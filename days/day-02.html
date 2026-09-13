@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>نبضة — اليوم 2: النظافة، وضع المريض، وتجهيز السرير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A1420; --surface:#101C2C; --surface-2:#16273A; --surface-3:#1C2F45; --line:#223850;
+  --text:#E8F1F5; --text-muted:#8FA6B8;
+  --accent:#35D6C4; --accent-2:#6EE7D8; --accent-soft:rgba(53,214,196,.13);
+  --warn:#F2B84B; --warn-soft:rgba(242,184,75,.13);
+  --danger:#FB6B6B; --danger-soft:rgba(251,107,107,.13);
+  --success:#4ADE9C; --success-soft:rgba(74,222,156,.13);
+  --radius-sm:8px; --radius-md:14px;
+  --font:'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif; --maxw:700px;
+}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);direction:rtl;text-align:right;line-height:1.8;-webkit-font-smoothing:antialiased;font-size:16px;}
+a{color:var(--accent-2);} button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{background:linear-gradient(180deg,#0C1826 0%,var(--bg) 100%);border-bottom:1px solid var(--line);padding:22px 0 20px;}
+.eyebrow{color:var(--accent-2);font-size:13px;font-weight:600;margin-bottom:4px;}
+.brand{font-size:23px;font-weight:700;color:var(--text);}
+.brand-sub{color:var(--text-muted);font-size:14px;margin-top:4px;}
+.wave{width:100%;height:40px;margin-top:14px;overflow:hidden;}
+.wave path{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.8s ease-out forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.disclaimer{margin:14px 0 0;padding:10px 12px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.35);border-radius:var(--radius-sm);color:var(--text);font-size:13.5px;}
+.disclaimer b{color:var(--warn);}
+.video-card{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;background:var(--accent-soft);border:1px solid rgba(53,214,196,.35);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);}
+.video-card .vic{font-size:22px;flex-shrink:0;}
+.video-card .vt{font-size:13px;color:var(--text-muted);}
+.video-card .vn{font-weight:700;color:var(--accent-2);font-size:14.5px;}
+main{padding:20px 0 50px;}
+.steps-tracker{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 14px;margin-bottom:6px;border-bottom:1px solid var(--line);}
+.steps-tracker::-webkit-scrollbar{display:none;}
+.step-dot{min-width:30px;height:30px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:var(--text-muted);border:1px solid var(--line);text-decoration:none;flex-shrink:0;}
+.step-dot.seen{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent);}
+.lesson-sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px;margin-bottom:14px;scroll-margin-top:14px;}
+.lesson-sec.warmup{border-color:rgba(242,184,75,.35);}
+.sec-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.sec-num{min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:#062522;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;}
+.lesson-sec.warmup .sec-num{background:var(--warn);}
+.sec-h{font-size:17px;font-weight:700;}
+.sec-time{color:var(--text-muted);font-size:12.5px;margin-inline-start:auto;}
+.lesson-sec p{margin:0 0 12px;font-size:15px;} .lesson-sec p:last-child{margin-bottom:0;}
+.glossary{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin:12px 0;}
+.gloss-row{display:flex;align-items:baseline;gap:8px;padding:9px 12px;font-size:14px;border-bottom:1px solid var(--line);background:var(--surface-2);}
+.gloss-row:last-child{border-bottom:none;}
+.gloss-row .term{color:var(--accent-2);font-weight:600;direction:ltr;}
+.gloss-row .eq{color:var(--text-muted);} .gloss-row .ar{color:var(--text);}
+details.reveal{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;margin:10px 0;background:var(--surface-2);}
+details.reveal summary{cursor:pointer;font-size:14.5px;color:var(--accent-2);font-weight:600;list-style:none;display:flex;align-items:center;gap:6px;}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--accent);font-weight:700;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:8px;font-size:14.5px;color:var(--text);padding-top:8px;border-top:1px dashed var(--line);}
+.skill-card .skf{display:flex;gap:8px;margin-bottom:10px;font-size:14.5px;}
+.skill-card .skf b{color:var(--accent-2);min-width:110px;flex-shrink:0;font-weight:600;}
+.skill-card .steplist{margin:0;padding-inline-start:20px;}
+.skill-card .steplist li{margin-bottom:8px;font-size:14.5px;}
+.skill-card .why{color:var(--text-muted);font-size:13px;display:block;margin-top:2px;}
+.note-flag{margin-top:12px;padding:9px 11px;background:var(--warn-soft);border-radius:var(--radius-sm);font-size:13px;color:var(--text);border:1px solid rgba(242,184,75,.3);}
+.q-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px;margin-bottom:10px;background:var(--surface-2);}
+.q-card .q-text{font-size:14.5px;margin-bottom:10px;font-weight:600;}
+.q-opts{display:flex;flex-direction:column;gap:7px;}
+.q-opt{text-align:right;background:var(--surface-3);border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:var(--radius-sm);font-size:14px;cursor:pointer;font-family:inherit;}
+.tf-row{display:flex;gap:8px;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:9px;font-size:13.5px;color:var(--text-muted);padding-top:9px;border-top:1px dashed var(--line);}
+.q-why.show{display:block;}
+.quiz-score{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:10px 12px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);}
+.quiz-score b{color:var(--accent-2);}
+.flash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.flashcard{perspective:1000px;height:120px;cursor:pointer;}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;border:1px solid var(--line);font-size:14px;}
+.flashcard-front{background:var(--surface-2);color:var(--accent-2);font-weight:700;direction:ltr;}
+.flashcard-back{background:var(--accent-soft);color:var(--text);transform:rotateY(180deg);}
+.summary-list{margin:0;padding-inline-start:20px;} .summary-list li{margin-bottom:9px;font-size:14.5px;}
+.complete-btn{width:100%;margin-top:14px;padding:13px;border:none;border-radius:var(--radius-sm);background:var(--accent);color:#062522;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;}
+.complete-btn[disabled]{background:var(--success);color:#06251a;cursor:default;}
+.next-hint{color:var(--text-muted);font-size:13px;margin-top:10px;text-align:center;}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--text-muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">اليوم 2 من 30 · Nursing Fundamentals</div>
+    <div class="brand">النظافة الشخصية، وضع المريض، وتجهيز السرير</div>
+    <div class="brand-sub">الجزء الثاني من سلسلة استرجاع أساسيات التمريض لسنة الامتياز</div>
+    <svg class="wave" viewBox="0 0 700 40" preserveAspectRatio="none">
+      <path d="M0,20 L120,20 L145,20 L158,4 L172,36 L186,12 L198,20 L340,20 L365,20 L378,4 L392,36 L406,12 L418,20 L560,20 L585,20 L598,4 L612,36 L626,12 L638,20 L700,20"/>
+    </svg>
+    <div class="disclaimer"><b>ملحوظة:</b> مرجع مذاكرة، مش بديل عن التدريب تحت إشراف. أي مهارة أو قرار سريري يمشي حسب الـ Hospital Policy المحلي عندك.</div>
+    <a class="video-card" href="https://www.youtube.com/playlist?list=PLZWxnerlkaRo5oxe4pleGgw1mR2RuXGmp" target="_blank" rel="noopener">
+      <span class="vic">🎥</span>
+      <span><span class="vn">بلايليست: مهارات التمريض بالتفصيل</span><br><span class="vt">فيديوهات عربية عملية للنظافة، الوضعيات، وتجهيز السرير — دور فيها على مهارة النهاردة</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="steps-tracker" id="stepsTracker">
+    <a href="#s1" class="step-dot" data-s="1">1</a><a href="#s2" class="step-dot" data-s="2">2</a><a href="#s3" class="step-dot" data-s="3">3</a>
+    <a href="#s4" class="step-dot" data-s="4">4</a><a href="#s5" class="step-dot" data-s="5">5</a><a href="#s6" class="step-dot" data-s="6">6</a>
+    <a href="#s7" class="step-dot" data-s="7">7</a><a href="#s8" class="step-dot" data-s="8">8</a><a href="#s9" class="step-dot" data-s="9">9</a>
+  </div>
+
+  <section class="lesson-sec warmup" id="s1">
+    <div class="sec-eyebrow"><div class="sec-num">1</div><div class="sec-h">تحقق سريع</div><div class="sec-time">~5 د</div></div>
+    <details class="reveal"><summary>امبارح اتكلمنا على إيه وضعية بتساعد التنفس؟</summary><div class="ans">Fowler's Position (نص جلوس).</div></details>
+    <details class="reveal"><summary>SpO₂ الطبيعي كام؟</summary><div class="ans">95% فأكتر — مراجعة من اليوم اللي فات.</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s2">
+    <div class="sec-eyebrow"><div class="sec-num">2</div><div class="sec-h">الشرح — نظافة، وضعيات، تجهيز سرير</div><div class="sec-time">~35 د</div></div>
+    <p><strong>النظافة الشخصية والعناية الفموية:</strong> النظافة جزء من العلاج مش رفاهية. المريض المستلقي لفترة طويلة معرّض لمشاكل كتير لو النظافة اتأخرت.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Bed Bath</span><span class="eq">=</span><span class="ar">استحمام المريض في السرير لو مايقدرش يتحرك</span></div>
+      <div class="gloss-row"><span class="term">Oral Care</span><span class="eq">=</span><span class="ar">العناية بالفم، مهمة جدًا للمريض الصايم أو على جهاز تنفس</span></div>
+      <div class="gloss-row"><span class="term">Perineal Care</span><span class="eq">=</span><span class="ar">نظافة المنطقة التناسلية بخصوصية تامة</span></div>
+    </div>
+    <p><strong>وضع المريض (Positioning):</strong> كل Position ليها استخدام سريري محدد، مش بس للراحة.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Fowler's</span><span class="eq">=</span><span class="ar">نص جلوس — بتساعد التنفس</span></div>
+      <div class="gloss-row"><span class="term">Supine</span><span class="eq">=</span><span class="ar">استلقاء كامل على الضهر</span></div>
+      <div class="gloss-row"><span class="term">Lateral</span><span class="eq">=</span><span class="ar">على الجنب — بتقلل الضغط وتفيد في الشفط</span></div>
+      <div class="gloss-row"><span class="term">Trendelenburg</span><span class="eq">=</span><span class="ar">الرأس لتحت والرجل لفوق، حسب البروتوكول</span></div>
+    </div>
+    <p><strong>تجهيز السرير:</strong> سرير نضيف ومرتب بيقلل فعليًا خطر العدوى وقرح الفراش، مش بس شكل.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Occupied Bed</span><span class="eq">=</span><span class="ar">تجهيز السرير والمريض لسه فيه</span></div>
+      <div class="gloss-row"><span class="term">Unoccupied Bed</span><span class="eq">=</span><span class="ar">تجهيز السرير والمريض مش فيه</span></div>
+    </div>
+  </section>
+
+  <section class="lesson-sec" id="s3">
+    <div class="sec-eyebrow"><div class="sec-num">3</div><div class="sec-h">مثال من المستشفى</div><div class="sec-time">~10 د</div></div>
+    <p>مريض عامل عملية وميقدرش يتحرك. مش هتسيبه من غير Oral Care يوم كامل، ولا هتسيبه في وضع واحد لساعات طويلة.</p>
+  </section>
+
+  <section class="lesson-sec skill-card" id="s4">
+    <div class="sec-eyebrow"><div class="sec-num">4</div><div class="sec-h">مهارة عملية — الاستحمام في السرير والعناية الفموية</div><div class="sec-time">~20 د</div></div>
+    <div class="skf"><b>Purpose</b><span>الحفاظ على نظافة المريض ومنع العدوى والتقرحات، خصوصًا للمريض غير القادر على الحركة.</span></div>
+    <div class="skf" style="display:block"><b style="display:block;margin-bottom:6px">Steps</b>
+      <ol class="steplist">
+        <li>جهّز الأدوات واتأكد من الخصوصية <span class="why">Why: كرامة المريض جزء من الرعاية.</span></li>
+        <li>ابدأ بالوش والعينين من الداخل للخارج <span class="why">Why: تتجنب نقل عدوى من عين لعين.</span></li>
+        <li>اغسل من الأنضف للأوسخ <span class="why">Why: تقلل انتقال الميكروبات.</span></li>
+        <li>راقب الجلد فوق العظام البارزة <span class="why">Why: دي أماكن قرح الفراش الشائعة.</span></li>
+      </ol>
+    </div>
+    <div class="skf"><b>Precautions</b><span>حافظ على حرارة المريض بتغطيته بعد كل جزء تغسله.</span></div>
+    <div class="skf"><b>Common mistakes</b><span>استخدام نفس جزء الإسفنجة لمناطق مختلفة من غير غسيل.</span></div>
+    <div class="skf"><b>Escalate إذا</b><span>احمرار ثابت مايختفيش بالضغط أو جرح جديد — بلّغ فورًا.</span></div>
+  </section>
+
+  <section class="lesson-sec" id="s5">
+    <div class="sec-eyebrow"><div class="sec-num">5</div><div class="sec-h">سيناريو إكلينيكي</div><div class="sec-time">~10 د</div></div>
+    <p><strong>الحالة:</strong> مريض عامل عملية من يومين، مش بيتحرك كتير، ولقيتي بداية احمرار في منطقة العصعص.</p>
+    <details class="reveal"><summary>What should you do first?</summary><div class="ans">تقللي الضغط عن المنطقة فورًا (تغيير وضعية) وتبلّغي.</div></details>
+    <details class="reveal"><summary>Why؟</summary><div class="ans">الاحمرار الأولي أول علامة لقرحة فراش، والتدخل المبكر بيمنعها تتفاقم.</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s6">
+    <div class="sec-eyebrow"><div class="sec-num">6</div><div class="sec-h">MCQs — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="mcqHolder"></div>
+    <div class="quiz-score">نتيجة الـ MCQ: <b><span id="mcqScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s7">
+    <div class="sec-eyebrow"><div class="sec-num">7</div><div class="sec-h">True / False — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="tfHolder"></div>
+    <div class="quiz-score">نتيجة الـ True/False: <b><span id="tfScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s8">
+    <div class="sec-eyebrow"><div class="sec-num">8</div><div class="sec-h">Flashcards — 8 كروت</div><div class="sec-time">~8 د</div></div>
+    <p style="color:var(--text-muted);font-size:13px">دوس على أي كارت عشان تقلبه.</p>
+    <div class="flash-grid" id="flashHolder"></div>
+  </section>
+
+  <section class="lesson-sec" id="s9">
+    <div class="sec-eyebrow"><div class="sec-num">9</div><div class="sec-h">Final Summary</div><div class="sec-time"></div></div>
+    <ol class="summary-list">
+      <li>النظافة جزء من العلاج مش رفاهية.</li>
+      <li>اغسل من الأنضف للأوسخ دايمًا.</li>
+      <li>كل Position ليها استخدام سريري مختلف.</li>
+      <li>راقب الجلد وقت أي عناية شخصية — الاحمرار الثابت إنذار مبكر.</li>
+      <li>الخصوصية والكرامة جزء أساسي من أي إجراء.</li>
+    </ol>
+    <button class="complete-btn" id="completeBtn">أنهيت اليوم 2 ✓</button>
+    <div class="next-hint">لما تكون جاهز لليوم اللي بعده، قوللي "يوم 3" في المحادثة.</div>
+  </section>
+</main>
+
+<footer>جزء من سلسلة الـ30 يوم لاسترجاع أساسيات التمريض — مرجع مذاكرة، مش بديل عن الإشراف الإكلينيكي.</footer>
+
+<script>
+const mcqData = [
+ {q:"أفضل وضعية للمريض اللي عنده صعوبة تنفس؟", opts:["Supine","Fowler's","Trendelenburg","Prone"], c:1, why:"Fowler's (نص جلوس) بتقلل الضغط على الحجاب الحاجز."},
+ {q:"العناية الفموية للمريض الصايم أو على جهاز تنفس بتكون؟", opts:["غير ضرورية","أهم من العادي","مرة واحدة بس باليوم","بعد الأكل بس"], c:1, why:"أكتر عرضة لجفاف الفم والعدوى."},
+ {q:"أول علامة لبداية قرحة الفراش؟", opts:["جرح مفتوح","احمرار ثابت مايختفيش بالضغط","تقشر الجلد","نزيف"], c:1, why:"الاحمرار الثابت هو الإنذار المبكر."},
+ {q:"لما تغسل المريض، تبدأ بإيه؟", opts:["الأجزاء الأوسخ","الوش والعينين","الرجلين","الظهر"], c:1, why:"تبدأ بالأنضف وتنتقل للأوسخ."},
+ {q:"Trendelenburg Position معناها إيه؟", opts:["نص جلوس","الرأس لتحت والرجل لفوق","على الجنب","جلوس كامل"], c:1, why:"الرأس لتحت والرجل لفوق، حسب البروتوكول."}
+];
+let mcqScore = 0;
+const mcqHolder = document.getElementById('mcqHolder');
+mcqData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  let optsHtml = '<div class="q-opts">';
+  item.opts.forEach(function(opt, oi){ optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>'; });
+  optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+  mcqHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const oi = parseInt(btn.dataset.oi,10);
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(oi === item.c){ btn.classList.add('correct'); mcqScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+    });
+  });
+});
+
+const tfData = [
+ {s:"تجهيز السرير مجرد شكل ومفهوش علاقة بمنع العدوى.", a:false, why:"سرير نظيف ومرتب بيقلل فعليًا خطر العدوى وقرح الفراش."},
+ {s:"لازم تحافظ على خصوصية المريض أثناء الاستحمام في السرير.", a:true, why:"الخصوصية والكرامة جزء أساسي من الرعاية."},
+ {s:"العظام البارزة زي العصعص من أكتر الأماكن عرضة لقرح الفراش.", a:true, why:"لقلة الأنسجة الرخوة وزيادة الضغط عليها."},
+ {s:"ينفع تستخدم نفس جزء الإسفنجة لكل أجزاء الجسم من غير غسيل.", a:false, why:"ده بينقل الميكروبات من منطقة لمنطقة."},
+ {s:"الـ Fowler's Position بتساعد في تسهيل التنفس.", a:true, why:"نص الجلوس بيقلل الضغط عن الحجاب الحاجز."}
+];
+let tfScore = 0;
+const tfHolder = document.getElementById('tfHolder');
+tfData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.s+'</div>'+
+    '<div class="q-opts tf-row"><button class="q-opt" data-v="true">صح</button><button class="q-opt" data-v="false">غلط</button></div>'+
+    '<div class="q-why">'+item.why+'</div>';
+  tfHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const v = btn.dataset.v === 'true';
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(v === item.a){ btn.classList.add('correct'); tfScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-v="'+item.a+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('tfScoreText').textContent = tfScore+' / '+tfData.length;
+    });
+  });
+});
+
+const flashData = [
+ {f:"Bed Bath", b:"استحمام المريض في السرير"}, {f:"Oral Care", b:"العناية بالفم والأسنان"},
+ {f:"Fowler's Position", b:"نص جلوس، بتسهّل التنفس"}, {f:"Supine", b:"استلقاء كامل على الضهر"},
+ {f:"Lateral Position", b:"النوم على الجنب"}, {f:"Trendelenburg", b:"الرأس لتحت، الرجل لفوق"},
+ {f:"Occupied Bed", b:"تجهيز السرير والمريض فيه"}, {f:"Perineal Care", b:"نظافة المنطقة التناسلية بخصوصية"}
+];
+const flashHolder = document.getElementById('flashHolder');
+flashData.forEach(function(item){
+  const card = document.createElement('div'); card.className = 'flashcard';
+  card.innerHTML = '<div class="flashcard-inner"><div class="flashcard-front">'+item.f+'</div><div class="flashcard-back">'+item.b+'</div></div>';
+  card.addEventListener('click', function(){card.classList.toggle('flipped');});
+  flashHolder.appendChild(card);
+});
+
+const dots = document.querySelectorAll('.step-dot');
+const secs = document.querySelectorAll('.lesson-sec');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const idx = Array.prototype.indexOf.call(secs, e.target) + 1;
+        const dot = document.querySelector('.step-dot[data-s="'+idx+'"]');
+        if(dot) dot.classList.add('seen');
+      }
+    });
+  }, {threshold:0.5});
+  secs.forEach(function(s){io.observe(s);});
+}
+
+async function loadProgress(){
+  try{
+    const res = await window.storage.get('nursing30_day2_progress', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      if(data.completed){
+        const btn = document.getElementById('completeBtn');
+        btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+data.mcq+'/5 — T/F '+data.tf+'/5)';
+        btn.setAttribute('disabled','');
+      }
+    }
+  }catch(e){}
+}
+loadProgress();
+document.getElementById('completeBtn').addEventListener('click', async function(){
+  const btn = this;
+  const data = {completed:true, mcq:mcqScore, tf:tfScore, ts:Date.now()};
+  btn.textContent = 'جاري الحفظ...';
+  try{ await window.storage.set('nursing30_day2_progress', JSON.stringify(data), false); }catch(e){}
+  btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+mcqScore+'/5 — T/F '+tfScore+'/5)';
+  btn.setAttribute('disabled','');
+});
+</script>
+</body>
+</html>
