@@ -1,1803 +1,3081 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nursing Internship | 30 Day Clinical Refresher</title>
+
+    <meta
+        name="description"
+        content="Nursing Internship — 30 Day Clinical Refresher. A practical clinical learning roadmap for Bachelor Nursing interns."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --bg: #07121f;
+            --bg-soft: #0b1827;
+            --surface: #0f2030;
+            --surface-2: #13283a;
+            --surface-3: #172f43;
+
+            --teal: #22c7b8;
+            --teal-dark: #159c91;
+            --blue: #4f8cff;
+
+            --text: #f3f7fa;
+            --text-soft: #c6d2dc;
+            --muted: #8495a5;
+
+            --border: rgba(255,255,255,0.08);
+            --border-strong: rgba(34,199,184,0.28);
+
+            --success: #35d09a;
+
+            --shadow:
+                0 20px 50px rgba(0,0,0,0.24);
+
+            --radius: 18px;
+            --radius-sm: 12px;
+
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 80% 0%,
+                    rgba(34,199,184,0.09),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(79,140,255,0.06),
+                    transparent 24%
+                ),
+                var(--bg);
+            color: var(--text);
+            font-family: "Cairo", "Noto Sans Arabic", Arial, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+            margin-inline: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(7,18,31,0.86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            min-height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+
+            flex: 0 0 auto;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border-strong);
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(34,199,184,0.18),
+                    rgba(79,140,255,0.08)
+                );
+
+            color: var(--teal);
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .brand-subtitle {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a {
+            padding: 8px 12px;
+
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 600;
+
+            border-radius: 9px;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255,255,255,0.06);
+            color: var(--teal);
+            outline: none;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            position: relative;
+            padding: 82px 0 58px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 0.65fr;
+            gap: 42px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-line {
+            width: 28px;
+            height: 2px;
+            background: var(--teal);
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            max-width: 780px;
+
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 1.08;
+            letter-spacing: -1.8px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--teal);
+        }
+
+        .hero-subtitle {
+            margin-top: 20px;
+
+            color: var(--text-soft);
+            font-size: clamp(18px, 2vw, 23px);
+            font-weight: 600;
+        }
+
+        .hero-description {
+            max-width: 690px;
+            margin-top: 18px;
+
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+            min-height: 48px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 20px;
+
+            border-radius: 11px;
+            border: 1px solid transparent;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid rgba(34,199,184,0.25);
+            outline-offset: 2px;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: #06201e;
+
+            box-shadow:
+                0 10px 28px rgba(34,199,184,0.18);
+        }
+
+        .btn-primary:hover {
+            background: #35d7c8;
+        }
 
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Nursing Internship | 30 Day Clinical Refresher</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: #07111f;
-      color: #f4f7fa;
-      font-family:
-        Arial,
-        "Segoe UI",
-        sans-serif;
-      line-height: 1.7;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .container {
-      width: min(1100px, calc(100% - 30px));
-      margin: auto;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      padding: 45px 0 30px;
-      border-bottom: 1px solid #1c2b3d;
-    }
-
-    .brand {
-      color: #35d6c4;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(30px, 7vw, 52px);
-      line-height: 1.2;
-      font-weight: 800;
-    }
-
-    .subtitle {
-      margin-top: 14px;
-      color: #aeb9c5;
-      font-size: 17px;
-    }
-
-    .intro {
-      margin-top: 20px;
-      color: #d5dce3;
-      font-size: 15px;
-      max-width: 800px;
-    }
-
-    /* =========================
-       PROGRESS
-    ========================= */
-
-    .progress-section {
-      margin-top: 28px;
-      background: #0d1b2b;
-      border: 1px solid #1c3147;
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 12px;
-    }
-
-    .progress-title {
-      font-weight: 700;
-    }
-
-    .progress-number {
-      color: #35d6c4;
-      font-weight: 800;
-      font-size: 20px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 11px;
-      background: #1b2a3b;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #35d6c4;
-      border-radius: inherit;
-      transition: width 0.3s ease;
-    }
-
-    .progress-info {
-      margin-top: 10px;
-      color: #8e9baa;
-      font-size: 13px;
-    }
-
-    .progress-actions {
-      margin-top: 16px;
-      display: flex;
-      justify-content: flex-start;
-    }
-
-    .reset-button {
-      border: 1px solid #34475b;
-      background: transparent;
-      color: #aeb9c5;
-      padding: 9px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .reset-button:hover {
-      border-color: #35d6c4;
-      color: #35d6c4;
-    }
-
-    /* =========================
-       SECTION
-    ========================= */
-
-    section {
-      padding: 40px 0;
-    }
-
-    .section-header {
-      margin-bottom: 22px;
-    }
-
-    .section-label {
-      color: #35d6c4;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 25px;
-    }
-
-    .section-description {
-      margin-top: 6px;
-      color: #8e9baa;
-      font-size: 14px;
-    }
-
-    /* =========================
-       DAYS GRID
-    ========================= */
-
-    .days-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .day-card {
-      position: relative;
-      min-height: 180px;
-      padding: 20px;
-      background: #0d1b2b;
-      border: 1px solid #1c3147;
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .day-card:hover {
-      transform: translateY(-3px);
-      border-color: #35d6c4;
-      background: #102235;
-    }
-
-    .day-card.completed {
-      border-color: #35d6c4;
-    }
-
-    .day-number {
-      color: #35d6c4;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    .day-title {
-      margin-top: 9px;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .day-description {
-      margin-top: 6px;
-      color: #8996a4;
-      font-size: 12px;
-    }
-
-    .day-bottom {
-      margin-top: auto;
-      padding-top: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .open-link {
-      color: #35d6c4;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .complete-button {
-      border: 1px solid #294158;
-      background: #101f30;
-      color: #aeb9c5;
-      padding: 7px 10px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 11px;
-      white-space: nowrap;
-    }
-
-    .complete-button:hover {
-      border-color: #35d6c4;
-    }
-
-    .complete-button.completed-button {
-      background: #35d6c4;
-      color: #07111f;
-      border-color: #35d6c4;
-      font-weight: 700;
-    }
-
-    /* =========================
-       METHOD
-    ========================= */
-
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .method-card {
-      background: #0d1b2b;
-      border: 1px solid #1c3147;
-      border-radius: 18px;
-      padding: 20px;
-    }
-
-    .method-number {
-      color: #35d6c4;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .method-title {
-      margin-top: 8px;
-      font-weight: 700;
-    }
-
-    .method-text {
-      margin-top: 7px;
-      color: #929eaa;
-      font-size: 13px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      margin-top: 30px;
-      padding: 30px 0;
-      border-top: 1px solid #1c2b3d;
-      color: #758290;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    /* =========================
-       TABLET
-    ========================= */
-
-    @media (max-width: 800px) {
-
-      .days-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .method-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 520px) {
-
-      .container {
-        width: min(100% - 22px, 1100px);
-      }
-
-      header {
-        padding-top: 32px;
-      }
-
-      h1 {
-        font-size: 31px;
-      }
-
-      .subtitle {
-        font-size: 15px;
-      }
-
-      .days-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .method-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .day-card {
-        min-height: 165px;
-      }
-
-      .progress-header {
-        align-items: flex-start;
-      }
-
-    }
-
-  </style>
+        .btn-secondary {
+            background: rgba(255,255,255,0.035);
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: var(--border-strong);
+        }
+
+        /* =========================
+           HERO VISUAL
+        ========================== */
+
+        .hero-panel {
+            position: relative;
+
+            min-height: 320px;
+
+            padding: 28px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(19,40,58,0.96),
+                    rgba(10,27,42,0.96)
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 24px;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .hero-panel::before {
+            content: "";
+
+            position: absolute;
+            width: 220px;
+            height: 220px;
+
+            top: -100px;
+            right: -70px;
+
+            border-radius: 50%;
+
+            background: rgba(34,199,184,0.09);
+        }
+
+        .hero-panel-label {
+            position: relative;
+
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-panel-title {
+            position: relative;
+
+            margin-top: 20px;
+
+            font-size: 27px;
+            line-height: 1.35;
+            font-weight: 800;
+        }
+
+        .hero-panel-number {
+            position: relative;
+
+            margin-top: 22px;
+
+            color: var(--teal);
+            font-size: 64px;
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        .hero-panel-footer {
+            position: relative;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 24px;
+            padding-top: 18px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        .section {
+            padding: 48px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            gap: 20px;
+
+            margin-bottom: 24px;
+        }
+
+        .section-kicker {
+            margin-bottom: 5px;
+
+            color: var(--teal);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(25px, 3vw, 34px);
+            line-height: 1.3;
+            font-weight: 800;
+        }
+
+        .section-description {
+            max-width: 560px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+           PROGRESS
+        ========================== */
+
+        .progress-dashboard {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        .progress-main,
+        .stat-card {
+            background: rgba(15,32,48,0.92);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .progress-main {
+            padding: 24px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 15px;
+        }
+
+        .progress-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .progress-value {
+            color: var(--teal);
+            font-size: 36px;
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+
+            margin-top: 25px;
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.06);
+            border-radius: 999px;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--teal-dark),
+                    var(--teal)
+                );
+
+            border-radius: inherit;
+
+            transition: width 0.5s ease;
+        }
+
+        .progress-bottom {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 12px;
+
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .stat-card {
+            min-height: 150px;
+            padding: 22px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .stat-value.teal {
+            color: var(--teal);
+        }
+
+        .stat-value.blue {
+            color: #75a8ff;
+        }
+
+        .progress-actions {
+            display: flex;
+            justify-content: flex-end;
+
+            margin-top: 14px;
+        }
+
+        .reset-btn {
+            border: 0;
+            background: transparent;
+
+            color: var(--muted);
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+            color: #f0a7a7;
+        }
+
+        /* =========================
+           CLINICAL PATH
+        ========================== */
+
+        .clinical-path {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .path-card {
+            position: relative;
+
+            padding: 22px;
+
+            min-height: 165px;
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .path-card:hover {
+            transform: translateY(-3px);
+            background: var(--surface-2);
+            border-color: var(--border-strong);
+        }
+
+        .path-number {
+            color: var(--teal);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .path-card h3 {
+            margin-top: 17px;
+
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        .path-card p {
+            margin-top: 8px;
+
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           ROADMAP
+        ========================== */
+
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .phase {
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,32,48,0.95),
+                    rgba(10,25,39,0.95)
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .phase-header {
+            padding: 22px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-meta {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .phase-number {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(34,199,184,0.09);
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+
+            color: var(--teal);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .phase-title {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .phase-range {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .phase-progress {
+            color: var(--muted);
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+
+            padding: 18px;
+        }
+
+        .day-card {
+            position: relative;
+
+            min-height: 190px;
+
+            padding: 19px;
+
+            display: flex;
+            flex-direction: column;
+
+            background: rgba(19,40,58,0.72);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-3px);
+            background: var(--surface-3);
+            border-color: rgba(34,199,184,0.22);
+        }
+
+        .day-card.current {
+            border-color: rgba(34,199,184,0.55);
+
+            box-shadow:
+                0 0 0 1px rgba(34,199,184,0.08),
+                0 12px 30px rgba(0,0,0,0.18);
+        }
+
+        .day-card.completed {
+            border-color: rgba(53,208,154,0.3);
+        }
+
+        .day-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .day-number {
+            color: var(--teal);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .status {
+            padding: 4px 8px;
+
+            border-radius: 6px;
+
+            color: var(--muted);
+            background: rgba(255,255,255,0.04);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .status.current-status {
+            color: var(--teal);
+            background: rgba(34,199,184,0.09);
+        }
+
+        .status.completed-status {
+            color: var(--success);
+            background: rgba(53,208,154,0.09);
+        }
+
+        .day-card h3 {
+            margin-top: 16px;
+
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 800;
+        }
+
+        .day-card p {
+            margin-top: 6px;
+
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .day-actions {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+
+            margin-top: auto;
+            padding-top: 16px;
+        }
+
+        .open-day {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 12px;
+
+            background: rgba(34,199,184,0.08);
+            border: 1px solid rgba(34,199,184,0.18);
+            border-radius: 9px;
+
+            color: var(--teal);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .open-day:hover {
+            background: rgba(34,199,184,0.14);
+            border-color: rgba(34,199,184,0.35);
+        }
+
+        .complete-btn {
+            min-height: 40px;
+            min-width: 40px;
+
+            padding: 0 10px;
+
+            background: rgba(255,255,255,0.035);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .complete-btn:hover {
+            color: var(--text);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .day-card.completed .complete-btn {
+            color: var(--success);
+            border-color: rgba(53,208,154,0.22);
+            background: rgba(53,208,154,0.06);
+        }
+
+        /* =========================
+           LEARNING METHOD
+        ========================== */
+
+        .method {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .method-card {
+            padding: 24px;
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+        }
+
+        .method-number {
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .method-card h3 {
+            margin-top: 16px;
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .method-card .arabic {
+            margin-top: 2px;
+
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .method-card p {
+            margin-top: 10px;
+
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* =========================
+           RESOURCES
+        ========================== */
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .resource {
+            min-height: 105px;
+
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .resource:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+        }
+
+        .resource strong {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .resource span {
+            margin-top: 3px;
+
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .resource a {
+            margin-top: 7px;
+
+            color: var(--teal);
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 40px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            min-height: 100px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .footer-text {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 980px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                min-height: 240px;
+            }
+
+            .progress-dashboard {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .progress-main {
+                grid-column: 1 / -1;
+            }
+
+            .clinical-path,
+            .method,
+            .resources {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .container {
+                width: min(
+                    calc(100% - 22px),
+                    var(--max-width)
+                );
+            }
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .brand-title {
+                font-size: 13px;
+            }
+
+            .brand-subtitle {
+                font-size: 9px;
+            }
+
+            .brand-mark {
+                width: 38px;
+                height: 38px;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 54px 0 36px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: -1px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .hero-panel {
+                min-height: 220px;
+                padding: 22px;
+            }
+
+            .hero-panel-number {
+                font-size: 54px;
+            }
+
+            .section {
+                padding: 35px 0;
+            }
+
+            .section-header {
+                display: block;
+            }
+
+            .section-description {
+                margin-top: 8px;
+            }
+
+            .progress-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-main {
+                grid-column: auto;
+            }
+
+            .clinical-path,
+            .method,
+            .resources,
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-header {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 18px;
+                gap: 10px;
+            }
+
+            .days-grid {
+                padding: 12px;
+            }
+
+            .day-card {
+                min-height: 180px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+
+                padding: 20px 0;
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .progress-value {
+                font-size: 31px;
+            }
+
+            .day-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .complete-btn {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+<header class="header">
+    <div class="container header-inner">
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+        <a href="#overview" class="brand" aria-label="Nursing Internship Home">
 
-  <header>
+            <div class="brand-mark" aria-hidden="true">
+                NR
+            </div>
 
-    <div class="container">
+            <div>
+                <div class="brand-title">
+                    Nursing Internship
+                </div>
 
-      <div class="brand">
-        NURSING INTERNSHIP PROGRAM
-      </div>
+                <div class="brand-subtitle">
+                    30 Day Clinical Refresher
+                </div>
+            </div>
 
-      <h1>
-        30 Day Clinical Refresher
-      </h1>
+        </a>
 
-      <div class="subtitle">
-        Bachelor Nursing Intern —
-        Knowledge, Skill, Judgment, Safety
-      </div>
+        <nav class="nav" aria-label="Main navigation">
 
-      <div class="intro">
+            <a href="#overview">
+                Overview
+            </a>
 
-        برنامج مراجعة عملي لمدة 30 يوم
-        مصمم لطالب التمريض في فترة الامتياز.
-        الهدف مش مجرد حفظ المعلومات،
-        لكن إنك تفهم، تفتكر، تطبق،
-        وتتصرف بأمان مع المريض.
+            <a href="#roadmap">
+                30 Days
+            </a>
 
-      </div>
+            <a href="#method">
+                Method
+            </a>
 
+            <a href="#resources">
+                Resources
+            </a>
 
-      <!-- PROGRESS -->
-
-      <div class="progress-section">
-
-        <div class="progress-header">
-
-          <div class="progress-title">
-            Your Progress
-          </div>
-
-          <div
-            class="progress-number"
-            id="progressNumber"
-          >
-            0%
-          </div>
-
-        </div>
-
-
-        <div class="progress-bar">
-
-          <div
-            class="progress-fill"
-            id="progressFill"
-          ></div>
-
-        </div>
-
-
-        <div
-          class="progress-info"
-          id="progressInfo"
-        >
-          0 من 30 يوم مكتمل
-        </div>
-
-
-        <div class="progress-actions">
-
-          <button
-            class="reset-button"
-            onclick="resetProgress()"
-          >
-            Reset Progress
-          </button>
-
-        </div>
-
-      </div>
+        </nav>
 
     </div>
-
-  </header>
-
+</header>
 
 
-  <!-- =========================
-       MAIN
-  ========================= -->
+<main id="overview">
 
-  <main>
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container hero-grid">
+
+            <div>
+
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    Clinical Nursing Education
+                </div>
+
+                <h1>
+                    Nursing Internship
+                    <span>Clinical Refresher</span>
+                </h1>
+
+                <div class="hero-subtitle">
+                    30-Day Practical Nursing Review
+                </div>
+
+                <p class="hero-description">
+                    برنامج عملي يساعد طالب التمريض على الانتقال من فهم
+                    المعلومة إلى تثبيتها وتطبيقها سريريًا واتخاذ القرار
+                    والتصرف بأمان مع المريض.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a
+                        class="btn btn-primary"
+                        href="days/day-01.html"
+                    >
+                        Start Day 1
+                    </a>
+
+                    <a
+                        class="btn btn-secondary"
+                        href="#roadmap"
+                    >
+                        View 30-Day Roadmap
+                    </a>
+
+                </div>
+
+            </div>
 
 
-    <section>
+            <aside class="hero-panel" aria-label="Program overview">
 
-      <div class="container">
+                <div>
 
+                    <div class="hero-panel-label">
+                        Clinical Refresher
+                    </div>
 
-        <div class="section-header">
+                    <div class="hero-panel-title">
+                        30 Days
+                        <br>
+                        Practical Readiness
+                    </div>
 
-          <div class="section-label">
-            CLINICAL ROADMAP
-          </div>
+                    <div
+                        class="hero-panel-number"
+                        id="heroProgress"
+                    >
+                        0%
+                    </div>
 
-          <h2>
-            خطة الـ 30 يوم
-          </h2>
+                </div>
 
-          <div class="section-description">
-            كل الأيام متاحة، والتقدم يتم حفظه تلقائيًا على جهازك.
-          </div>
+                <div class="hero-panel-footer">
+
+                    <span>
+                        Overall progress
+                    </span>
+
+                    <span id="heroCompleted">
+                        0 / 30
+                    </span>
+
+                </div>
+
+            </aside>
 
         </div>
-
-
-
-        <div class="days-grid">
-
-
-          <!-- DAY 01 -->
-
-          <div
-            class="day-card"
-            id="day-card-1"
-          >
-
-            <div class="day-number">
-              DAY 01
-            </div>
-
-            <div class="day-title">
-              Assessment + ABCDE +
-              Vital Signs + Patient Safety
-            </div>
-
-            <div class="day-description">
-              أساس تقييم المريض والتعامل الآمن معه.
-            </div>
-
-            <div class="day-bottom">
-
-              <a
-                class="open-link"
-                href="days/day-01.html"
-              >
-                Open Day
-              </a>
-
-              <button
-                class="complete-button"
-                id="complete-1"
-                onclick="toggleComplete(1)"
-              >
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 02 -->
-
-          <div
-            class="day-card"
-            id="day-card-2"
-          >
-
-            <div class="day-number">
-              DAY 02
-            </div>
-
-            <div class="day-title">
-              Hygiene, Positioning
-              & Bed Preparation
-            </div>
-
-            <div class="day-description">
-              النظافة، وضع المريض وتجهيز السرير.
-            </div>
-
-            <div class="day-bottom">
-
-              <a
-                class="open-link"
-                href="days/day-02.html"
-              >
-                Open Day
-              </a>
-
-              <button
-                class="complete-button"
-                id="complete-2"
-                onclick="toggleComplete(2)"
-              >
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 03 -->
-
-          <div
-            class="day-card"
-            id="day-card-3"
-          >
-
-            <div class="day-number">
-              DAY 03
-            </div>
-
-            <div class="day-title">
-              Infection Control
-            </div>
-
-            <div class="day-description">
-              Hand Hygiene, PPE & Precautions.
-            </div>
-
-            <div class="day-bottom">
-
-              <a
-                class="open-link"
-                href="days/day-03.html"
-              >
-                Open Day
-              </a>
-
-              <button
-                class="complete-button"
-                id="complete-3"
-                onclick="toggleComplete(3)"
-              >
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 04 -->
-
-          <div
-            class="day-card"
-            id="day-card-4"
-          >
-
-            <div class="day-number">
-              DAY 04
-            </div>
-
-            <div class="day-title">
-              Mobility, Transfer
-              & Fall Prevention
-            </div>
-
-            <div class="day-description">
-              الحركة، النقل، المشي ومنع السقوط.
-            </div>
-
-            <div class="day-bottom">
-
-              <a
-                class="open-link"
-                href="days/day-04.html"
-              >
-                Open Day
-              </a>
-
-              <button
-                class="complete-button"
-                id="complete-4"
-                onclick="toggleComplete(4)"
-              >
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 05 -->
-
-          <div class="day-card" id="day-card-5">
-
-            <div class="day-number">DAY 05</div>
-
-            <div class="day-title">
-              Hygiene & Pressure Injury Prevention
-            </div>
-
-            <div class="day-description">
-              العناية بالنظافة والوقاية من قرح الضغط.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-05.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-5" onclick="toggleComplete(5)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 06 -->
-
-          <div class="day-card" id="day-card-6">
-
-            <div class="day-number">DAY 06</div>
-
-            <div class="day-title">
-              Intake & Output
-            </div>
-
-            <div class="day-description">
-              متابعة السوائل الداخلة والخارجة.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-06.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-6" onclick="toggleComplete(6)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 07 -->
-
-          <div class="day-card" id="day-card-7">
-
-            <div class="day-number">DAY 07</div>
-
-            <div class="day-title">
-              Medication Safety
-            </div>
-
-            <div class="day-description">
-              مبادئ أمان الدواء وتقليل الأخطاء.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-07.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-7" onclick="toggleComplete(7)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 08 -->
-
-          <div class="day-card" id="day-card-8">
-
-            <div class="day-number">DAY 08</div>
-
-            <div class="day-title">
-              Medication Administration
-            </div>
-
-            <div class="day-description">
-              إعطاء الأدوية بأمان.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-08.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-8" onclick="toggleComplete(8)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 09 -->
-
-          <div class="day-card" id="day-card-9">
-
-            <div class="day-number">DAY 09</div>
-
-            <div class="day-title">
-              IV Therapy
-            </div>
-
-            <div class="day-description">
-              أساسيات العلاج الوريدي.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-09.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-9" onclick="toggleComplete(9)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 10 -->
-
-          <div class="day-card" id="day-card-10">
-
-            <div class="day-number">DAY 10</div>
-
-            <div class="day-title">
-              Wound Care
-            </div>
-
-            <div class="day-description">
-              تقييم الجروح والعناية بها.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-10.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-10" onclick="toggleComplete(10)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 11 -->
-
-          <div class="day-card" id="day-card-11">
-
-            <div class="day-number">DAY 11</div>
-
-            <div class="day-title">
-              Oxygen Therapy
-            </div>
-
-            <div class="day-description">
-              أساسيات إعطاء الأكسجين ومتابعة المريض.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-11.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-11" onclick="toggleComplete(11)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 12 -->
-
-          <div class="day-card" id="day-card-12">
-
-            <div class="day-number">DAY 12</div>
-
-            <div class="day-title">
-              Respiratory Assessment
-            </div>
-
-            <div class="day-description">
-              تقييم الجهاز التنفسي.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-12.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-12" onclick="toggleComplete(12)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 13 -->
-
-          <div class="day-card" id="day-card-13">
-
-            <div class="day-number">DAY 13</div>
-
-            <div class="day-title">
-              Cardiovascular Assessment
-            </div>
-
-            <div class="day-description">
-              تقييم الجهاز القلبي الوعائي.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-13.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-13" onclick="toggleComplete(13)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 14 -->
-
-          <div class="day-card" id="day-card-14">
-
-            <div class="day-number">DAY 14</div>
-
-            <div class="day-title">
-              Neurological Assessment
-            </div>
-
-            <div class="day-description">
-              تقييم الحالة العصبية والوعي.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-14.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-14" onclick="toggleComplete(14)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 15 -->
-
-          <div class="day-card" id="day-card-15">
-
-            <div class="day-number">DAY 15</div>
-
-            <div class="day-title">
-              Pain Assessment
-            </div>
-
-            <div class="day-description">
-              تقييم الألم ومتابعة الاستجابة.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-15.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-15" onclick="toggleComplete(15)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 16 -->
-
-          <div class="day-card" id="day-card-16">
-
-            <div class="day-number">DAY 16</div>
-
-            <div class="day-title">
-              Fluid & Electrolyte Balance
-            </div>
-
-            <div class="day-description">
-              السوائل والكهارل والتوازن الداخلي.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-16.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-16" onclick="toggleComplete(16)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 17 -->
-
-          <div class="day-card" id="day-card-17">
-
-            <div class="day-number">DAY 17</div>
-
-            <div class="day-title">
-              Medical-Surgical Nursing
-            </div>
-
-            <div class="day-description">
-              أساسيات التفكير في حالات الباطنة والجراحة.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-17.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-17" onclick="toggleComplete(17)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 18 -->
-
-          <div class="day-card" id="day-card-18">
-
-            <div class="day-number">DAY 18</div>
-
-            <div class="day-title">
-              Diabetes & Insulin
-            </div>
-
-            <div class="day-description">
-              أساسيات السكري والإنسولين.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-18.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-18" onclick="toggleComplete(18)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 19 -->
-
-          <div class="day-card" id="day-card-19">
-
-            <div class="day-number">DAY 19</div>
-
-            <div class="day-title">
-              Hypertension & Cardiovascular Care
-            </div>
-
-            <div class="day-description">
-              ارتفاع ضغط الدم والرعاية القلبية.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-19.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-19" onclick="toggleComplete(19)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 20 -->
-
-          <div class="day-card" id="day-card-20">
-
-            <div class="day-number">DAY 20</div>
-
-            <div class="day-title">
-              Heart Failure & Shock
-            </div>
-
-            <div class="day-description">
-              فشل القلب والصدمة.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-20.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-20" onclick="toggleComplete(20)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 21 -->
-
-          <div class="day-card" id="day-card-21">
-
-            <div class="day-number">DAY 21</div>
-
-            <div class="day-title">
-              COPD & Respiratory Disorders
-            </div>
-
-            <div class="day-description">
-              أمراض الجهاز التنفسي وCOPD.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-21.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-21" onclick="toggleComplete(21)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 22 -->
-
-          <div class="day-card" id="day-card-22">
-
-            <div class="day-number">DAY 22</div>
-
-            <div class="day-title">
-              Stroke & Neurological Care
-            </div>
-
-            <div class="day-description">
-              السكتة الدماغية والرعاية العصبية.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-22.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-22" onclick="toggleComplete(22)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 23 -->
-
-          <div class="day-card" id="day-card-23">
-
-            <div class="day-number">DAY 23</div>
-
-            <div class="day-title">
-              Preoperative Nursing
-            </div>
-
-            <div class="day-description">
-              رعاية المريض قبل العملية.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-23.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-23" onclick="toggleComplete(23)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 24 -->
-
-          <div class="day-card" id="day-card-24">
-
-            <div class="day-number">DAY 24</div>
-
-            <div class="day-title">
-              Postoperative Nursing
-            </div>
-
-            <div class="day-description">
-              رعاية المريض بعد العملية.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-24.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-24" onclick="toggleComplete(24)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 25 -->
-
-          <div class="day-card" id="day-card-25">
-
-            <div class="day-number">DAY 25</div>
-
-            <div class="day-title">
-              Emergency Nursing
-            </div>
-
-            <div class="day-description">
-              أساسيات التعامل مع الحالات الطارئة.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-25.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-25" onclick="toggleComplete(25)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 26 -->
-
-          <div class="day-card" id="day-card-26">
-
-            <div class="day-number">DAY 26</div>
-
-            <div class="day-title">
-              Patient Education
-            </div>
-
-            <div class="day-description">
-              تثقيف المريض وتعليمات الخروج.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-26.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-26" onclick="toggleComplete(26)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 27 -->
-
-          <div class="day-card" id="day-card-27">
-
-            <div class="day-number">DAY 27</div>
-
-            <div class="day-title">
-              Communication & Handover
-            </div>
-
-            <div class="day-description">
-              التواصل والتسليم بين أفراد الفريق.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-27.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-27" onclick="toggleComplete(27)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 28 -->
-
-          <div class="day-card" id="day-card-28">
-
-            <div class="day-number">DAY 28</div>
-
-            <div class="day-title">
-              Documentation & Legal Safety
-            </div>
-
-            <div class="day-description">
-              التوثيق والسلامة القانونية.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-28.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-28" onclick="toggleComplete(28)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 29 -->
-
-          <div class="day-card" id="day-card-29">
-
-            <div class="day-number">DAY 29</div>
-
-            <div class="day-title">
-              Clinical Judgment
-            </div>
-
-            <div class="day-description">
-              التفكير السريري واتخاذ القرار الآمن.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-29.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-29" onclick="toggleComplete(29)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- DAY 30 -->
-
-          <div class="day-card" id="day-card-30">
-
-            <div class="day-number">DAY 30</div>
-
-            <div class="day-title">
-              Final Clinical Readiness
-            </div>
-
-            <div class="day-description">
-              المراجعة النهائية والاستعداد السريري.
-            </div>
-
-            <div class="day-bottom">
-
-              <a class="open-link" href="days/day-30.html">
-                Open Day
-              </a>
-
-              <button class="complete-button" id="complete-30" onclick="toggleComplete(30)">
-                Mark as Completed
-              </button>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
 
     </section>
 
 
+    <!-- PROGRESS -->
 
-    <!-- =========================
-         LEARNING METHOD
-    ========================= -->
+    <section class="section" id="progress">
 
-    <section>
+        <div class="container">
 
-      <div class="container">
+            <div class="section-header">
 
-        <div class="section-header">
+                <div>
+                    <div class="section-kicker">
+                        Your Progress
+                    </div>
 
-          <div class="section-label">
-            LEARNING METHOD
-          </div>
+                    <h2 class="section-title">
+                        Clinical Progress Overview
+                    </h2>
+                </div>
 
-          <h2>
-            طريقة التعلم
-          </h2>
+                <p class="section-description">
+                    تقدمك محفوظ محليًا على جهازك، ويمكنك العودة للبرنامج
+                    في أي وقت من نفس النقطة.
+                </p>
 
-          <div class="section-description">
-            البرنامج مبني على الانتقال من المعرفة إلى التصرف الآمن.
-          </div>
+            </div>
+
+
+            <div class="progress-dashboard">
+
+                <div class="progress-main">
+
+                    <div class="progress-top">
+
+                        <div>
+                            <div class="progress-label">
+                                Overall Progress
+                            </div>
+                        </div>
+
+                        <div
+                            class="progress-value"
+                            id="progressPercent"
+                        >
+                            0%
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="progress-track"
+                        role="progressbar"
+                        aria-label="Overall program progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="progressBar"
+                    >
+                        <div
+                            class="progress-fill"
+                            id="progressFill"
+                        ></div>
+                    </div>
+
+                    <div class="progress-bottom">
+
+                        <span id="completedText">
+                            0 من 30 يوم مكتمل
+                        </span>
+
+                        <span id="currentDayText">
+                            Current Day: 01
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Completed
+                    </div>
+
+                    <div
+                        class="stat-value teal"
+                        id="completedCount"
+                    >
+                        0 / 30
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Current Stage
+                    </div>
+
+                    <div
+                        class="stat-value blue"
+                        id="currentStage"
+                    >
+                        Clinical Refresher
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-actions">
+
+                <button
+                    class="reset-btn"
+                    id="resetProgress"
+                    type="button"
+                >
+                    Reset Progress
+                </button>
+
+            </div>
 
         </div>
-
-
-        <div class="method-grid">
-
-
-          <div class="method-card">
-
-            <div class="method-number">
-              01
-            </div>
-
-            <div class="method-title">
-              Understand
-            </div>
-
-            <div class="method-text">
-              افهم المعلومة وسبب عملها قبل حفظ الخطوات.
-            </div>
-
-          </div>
-
-
-          <div class="method-card">
-
-            <div class="method-number">
-              02
-            </div>
-
-            <div class="method-title">
-              Remember
-            </div>
-
-            <div class="method-text">
-              ثبت النقاط الأساسية والمصطلحات المهمة.
-            </div>
-
-          </div>
-
-
-          <div class="method-card">
-
-            <div class="method-number">
-              03
-            </div>
-
-            <div class="method-title">
-              Apply
-            </div>
-
-            <div class="method-text">
-              اربط المعرفة بالمهارة والتطبيق العملي.
-            </div>
-
-          </div>
-
-
-          <div class="method-card">
-
-            <div class="method-number">
-              04
-            </div>
-
-            <div class="method-title">
-              Act Safely
-            </div>
-
-            <div class="method-text">
-              اتعلم إمتى تتصرف وإمتى توقف وتطلب المساعدة.
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
 
     </section>
 
-  </main>
+
+    <!-- CLINICAL PATH -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+                    <div class="section-kicker">
+                        Learning Architecture
+                    </div>
+
+                    <h2 class="section-title">
+                        Clinical Learning Path
+                    </h2>
+                </div>
+
+                <p class="section-description">
+                    البرنامج مبني تدريجيًا بحيث تنتقل من الأساسيات
+                    إلى المهارات والتقييم والاستعداد السريري.
+                </p>
+
+            </div>
 
 
+            <div class="clinical-path">
 
-  <!-- =========================
-       FOOTER
-  ========================= -->
+                <article class="path-card">
 
-  <footer>
+                    <div class="path-number">
+                        PHASE 01
+                    </div>
 
-    <div class="container">
+                    <h3>
+                        Nursing Foundations
+                    </h3>
 
-      Nursing Internship — 30 Day Clinical Refresher
+                    <p>
+                        بناء الأساس السريري ومهارات التمريض الأساسية.
+                    </p>
 
-      <br>
+                </article>
 
-      Built for clinical learning and internship readiness.
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        PHASE 02
+                    </div>
+
+                    <h3>
+                        Clinical Assessment & Skills
+                    </h3>
+
+                    <p>
+                        تطوير التقييم السريري والمهارات العملية.
+                    </p>
+
+                </article>
+
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        PHASE 03
+                    </div>
+
+                    <h3>
+                        Medical-Surgical Nursing
+                    </h3>
+
+                    <p>
+                        ربط المعرفة بالحالات الطبية والجراحية الشائعة.
+                    </p>
+
+                </article>
+
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        PHASE 04
+                    </div>
+
+                    <h3>
+                        Clinical Readiness
+                    </h3>
+
+                    <p>
+                        الاستعداد للتعامل الآمن واتخاذ القرار والتواصل.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ROADMAP -->
+
+    <section class="section" id="roadmap">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+                    <div class="section-kicker">
+                        30 Day Program
+                    </div>
+
+                    <h2 class="section-title">
+                        Clinical Roadmap
+                    </h2>
+                </div>
+
+                <p class="section-description">
+                    كل يوم يمثل خطوة مستقلة في رحلة المراجعة العملية.
+                    جميع الأيام متاحة ويمكن فتحها مباشرة.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap">
+
+
+                <!-- PHASE 01 -->
+
+                <section class="phase">
+
+                    <div class="phase-header">
+
+                        <div class="phase-meta">
+
+                            <div class="phase-number">
+                                01
+                            </div>
+
+                            <div>
+
+                                <div class="phase-title">
+                                    Nursing Foundations
+                                </div>
+
+                                <div class="phase-range">
+                                    Days 01–07
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="phase-progress"
+                            id="phaseProgress1"
+                        >
+                            0 / 7 completed
+                        </div>
+
+                    </div>
+
+
+                    <div class="days-grid">
+
+                        <!-- DAY 01 -->
+
+                        <article
+                            class="day-card"
+                            data-day="1"
+                            id="day-card-1"
+                        >
+
+                            <div class="day-top">
+
+                                <span class="day-number">
+                                    DAY 01
+                                </span>
+
+                                <span
+                                    class="status"
+                                    id="status-1"
+                                >
+                                    Available
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Assessment, ABCDE & Vital Signs
+                            </h3>
+
+                            <p>
+                                Patient assessment, ABCDE approach,
+                                vital signs and patient safety.
+                            </p>
+
+                            <div class="day-actions">
+
+                                <a
+                                    class="open-day"
+                                    href="days/day-01.html"
+                                >
+                                    Open Day
+                                </a>
+
+                                <button
+                                    class="complete-btn"
+                                    type="button"
+                                    data-complete="1"
+                                    aria-label="Mark Day 1 as completed"
+                                >
+                                    Complete
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 02 -->
+
+                        <article
+                            class="day-card"
+                            data-day="2"
+                            id="day-card-2"
+                        >
+
+                            <div class="day-top">
+
+                                <span class="day-number">
+                                    DAY 02
+                                </span>
+
+                                <span
+                                    class="status"
+                                    id="status-2"
+                                >
+                                    Available
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Hygiene, Positioning & Bed Preparation
+                            </h3>
+
+                            <p>
+                                Basic patient care, positioning and
+                                safe bed preparation.
+                            </p>
+
+                            <div class="day-actions">
+
+                                <a
+                                    class="open-day"
+                                    href="days/day-02.html"
+                                >
+                                    Open Day
+                                </a>
+
+                                <button
+                                    class="complete-btn"
+                                    type="button"
+                                    data-complete="2"
+                                    aria-label="Mark Day 2 as completed"
+                                >
+                                    Complete
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 03 -->
+
+                        <article
+                            class="day-card"
+                            data-day="3"
+                            id="day-card-3"
+                        >
+
+                            <div class="day-top">
+
+                                <span class="day-number">
+                                    DAY 03
+                                </span>
+
+                                <span
+                                    class="status"
+                                    id="status-3"
+                                >
+                                    Available
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Infection Control
+                            </h3>
+
+                            <p>
+                                Hand hygiene, PPE and standard and
+                                transmission-based precautions.
+                            </p>
+
+                            <div class="day-actions">
+
+                                <a
+                                    class="open-day"
+                                    href="days/day-03.html"
+                                >
+                                    Open Day
+                                </a>
+
+                                <button
+                                    class="complete-btn"
+                                    type="button"
+                                    data-complete="3"
+                                    aria-label="Mark Day 3 as completed"
+                                >
+                                    Complete
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 04 -->
+
+                        <article
+                            class="day-card"
+                            data-day="4"
+                            id="day-card-4"
+                        >
+
+                            <div class="day-top">
+
+                                <span class="day-number">
+                                    DAY 04
+                                </span>
+
+                                <span
+                                    class="status"
+                                    id="status-4"
+                                >
+                                    Available
+                                </span>
+
+                            </div>
+
+                            <h3>
+                                Mobility, Transfer & Fall Prevention
+                            </h3>
+
+                            <p>
+                                Safe movement, transfers, ambulation
+                                and fall prevention.
+                            </p>
+
+                            <div class="day-actions">
+
+                                <a
+                                    class="open-day"
+                                    href="days/day-04.html"
+                                >
+                                    Open Day
+                                </a>
+
+                                <button
+                                    class="complete-btn"
+                                    type="button"
+                                    data-complete="4"
+                                    aria-label="Mark Day 4 as completed"
+                                >
+                                    Complete
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 05 -->
+
+                        <article class="day-card" data-day="5" id="day-card-5">
+
+                            <div class="day-top">
+                                <span class="day-number">DAY 05</span>
+                                <span class="status" id="status-5">Available</span>
+                            </div>
+
+                            <h3>Hygiene & Pressure Injury Prevention</h3>
+
+                            <p>
+                                Hygiene care, skin protection and pressure injury prevention.
+                            </p>
+
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-05.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="5" aria-label="Mark Day 5 as completed">Complete</button>
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 06 -->
+
+                        <article class="day-card" data-day="6" id="day-card-6">
+
+                            <div class="day-top">
+                                <span class="day-number">DAY 06</span>
+                                <span class="status" id="status-6">Available</span>
+                            </div>
+
+                            <h3>Intake & Output</h3>
+
+                            <p>
+                                Fluid balance, intake and output measurement and documentation.
+                            </p>
+
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-06.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="6" aria-label="Mark Day 6 as completed">Complete</button>
+                            </div>
+
+                        </article>
+
+
+                        <!-- DAY 07 -->
+
+                        <article class="day-card" data-day="7" id="day-card-7">
+
+                            <div class="day-top">
+                                <span class="day-number">DAY 07</span>
+                                <span class="status" id="status-7">Available</span>
+                            </div>
+
+                            <h3>Medication Safety</h3>
+
+                            <p>
+                                Safe medication principles, checking and error prevention.
+                            </p>
+
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-07.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="7" aria-label="Mark Day 7 as completed">Complete</button>
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PHASE 02 -->
+
+                <section class="phase">
+
+                    <div class="phase-header">
+
+                        <div class="phase-meta">
+
+                            <div class="phase-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <div class="phase-title">
+                                    Clinical Assessment & Skills
+                                </div>
+
+                                <div class="phase-range">
+                                    Days 08–14
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="phase-progress"
+                            id="phaseProgress2"
+                        >
+                            0 / 7 completed
+                        </div>
+
+                    </div>
+
+
+                    <div class="days-grid">
+
+                        <article class="day-card" data-day="8" id="day-card-8">
+                            <div class="day-top">
+                                <span class="day-number">DAY 08</span>
+                                <span class="status" id="status-8">Available</span>
+                            </div>
+                            <h3>Medication Administration</h3>
+                            <p>Medication administration principles and safe practice.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-08.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="8" aria-label="Mark Day 8 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="9" id="day-card-9">
+                            <div class="day-top">
+                                <span class="day-number">DAY 09</span>
+                                <span class="status" id="status-9">Available</span>
+                            </div>
+                            <h3>IV Therapy</h3>
+                            <p>IV therapy fundamentals, safety and monitoring.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-09.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="9" aria-label="Mark Day 9 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="10" id="day-card-10">
+                            <div class="day-top">
+                                <span class="day-number">DAY 10</span>
+                                <span class="status" id="status-10">Available</span>
+                            </div>
+                            <h3>Wound Care</h3>
+                            <p>Wound assessment, care principles and infection prevention.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-10.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="10" aria-label="Mark Day 10 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="11" id="day-card-11">
+                            <div class="day-top">
+                                <span class="day-number">DAY 11</span>
+                                <span class="status" id="status-11">Available</span>
+                            </div>
+                            <h3>Oxygen Therapy</h3>
+                            <p>Oxygen delivery, monitoring and patient safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-11.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="11" aria-label="Mark Day 11 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="12" id="day-card-12">
+                            <div class="day-top">
+                                <span class="day-number">DAY 12</span>
+                                <span class="status" id="status-12">Available</span>
+                            </div>
+                            <h3>Respiratory Assessment</h3>
+                            <p>Focused respiratory assessment and clinical findings.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-12.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="12" aria-label="Mark Day 12 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="13" id="day-card-13">
+                            <div class="day-top">
+                                <span class="day-number">DAY 13</span>
+                                <span class="status" id="status-13">Available</span>
+                            </div>
+                            <h3>Cardiovascular Assessment</h3>
+                            <p>Cardiovascular assessment and recognition of abnormal findings.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-13.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="13" aria-label="Mark Day 13 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="14" id="day-card-14">
+                            <div class="day-top">
+                                <span class="day-number">DAY 14</span>
+                                <span class="status" id="status-14">Available</span>
+                            </div>
+                            <h3>Neurological Assessment</h3>
+                            <p>Neurological assessment, consciousness and focused findings.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-14.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="14" aria-label="Mark Day 14 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PHASE 03 -->
+
+                <section class="phase">
+
+                    <div class="phase-header">
+
+                        <div class="phase-meta">
+
+                            <div class="phase-number">
+                                03
+                            </div>
+
+                            <div>
+
+                                <div class="phase-title">
+                                    Medical-Surgical Nursing
+                                </div>
+
+                                <div class="phase-range">
+                                    Days 15–21
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="phase-progress"
+                            id="phaseProgress3"
+                        >
+                            0 / 7 completed
+                        </div>
+
+                    </div>
+
+
+                    <div class="days-grid">
+
+                        <article class="day-card" data-day="15" id="day-card-15">
+                            <div class="day-top">
+                                <span class="day-number">DAY 15</span>
+                                <span class="status" id="status-15">Available</span>
+                            </div>
+                            <h3>Pain Assessment</h3>
+                            <p>Pain assessment, documentation and safe nursing interventions.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-15.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="15" aria-label="Mark Day 15 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="16" id="day-card-16">
+                            <div class="day-top">
+                                <span class="day-number">DAY 16</span>
+                                <span class="status" id="status-16">Available</span>
+                            </div>
+                            <h3>Fluid & Electrolyte Balance</h3>
+                            <p>Fluid balance and common electrolyte disturbances.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-16.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="16" aria-label="Mark Day 16 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="17" id="day-card-17">
+                            <div class="day-top">
+                                <span class="day-number">DAY 17</span>
+                                <span class="status" id="status-17">Available</span>
+                            </div>
+                            <h3>Medical-Surgical Nursing</h3>
+                            <p>Clinical thinking across common medical and surgical conditions.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-17.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="17" aria-label="Mark Day 17 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="18" id="day-card-18">
+                            <div class="day-top">
+                                <span class="day-number">DAY 18</span>
+                                <span class="status" id="status-18">Available</span>
+                            </div>
+                            <h3>Diabetes & Insulin</h3>
+                            <p>Diabetes care, glucose monitoring and insulin safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-18.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="18" aria-label="Mark Day 18 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="19" id="day-card-19">
+                            <div class="day-top">
+                                <span class="day-number">DAY 19</span>
+                                <span class="status" id="status-19">Available</span>
+                            </div>
+                            <h3>Hypertension & Cardiovascular Care</h3>
+                            <p>Blood pressure management and cardiovascular nursing care.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-19.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="19" aria-label="Mark Day 19 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="20" id="day-card-20">
+                            <div class="day-top">
+                                <span class="day-number">DAY 20</span>
+                                <span class="status" id="status-20">Available</span>
+                            </div>
+                            <h3>Heart Failure & Shock</h3>
+                            <p>Recognition, monitoring and nursing priorities.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-20.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="20" aria-label="Mark Day 20 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="21" id="day-card-21">
+                            <div class="day-top">
+                                <span class="day-number">DAY 21</span>
+                                <span class="status" id="status-21">Available</span>
+                            </div>
+                            <h3>COPD & Respiratory Disorders</h3>
+                            <p>Respiratory disorders and practical nursing priorities.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-21.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="21" aria-label="Mark Day 21 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PHASE 04 -->
+
+                <section class="phase">
+
+                    <div class="phase-header">
+
+                        <div class="phase-meta">
+
+                            <div class="phase-number">
+                                04
+                            </div>
+
+                            <div>
+
+                                <div class="phase-title">
+                                    Clinical Readiness
+                                </div>
+
+                                <div class="phase-range">
+                                    Days 22–30
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="phase-progress"
+                            id="phaseProgress4"
+                        >
+                            0 / 9 completed
+                        </div>
+
+                    </div>
+
+
+                    <div class="days-grid">
+
+                        <article class="day-card" data-day="22" id="day-card-22">
+                            <div class="day-top">
+                                <span class="day-number">DAY 22</span>
+                                <span class="status" id="status-22">Available</span>
+                            </div>
+                            <h3>Stroke & Neurological Care</h3>
+                            <p>Neurological nursing priorities and patient safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-22.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="22" aria-label="Mark Day 22 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="23" id="day-card-23">
+                            <div class="day-top">
+                                <span class="day-number">DAY 23</span>
+                                <span class="status" id="status-23">Available</span>
+                            </div>
+                            <h3>Preoperative Nursing</h3>
+                            <p>Preoperative assessment, preparation and safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-23.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="23" aria-label="Mark Day 23 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="24" id="day-card-24">
+                            <div class="day-top">
+                                <span class="day-number">DAY 24</span>
+                                <span class="status" id="status-24">Available</span>
+                            </div>
+                            <h3>Postoperative Nursing</h3>
+                            <p>Postoperative monitoring, complications and nursing care.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-24.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="24" aria-label="Mark Day 24 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="25" id="day-card-25">
+                            <div class="day-top">
+                                <span class="day-number">DAY 25</span>
+                                <span class="status" id="status-25">Available</span>
+                            </div>
+                            <h3>Emergency Nursing</h3>
+                            <p>Emergency priorities, rapid assessment and safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-25.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="25" aria-label="Mark Day 25 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="26" id="day-card-26">
+                            <div class="day-top">
+                                <span class="day-number">DAY 26</span>
+                                <span class="status" id="status-26">Available</span>
+                            </div>
+                            <h3>Patient Education</h3>
+                            <p>Effective patient education and health communication.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-26.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="26" aria-label="Mark Day 26 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="27" id="day-card-27">
+                            <div class="day-top">
+                                <span class="day-number">DAY 27</span>
+                                <span class="status" id="status-27">Available</span>
+                            </div>
+                            <h3>Communication & Handover</h3>
+                            <p>Clinical communication, handover and continuity of care.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-27.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="27" aria-label="Mark Day 27 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="28" id="day-card-28">
+                            <div class="day-top">
+                                <span class="day-number">DAY 28</span>
+                                <span class="status" id="status-28">Available</span>
+                            </div>
+                            <h3>Documentation & Legal Safety</h3>
+                            <p>Safe documentation, professional responsibility and legal awareness.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-28.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="28" aria-label="Mark Day 28 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="29" id="day-card-29">
+                            <div class="day-top">
+                                <span class="day-number">DAY 29</span>
+                                <span class="status" id="status-29">Available</span>
+                            </div>
+                            <h3>Clinical Judgment</h3>
+                            <p>Recognizing priorities and making safer clinical decisions.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-29.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="29" aria-label="Mark Day 29 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                        <article class="day-card" data-day="30" id="day-card-30">
+                            <div class="day-top">
+                                <span class="day-number">DAY 30</span>
+                                <span class="status" id="status-30">Available</span>
+                            </div>
+                            <h3>Final Clinical Readiness</h3>
+                            <p>Final integration of knowledge, skills, judgment and safety.</p>
+                            <div class="day-actions">
+                                <a class="open-day" href="days/day-30.html">Open Day</a>
+                                <button class="complete-btn" type="button" data-complete="30" aria-label="Mark Day 30 as completed">Complete</button>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- METHOD -->
+
+    <section class="section" id="method">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+                    <div class="section-kicker">
+                        Learning Method
+                    </div>
+
+                    <h2 class="section-title">
+                        From Knowledge to Clinical Action
+                    </h2>
+                </div>
+
+                <p class="section-description">
+                    الهدف ليس حفظ المعلومات فقط، ولكن تحويلها إلى
+                    مهارة وحكم سريري وتصرف آمن.
+                </p>
+
+            </div>
+
+
+            <div class="method">
+
+                <article class="method-card">
+
+                    <div class="method-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Understand
+                    </h3>
+
+                    <div class="arabic">
+                        افهم
+                    </div>
+
+                    <p>
+                        افهم لماذا تحدث المشكلة وما الذي تبحث عنه
+                        عند تقييم المريض.
+                    </p>
+
+                </article>
+
+
+                <article class="method-card">
+
+                    <div class="method-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Remember
+                    </h3>
+
+                    <div class="arabic">
+                        ثبت
+                    </div>
+
+                    <p>
+                        ثبت المعلومات الأساسية التي تحتاجها
+                        أثناء العمل السريري.
+                    </p>
+
+                </article>
+
+
+                <article class="method-card">
+
+                    <div class="method-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Apply
+                    </h3>
+
+                    <div class="arabic">
+                        طبق
+                    </div>
+
+                    <p>
+                        حوّل المعرفة إلى خطوات عملية ومهارات
+                        يمكن تنفيذها مع المريض.
+                    </p>
+
+                </article>
+
+
+                <article class="method-card">
+
+                    <div class="method-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Act Safely
+                    </h3>
+
+                    <div class="arabic">
+                        تصرف بأمان
+                    </div>
+
+                    <p>
+                        حدد الأولويات واعرف متى تتصرف ومتى
+                        تحتاج إلى طلب المساعدة.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESOURCES -->
+
+    <section class="section" id="resources">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+                    <div class="section-kicker">
+                        Evidence & Standards
+                    </div>
+
+                    <h2 class="section-title">
+                        Clinical Standards
+                    </h2>
+                </div>
+
+                <p class="section-description">
+                    مصادر مرجعية عامة يمكن الرجوع إليها أثناء تطوير
+                    المعرفة والممارسة السريرية.
+                </p>
+
+            </div>
+
+
+            <div class="resources">
+
+                <div class="resource">
+
+                    <strong>
+                        WHO
+                    </strong>
+
+                    <span>
+                        World Health Organization
+                    </span>
+
+                    <a
+                        href="https://www.who.int/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Official Website
+                    </a>
+
+                </div>
+
+
+                <div class="resource">
+
+                    <strong>
+                        CDC
+                    </strong>
+
+                    <span>
+                        Centers for Disease Control and Prevention
+                    </span>
+
+                    <a
+                        href="https://www.cdc.gov/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Official Website
+                    </a>
+
+                </div>
+
+
+                <div class="resource">
+
+                    <strong>
+                        AHA
+                    </strong>
+
+                    <span>
+                        American Heart Association
+                    </span>
+
+                    <a
+                        href="https://www.heart.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Official Website
+                    </a>
+
+                </div>
+
+
+                <div class="resource">
+
+                    <strong>
+                        NHS
+                    </strong>
+
+                    <span>
+                        National Health Service
+                    </span>
+
+                    <a
+                        href="https://www.nhs.uk/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Official Website
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <div class="footer-brand">
+                Nursing Internship — 30 Day Clinical Refresher
+            </div>
+
+            <div class="footer-text">
+                Bachelor Nursing Intern • Knowledge • Skill • Judgment • Safety
+            </div>
+
+        </div>
+
+        <div class="footer-text">
+            Personal Clinical Learning Platform
+        </div>
 
     </div>
 
-  </footer>
+</footer>
 
 
-
-  <!-- =========================
-       PROGRESS JAVASCRIPT
-  ========================= -->
-
-  <script>
+<script>
+    "use strict";
 
     const TOTAL_DAYS = 30;
+    const STORAGE_KEY = "nursingInternshipProgress";
 
-    const STORAGE_KEY =
-      "nursingInternshipProgress";
-
+    const phaseRanges = {
+        1: [1, 7],
+        2: [8, 14],
+        3: [15, 21],
+        4: [22, 30]
+    };
 
 
     function getProgress() {
 
-      const saved =
-        localStorage.getItem(STORAGE_KEY);
+        try {
 
-      if (!saved) {
-        return [];
-      }
+            const saved = localStorage.getItem(STORAGE_KEY);
 
-      try {
+            if (!saved) {
+                return [];
+            }
 
-        const data =
-          JSON.parse(saved);
+            const parsed = JSON.parse(saved);
 
-        if (!Array.isArray(data)) {
-          return [];
+            if (!Array.isArray(parsed)) {
+                return [];
+            }
+
+            return parsed
+                .map(Number)
+                .filter(day =>
+                    Number.isInteger(day) &&
+                    day >= 1 &&
+                    day <= TOTAL_DAYS
+                );
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to read saved progress.",
+                error
+            );
+
+            return [];
         }
-
-        return data;
-
-      } catch (error) {
-
-        return [];
-
-      }
-
     }
-
 
 
     function saveProgress(progress) {
 
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(progress)
-      );
+        try {
 
+            const uniqueProgress = [
+                ...new Set(progress)
+            ].sort((a, b) => a - b);
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(uniqueProgress)
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to save progress.",
+                error
+            );
+        }
     }
 
 
+    function getCurrentDay(progress) {
 
-    function toggleComplete(day) {
+        for (
+            let day = 1;
+            day <= TOTAL_DAYS;
+            day++
+        ) {
 
-      let progress =
-        getProgress();
+            if (!progress.includes(day)) {
+                return day;
+            }
+        }
 
-      if (progress.includes(day)) {
-
-        progress =
-          progress.filter(
-            item => item !== day
-          );
-
-      } else {
-
-        progress.push(day);
-
-      }
-
-      progress.sort(
-        (a, b) => a - b
-      );
-
-      saveProgress(progress);
-
-      updateProgress();
-
+        return TOTAL_DAYS;
     }
 
+
+    function getCurrentStage(day) {
+
+        if (day <= 7) {
+            return "Nursing Foundations";
+        }
+
+        if (day <= 14) {
+            return "Clinical Assessment";
+        }
+
+        if (day <= 21) {
+            return "Medical-Surgical";
+        }
+
+        return "Clinical Readiness";
+    }
 
 
     function updateProgress() {
 
-      const progress =
-        getProgress();
+        const progress = getProgress();
 
-      const completed =
-        progress.length;
+        const completedCount = progress.length;
 
-      const percentage =
-        Math.round(
-          (completed / TOTAL_DAYS) * 100
+        const percentage = Math.round(
+            (completedCount / TOTAL_DAYS) * 100
+        );
+
+        const currentDay =
+            getCurrentDay(progress);
+
+        const currentStage =
+            getCurrentStage(currentDay);
+
+
+        /* Main progress */
+
+        document.getElementById(
+            "progressPercent"
+        ).textContent = percentage + "%";
+
+
+        document.getElementById(
+            "progressFill"
+        ).style.width = percentage + "%";
+
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        progressBar.setAttribute(
+            "aria-valuenow",
+            percentage
         );
 
 
-      document.getElementById(
-        "progressNumber"
-      ).textContent =
-        percentage + "%";
+        document.getElementById(
+            "completedCount"
+        ).textContent =
+            completedCount + " / " + TOTAL_DAYS;
 
 
-      document.getElementById(
-        "progressFill"
-      ).style.width =
-        percentage + "%";
+        document.getElementById(
+            "completedText"
+        ).textContent =
+            completedCount +
+            " من " +
+            TOTAL_DAYS +
+            " يوم مكتمل";
 
 
-      document.getElementById(
-        "progressInfo"
-      ).textContent =
-        completed +
-        " من " +
-        TOTAL_DAYS +
-        " يوم مكتمل";
+        document.getElementById(
+            "currentDayText"
+        ).textContent =
+            "Current Day: " +
+            String(currentDay).padStart(2, "0");
 
 
-      for (
-        let day = 1;
-        day <= TOTAL_DAYS;
-        day++
-      ) {
-
-        const card =
-          document.getElementById(
-            "day-card-" + day
-          );
-
-        const button =
-          document.getElementById(
-            "complete-" + day
-          );
+        document.getElementById(
+            "currentStage"
+        ).textContent =
+            currentStage;
 
 
-        if (!card || !button) {
-          continue;
+        /* Hero */
+
+        document.getElementById(
+            "heroProgress"
+        ).textContent =
+            percentage + "%";
+
+
+        document.getElementById(
+            "heroCompleted"
+        ).textContent =
+            completedCount +
+            " / " +
+            TOTAL_DAYS;
+
+
+        /* Day cards */
+
+        for (
+            let day = 1;
+            day <= TOTAL_DAYS;
+            day++
+        ) {
+
+            const card =
+                document.getElementById(
+                    "day-card-" + day
+                );
+
+            const status =
+                document.getElementById(
+                    "status-" + day
+                );
+
+            const button =
+                document.querySelector(
+                    '[data-complete="' +
+                    day +
+                    '"]'
+                );
+
+
+            if (!card || !status || !button) {
+                continue;
+            }
+
+
+            card.classList.remove(
+                "completed",
+                "current"
+            );
+
+            status.classList.remove(
+                "completed-status",
+                "current-status"
+            );
+
+
+            if (progress.includes(day)) {
+
+                card.classList.add(
+                    "completed"
+                );
+
+                status.classList.add(
+                    "completed-status"
+                );
+
+                status.textContent =
+                    "Completed";
+
+                button.textContent =
+                    "Completed";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Mark Day " +
+                    day +
+                    " as incomplete"
+                );
+
+            } else {
+
+                status.textContent =
+                    "Available";
+
+                button.textContent =
+                    "Complete";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Mark Day " +
+                    day +
+                    " as completed"
+                );
+            }
+
+
+            if (
+                day === currentDay &&
+                !progress.includes(day)
+            ) {
+
+                card.classList.add(
+                    "current"
+                );
+
+                status.classList.add(
+                    "current-status"
+                );
+
+                status.textContent =
+                    "Current Day";
+            }
         }
 
 
-        if (progress.includes(day)) {
+        /* Phase progress */
 
-          card.classList.add(
-            "completed"
-          );
+        Object.entries(
+            phaseRanges
+        ).forEach(
+            ([phase, range]) => {
 
-          button.classList.add(
-            "completed-button"
-          );
+                const start = range[0];
+                const end = range[1];
 
-          button.textContent =
-            "Completed";
+                const total =
+                    end - start + 1;
+
+                const completed =
+                    progress.filter(
+                        day =>
+                            day >= start &&
+                            day <= end
+                    ).length;
+
+                const element =
+                    document.getElementById(
+                        "phaseProgress" + phase
+                    );
+
+                if (element) {
+
+                    element.textContent =
+                        completed +
+                        " / " +
+                        total +
+                        " completed";
+                }
+            }
+        );
+    }
+
+
+    function toggleComplete(day) {
+
+        const progress =
+            getProgress();
+
+        const index =
+            progress.indexOf(day);
+
+
+        if (index === -1) {
+
+            progress.push(day);
 
         } else {
 
-          card.classList.remove(
-            "completed"
-          );
-
-          button.classList.remove(
-            "completed-button"
-          );
-
-          button.textContent =
-            "Mark as Completed";
-
+            progress.splice(index, 1);
         }
 
-      }
 
+        saveProgress(progress);
+
+        updateProgress();
     }
-
 
 
     function resetProgress() {
 
-      const confirmed =
-        confirm(
-          "هل أنت متأكد من مسح معدل التقدم والبدء من جديد؟"
+        const progress =
+            getProgress();
+
+        if (progress.length === 0) {
+            return;
+        }
+
+
+        const confirmed =
+            window.confirm(
+                "Reset your entire 30-day progress?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        localStorage.removeItem(
+            STORAGE_KEY
         );
 
-      if (!confirmed) {
-        return;
-      }
-
-      localStorage.removeItem(
-        STORAGE_KEY
-      );
-
-      updateProgress();
-
+        updateProgress();
     }
 
 
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
 
-    updateProgress();
+            document
+                .querySelectorAll(
+                    "[data-complete]"
+                )
+                .forEach(
+                    button => {
 
-  </script>
+                        button.addEventListener(
+                            "click",
+                            function () {
 
+                                const day =
+                                    Number(
+                                        this.dataset.complete
+                                    );
+
+                                if (
+                                    Number.isInteger(day) &&
+                                    day >= 1 &&
+                                    day <= TOTAL_DAYS
+                                ) {
+
+                                    toggleComplete(day);
+                                }
+                            }
+                        );
+                    }
+                );
+
+
+            document
+                .getElementById(
+                    "resetProgress"
+                )
+                .addEventListener(
+                    "click",
+                    resetProgress
+                );
+
+
+            updateProgress();
+        }
+    );
+</script>
 
 </body>
-
 </html>
