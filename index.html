@@ -38,6 +38,10 @@
       color: inherit;
     }
 
+    button {
+      font-family: inherit;
+    }
+
     .container {
       width: min(1100px, calc(100% - 30px));
       margin: auto;
@@ -48,14 +52,14 @@
     ========================= */
 
     header {
-      padding: 55px 0 35px;
+      padding: 45px 0 30px;
       border-bottom: 1px solid #1c2b3d;
     }
 
     .brand {
       color: #35d6c4;
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 800;
       letter-spacing: 1px;
       margin-bottom: 12px;
     }
@@ -68,14 +72,13 @@
     }
 
     .subtitle {
-      margin-top: 15px;
+      margin-top: 14px;
       color: #aeb9c5;
       font-size: 17px;
-      max-width: 700px;
     }
 
     .intro {
-      margin-top: 25px;
+      margin-top: 20px;
       color: #d5dce3;
       font-size: 15px;
       max-width: 800px;
@@ -86,7 +89,7 @@
     ========================= */
 
     .progress-section {
-      margin-top: 30px;
+      margin-top: 28px;
       background: #0d1b2b;
       border: 1px solid #1c3147;
       border-radius: 18px;
@@ -108,11 +111,12 @@
     .progress-number {
       color: #35d6c4;
       font-weight: 800;
+      font-size: 20px;
     }
 
     .progress-bar {
       width: 100%;
-      height: 10px;
+      height: 11px;
       background: #1b2a3b;
       border-radius: 20px;
       overflow: hidden;
@@ -123,12 +127,34 @@
       height: 100%;
       background: #35d6c4;
       border-radius: inherit;
+      transition: width 0.3s ease;
     }
 
     .progress-info {
       margin-top: 10px;
       color: #8e9baa;
       font-size: 13px;
+    }
+
+    .progress-actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .reset-button {
+      border: 1px solid #34475b;
+      background: transparent;
+      color: #aeb9c5;
+      padding: 9px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .reset-button:hover {
+      border-color: #35d6c4;
+      color: #35d6c4;
     }
 
     /* =========================
@@ -145,8 +171,9 @@
 
     .section-label {
       color: #35d6c4;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
       margin-bottom: 5px;
     }
 
@@ -172,11 +199,14 @@
     }
 
     .day-card {
-      min-height: 155px;
+      position: relative;
+      min-height: 180px;
       padding: 20px;
       background: #0d1b2b;
       border: 1px solid #1c3147;
       border-radius: 18px;
+      display: flex;
+      flex-direction: column;
       transition:
         transform 0.2s ease,
         border-color 0.2s ease,
@@ -189,12 +219,8 @@
       background: #102235;
     }
 
-    .day-card.active {
+    .day-card.completed {
       border-color: #35d6c4;
-    }
-
-    .day-card.locked {
-      opacity: 0.55;
     }
 
     .day-number {
@@ -205,24 +231,57 @@
     }
 
     .day-title {
-      margin-top: 10px;
+      margin-top: 9px;
       font-size: 17px;
       font-weight: 700;
       line-height: 1.5;
     }
 
-    .day-status {
-      margin-top: 12px;
+    .day-description {
+      margin-top: 6px;
       color: #8996a4;
       font-size: 12px;
     }
 
-    .active .day-status {
+    .day-bottom {
+      margin-top: auto;
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .open-link {
       color: #35d6c4;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .complete-button {
+      border: 1px solid #294158;
+      background: #101f30;
+      color: #aeb9c5;
+      padding: 7px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .complete-button:hover {
+      border-color: #35d6c4;
+    }
+
+    .complete-button.completed-button {
+      background: #35d6c4;
+      color: #07111f;
+      border-color: #35d6c4;
+      font-weight: 700;
     }
 
     /* =========================
-       PROGRAM METHOD
+       METHOD
     ========================= */
 
     .method-grid {
@@ -295,7 +354,7 @@
       }
 
       header {
-        padding-top: 35px;
+        padding-top: 32px;
       }
 
       h1 {
@@ -315,7 +374,11 @@
       }
 
       .day-card {
-        min-height: auto;
+        min-height: 165px;
+      }
+
+      .progress-header {
+        align-items: flex-start;
       }
 
     }
@@ -327,6 +390,10 @@
 
 <body>
 
+
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header>
 
@@ -341,8 +408,8 @@
       </h1>
 
       <div class="subtitle">
-        Bachelor Nursing Intern
-        — Knowledge, Skill, Judgment, Safety
+        Bachelor Nursing Intern —
+        Knowledge, Skill, Judgment, Safety
       </div>
 
       <div class="intro">
@@ -356,6 +423,8 @@
       </div>
 
 
+      <!-- PROGRESS -->
+
       <div class="progress-section">
 
         <div class="progress-header">
@@ -364,7 +433,10 @@
             Your Progress
           </div>
 
-          <div class="progress-number">
+          <div
+            class="progress-number"
+            id="progressNumber"
+          >
             0%
           </div>
 
@@ -373,14 +445,30 @@
 
         <div class="progress-bar">
 
-          <div class="progress-fill"></div>
+          <div
+            class="progress-fill"
+            id="progressFill"
+          ></div>
 
         </div>
 
 
-        <div class="progress-info">
-
+        <div
+          class="progress-info"
+          id="progressInfo"
+        >
           0 من 30 يوم مكتمل
+        </div>
+
+
+        <div class="progress-actions">
+
+          <button
+            class="reset-button"
+            onclick="resetProgress()"
+          >
+            Reset Progress
+          </button>
 
         </div>
 
@@ -392,11 +480,17 @@
 
 
 
+  <!-- =========================
+       MAIN
+  ========================= -->
+
   <main>
+
 
     <section>
 
       <div class="container">
+
 
         <div class="section-header">
 
@@ -409,10 +503,11 @@
           </h2>
 
           <div class="section-description">
-            اختار اليوم اللي عايز تدرسه.
+            كل الأيام متاحة، والتقدم يتم حفظه تلقائيًا على جهازك.
           </div>
 
         </div>
+
 
 
         <div class="days-grid">
@@ -420,9 +515,9 @@
 
           <!-- DAY 01 -->
 
-          <a
-            class="day-card active"
-            href="days/day-01.html"
+          <div
+            class="day-card"
+            id="day-card-1"
           >
 
             <div class="day-number">
@@ -434,19 +529,38 @@
               Vital Signs + Patient Safety
             </div>
 
-            <div class="day-status">
-              Available
+            <div class="day-description">
+              أساس تقييم المريض والتعامل الآمن معه.
             </div>
 
-          </a>
+            <div class="day-bottom">
+
+              <a
+                class="open-link"
+                href="days/day-01.html"
+              >
+                Open Day
+              </a>
+
+              <button
+                class="complete-button"
+                id="complete-1"
+                onclick="toggleComplete(1)"
+              >
+                Mark as Completed
+              </button>
+
+            </div>
+
+          </div>
 
 
 
           <!-- DAY 02 -->
 
-          <a
-            class="day-card active"
-            href="days/day-02.html"
+          <div
+            class="day-card"
+            id="day-card-2"
           >
 
             <div class="day-number">
@@ -458,17 +572,39 @@
               & Bed Preparation
             </div>
 
-            <div class="day-status">
-              Available
+            <div class="day-description">
+              النظافة، وضع المريض وتجهيز السرير.
             </div>
 
-          </a>
+            <div class="day-bottom">
+
+              <a
+                class="open-link"
+                href="days/day-02.html"
+              >
+                Open Day
+              </a>
+
+              <button
+                class="complete-button"
+                id="complete-2"
+                onclick="toggleComplete(2)"
+              >
+                Mark as Completed
+              </button>
+
+            </div>
+
+          </div>
 
 
 
-          <!-- DAYS 03 - 30 -->
+          <!-- DAY 03 -->
 
-          <div class="day-card locked">
+          <div
+            class="day-card"
+            id="day-card-3"
+          >
 
             <div class="day-number">
               DAY 03
@@ -478,14 +614,39 @@
               Infection Control
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              Hand Hygiene, PPE & Precautions.
+            </div>
+
+            <div class="day-bottom">
+
+              <a
+                class="open-link"
+                href="days/day-03.html"
+              >
+                Open Day
+              </a>
+
+              <button
+                class="complete-button"
+                id="complete-3"
+                onclick="toggleComplete(3)"
+              >
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
+
+          <!-- DAY 04 -->
+
+          <div
+            class="day-card"
+            id="day-card-4"
+          >
 
             <div class="day-number">
               DAY 04
@@ -496,451 +657,807 @@
               & Fall Prevention
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              الحركة، النقل، المشي ومنع السقوط.
+            </div>
+
+            <div class="day-bottom">
+
+              <a
+                class="open-link"
+                href="days/day-04.html"
+              >
+                Open Day
+              </a>
+
+              <button
+                class="complete-button"
+                id="complete-4"
+                onclick="toggleComplete(4)"
+              >
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 05
-            </div>
+          <!-- DAY 05 -->
+
+          <div class="day-card" id="day-card-5">
+
+            <div class="day-number">DAY 05</div>
 
             <div class="day-title">
-              Hygiene & Pressure
-              Injury Prevention
+              Hygiene & Pressure Injury Prevention
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              العناية بالنظافة والوقاية من قرح الضغط.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-05.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-5" onclick="toggleComplete(5)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 06
-            </div>
+          <!-- DAY 06 -->
+
+          <div class="day-card" id="day-card-6">
+
+            <div class="day-number">DAY 06</div>
 
             <div class="day-title">
               Intake & Output
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              متابعة السوائل الداخلة والخارجة.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-06.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-6" onclick="toggleComplete(6)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 07
-            </div>
+          <!-- DAY 07 -->
+
+          <div class="day-card" id="day-card-7">
+
+            <div class="day-number">DAY 07</div>
 
             <div class="day-title">
               Medication Safety
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              مبادئ أمان الدواء وتقليل الأخطاء.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-07.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-7" onclick="toggleComplete(7)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 08
-            </div>
+          <!-- DAY 08 -->
+
+          <div class="day-card" id="day-card-8">
+
+            <div class="day-number">DAY 08</div>
 
             <div class="day-title">
               Medication Administration
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              إعطاء الأدوية بأمان.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-08.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-8" onclick="toggleComplete(8)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 09
-            </div>
+          <!-- DAY 09 -->
+
+          <div class="day-card" id="day-card-9">
+
+            <div class="day-number">DAY 09</div>
 
             <div class="day-title">
               IV Therapy
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أساسيات العلاج الوريدي.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-09.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-9" onclick="toggleComplete(9)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 10
-            </div>
+          <!-- DAY 10 -->
+
+          <div class="day-card" id="day-card-10">
+
+            <div class="day-number">DAY 10</div>
 
             <div class="day-title">
               Wound Care
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تقييم الجروح والعناية بها.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-10.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-10" onclick="toggleComplete(10)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 11
-            </div>
+          <!-- DAY 11 -->
+
+          <div class="day-card" id="day-card-11">
+
+            <div class="day-number">DAY 11</div>
 
             <div class="day-title">
               Oxygen Therapy
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أساسيات إعطاء الأكسجين ومتابعة المريض.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-11.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-11" onclick="toggleComplete(11)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 12
-            </div>
+          <!-- DAY 12 -->
+
+          <div class="day-card" id="day-card-12">
+
+            <div class="day-number">DAY 12</div>
 
             <div class="day-title">
               Respiratory Assessment
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تقييم الجهاز التنفسي.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-12.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-12" onclick="toggleComplete(12)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 13
-            </div>
+          <!-- DAY 13 -->
+
+          <div class="day-card" id="day-card-13">
+
+            <div class="day-number">DAY 13</div>
 
             <div class="day-title">
               Cardiovascular Assessment
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تقييم الجهاز القلبي الوعائي.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-13.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-13" onclick="toggleComplete(13)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 14
-            </div>
+          <!-- DAY 14 -->
+
+          <div class="day-card" id="day-card-14">
+
+            <div class="day-number">DAY 14</div>
 
             <div class="day-title">
               Neurological Assessment
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تقييم الحالة العصبية والوعي.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-14.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-14" onclick="toggleComplete(14)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 15
-            </div>
+          <!-- DAY 15 -->
+
+          <div class="day-card" id="day-card-15">
+
+            <div class="day-number">DAY 15</div>
 
             <div class="day-title">
               Pain Assessment
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تقييم الألم ومتابعة الاستجابة.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-15.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-15" onclick="toggleComplete(15)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 16
-            </div>
+          <!-- DAY 16 -->
+
+          <div class="day-card" id="day-card-16">
+
+            <div class="day-number">DAY 16</div>
 
             <div class="day-title">
               Fluid & Electrolyte Balance
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              السوائل والكهارل والتوازن الداخلي.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-16.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-16" onclick="toggleComplete(16)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 17
-            </div>
+          <!-- DAY 17 -->
+
+          <div class="day-card" id="day-card-17">
+
+            <div class="day-number">DAY 17</div>
 
             <div class="day-title">
               Medical-Surgical Nursing
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أساسيات التفكير في حالات الباطنة والجراحة.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-17.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-17" onclick="toggleComplete(17)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 18
-            </div>
+          <!-- DAY 18 -->
+
+          <div class="day-card" id="day-card-18">
+
+            <div class="day-number">DAY 18</div>
 
             <div class="day-title">
               Diabetes & Insulin
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أساسيات السكري والإنسولين.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-18.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-18" onclick="toggleComplete(18)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 19
-            </div>
+          <!-- DAY 19 -->
+
+          <div class="day-card" id="day-card-19">
+
+            <div class="day-number">DAY 19</div>
 
             <div class="day-title">
               Hypertension & Cardiovascular Care
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              ارتفاع ضغط الدم والرعاية القلبية.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-19.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-19" onclick="toggleComplete(19)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 20
-            </div>
+          <!-- DAY 20 -->
+
+          <div class="day-card" id="day-card-20">
+
+            <div class="day-number">DAY 20</div>
 
             <div class="day-title">
               Heart Failure & Shock
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              فشل القلب والصدمة.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-20.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-20" onclick="toggleComplete(20)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 21
-            </div>
+          <!-- DAY 21 -->
+
+          <div class="day-card" id="day-card-21">
+
+            <div class="day-number">DAY 21</div>
 
             <div class="day-title">
               COPD & Respiratory Disorders
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أمراض الجهاز التنفسي وCOPD.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-21.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-21" onclick="toggleComplete(21)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 22
-            </div>
+          <!-- DAY 22 -->
+
+          <div class="day-card" id="day-card-22">
+
+            <div class="day-number">DAY 22</div>
 
             <div class="day-title">
               Stroke & Neurological Care
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              السكتة الدماغية والرعاية العصبية.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-22.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-22" onclick="toggleComplete(22)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 23
-            </div>
+          <!-- DAY 23 -->
+
+          <div class="day-card" id="day-card-23">
+
+            <div class="day-number">DAY 23</div>
 
             <div class="day-title">
               Preoperative Nursing
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              رعاية المريض قبل العملية.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-23.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-23" onclick="toggleComplete(23)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 24
-            </div>
+          <!-- DAY 24 -->
+
+          <div class="day-card" id="day-card-24">
+
+            <div class="day-number">DAY 24</div>
 
             <div class="day-title">
               Postoperative Nursing
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              رعاية المريض بعد العملية.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-24.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-24" onclick="toggleComplete(24)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 25
-            </div>
+          <!-- DAY 25 -->
+
+          <div class="day-card" id="day-card-25">
+
+            <div class="day-number">DAY 25</div>
 
             <div class="day-title">
               Emergency Nursing
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              أساسيات التعامل مع الحالات الطارئة.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-25.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-25" onclick="toggleComplete(25)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 26
-            </div>
+          <!-- DAY 26 -->
+
+          <div class="day-card" id="day-card-26">
+
+            <div class="day-number">DAY 26</div>
 
             <div class="day-title">
               Patient Education
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              تثقيف المريض وتعليمات الخروج.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-26.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-26" onclick="toggleComplete(26)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 27
-            </div>
+          <!-- DAY 27 -->
+
+          <div class="day-card" id="day-card-27">
+
+            <div class="day-number">DAY 27</div>
 
             <div class="day-title">
               Communication & Handover
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              التواصل والتسليم بين أفراد الفريق.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-27.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-27" onclick="toggleComplete(27)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 28
-            </div>
+          <!-- DAY 28 -->
+
+          <div class="day-card" id="day-card-28">
+
+            <div class="day-number">DAY 28</div>
 
             <div class="day-title">
               Documentation & Legal Safety
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              التوثيق والسلامة القانونية.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-28.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-28" onclick="toggleComplete(28)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 29
-            </div>
+          <!-- DAY 29 -->
+
+          <div class="day-card" id="day-card-29">
+
+            <div class="day-number">DAY 29</div>
 
             <div class="day-title">
               Clinical Judgment
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              التفكير السريري واتخاذ القرار الآمن.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-29.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-29" onclick="toggleComplete(29)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
 
 
-          <div class="day-card locked">
 
-            <div class="day-number">
-              DAY 30
-            </div>
+          <!-- DAY 30 -->
+
+          <div class="day-card" id="day-card-30">
+
+            <div class="day-number">DAY 30</div>
 
             <div class="day-title">
               Final Clinical Readiness
             </div>
 
-            <div class="day-status">
-              Coming Soon
+            <div class="day-description">
+              المراجعة النهائية والاستعداد السريري.
+            </div>
+
+            <div class="day-bottom">
+
+              <a class="open-link" href="days/day-30.html">
+                Open Day
+              </a>
+
+              <button class="complete-button" id="complete-30" onclick="toggleComplete(30)">
+                Mark as Completed
+              </button>
+
             </div>
 
           </div>
@@ -954,7 +1471,9 @@
 
 
 
-    <!-- PROGRAM METHOD -->
+    <!-- =========================
+         LEARNING METHOD
+    ========================= -->
 
     <section>
 
@@ -1058,6 +1577,10 @@
 
 
 
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer>
 
     <div class="container">
@@ -1071,6 +1594,208 @@
     </div>
 
   </footer>
+
+
+
+  <!-- =========================
+       PROGRESS JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    const TOTAL_DAYS = 30;
+
+    const STORAGE_KEY =
+      "nursingInternshipProgress";
+
+
+
+    function getProgress() {
+
+      const saved =
+        localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        return [];
+      }
+
+      try {
+
+        const data =
+          JSON.parse(saved);
+
+        if (!Array.isArray(data)) {
+          return [];
+        }
+
+        return data;
+
+      } catch (error) {
+
+        return [];
+
+      }
+
+    }
+
+
+
+    function saveProgress(progress) {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(progress)
+      );
+
+    }
+
+
+
+    function toggleComplete(day) {
+
+      let progress =
+        getProgress();
+
+      if (progress.includes(day)) {
+
+        progress =
+          progress.filter(
+            item => item !== day
+          );
+
+      } else {
+
+        progress.push(day);
+
+      }
+
+      progress.sort(
+        (a, b) => a - b
+      );
+
+      saveProgress(progress);
+
+      updateProgress();
+
+    }
+
+
+
+    function updateProgress() {
+
+      const progress =
+        getProgress();
+
+      const completed =
+        progress.length;
+
+      const percentage =
+        Math.round(
+          (completed / TOTAL_DAYS) * 100
+        );
+
+
+      document.getElementById(
+        "progressNumber"
+      ).textContent =
+        percentage + "%";
+
+
+      document.getElementById(
+        "progressFill"
+      ).style.width =
+        percentage + "%";
+
+
+      document.getElementById(
+        "progressInfo"
+      ).textContent =
+        completed +
+        " من " +
+        TOTAL_DAYS +
+        " يوم مكتمل";
+
+
+      for (
+        let day = 1;
+        day <= TOTAL_DAYS;
+        day++
+      ) {
+
+        const card =
+          document.getElementById(
+            "day-card-" + day
+          );
+
+        const button =
+          document.getElementById(
+            "complete-" + day
+          );
+
+
+        if (!card || !button) {
+          continue;
+        }
+
+
+        if (progress.includes(day)) {
+
+          card.classList.add(
+            "completed"
+          );
+
+          button.classList.add(
+            "completed-button"
+          );
+
+          button.textContent =
+            "Completed";
+
+        } else {
+
+          card.classList.remove(
+            "completed"
+          );
+
+          button.classList.remove(
+            "completed-button"
+          );
+
+          button.textContent =
+            "Mark as Completed";
+
+        }
+
+      }
+
+    }
+
+
+
+    function resetProgress() {
+
+      const confirmed =
+        confirm(
+          "هل أنت متأكد من مسح معدل التقدم والبدء من جديد؟"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      localStorage.removeItem(
+        STORAGE_KEY
+      );
+
+      updateProgress();
+
+    }
+
+
+
+    updateProgress();
+
+  </script>
 
 
 </body>
