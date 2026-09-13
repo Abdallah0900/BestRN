@@ -2,119 +2,1076 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Nursing Internship — 30 Days</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Nursing Internship | 30 Day Clinical Refresher</title>
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      padding: 30px 15px;
-      font-family: Arial, sans-serif;
-      background: #08111f;
-      color: white;
+      background: #07111f;
+      color: #f4f7fa;
+      font-family:
+        Arial,
+        "Segoe UI",
+        sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     .container {
-      max-width: 700px;
+      width: min(1100px, calc(100% - 30px));
       margin: auto;
     }
 
-    h1 {
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      padding: 55px 0 35px;
+      border-bottom: 1px solid #1c2b3d;
+    }
+
+    .brand {
       color: #35d6c4;
-      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 7vw, 52px);
+      line-height: 1.2;
+      font-weight: 800;
     }
 
     .subtitle {
-      color: #aaa;
-      margin-bottom: 30px;
+      margin-top: 15px;
+      color: #aeb9c5;
+      font-size: 17px;
+      max-width: 700px;
     }
 
-    .day {
-      display: block;
-      background: #142235;
-      border: 1px solid #263b55;
-      border-radius: 15px;
+    .intro {
+      margin-top: 25px;
+      color: #d5dce3;
+      font-size: 15px;
+      max-width: 800px;
+    }
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .progress-section {
+      margin-top: 30px;
+      background: #0d1b2b;
+      border: 1px solid #1c3147;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+
+    .progress-title {
+      font-weight: 700;
+    }
+
+    .progress-number {
+      color: #35d6c4;
+      font-weight: 800;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #1b2a3b;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #35d6c4;
+      border-radius: inherit;
+    }
+
+    .progress-info {
+      margin-top: 10px;
+      color: #8e9baa;
+      font-size: 13px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-label {
+      color: #35d6c4;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .section-description {
+      margin-top: 6px;
+      color: #8e9baa;
+      font-size: 14px;
+    }
+
+    /* =========================
+       DAYS GRID
+    ========================= */
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .day-card {
+      min-height: 155px;
       padding: 20px;
-      margin-bottom: 15px;
-      text-decoration: none;
-      color: white;
+      background: #0d1b2b;
+      border: 1px solid #1c3147;
+      border-radius: 18px;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
     }
 
-    .day:hover {
+    .day-card:hover {
+      transform: translateY(-3px);
+      border-color: #35d6c4;
+      background: #102235;
+    }
+
+    .day-card.active {
       border-color: #35d6c4;
     }
 
-    .number {
+    .day-card.locked {
+      opacity: 0.55;
+    }
+
+    .day-number {
       color: #35d6c4;
-      font-weight: bold;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    .title {
-      font-size: 19px;
-      font-weight: bold;
-      margin-top: 8px;
+    .day-title {
+      margin-top: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
-    .description {
-      color: #aab7c4;
-      font-size: 14px;
-      margin-top: 8px;
+    .day-status {
+      margin-top: 12px;
+      color: #8996a4;
+      font-size: 12px;
     }
+
+    .active .day-status {
+      color: #35d6c4;
+    }
+
+    /* =========================
+       PROGRAM METHOD
+    ========================= */
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .method-card {
+      background: #0d1b2b;
+      border: 1px solid #1c3147;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .method-number {
+      color: #35d6c4;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .method-title {
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .method-text {
+      margin-top: 7px;
+      color: #929eaa;
+      font-size: 13px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 30px;
+      padding: 30px 0;
+      border-top: 1px solid #1c2b3d;
+      color: #758290;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .days-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .method-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 520px) {
+
+      .container {
+        width: min(100% - 22px, 1100px);
+      }
+
+      header {
+        padding-top: 35px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .days-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-card {
+        min-height: auto;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
 
-    <h1>🩺 Nursing Internship</h1>
+  <header>
 
-    <div class="subtitle">
-      30 Day Clinical Refresher
+    <div class="container">
+
+      <div class="brand">
+        NURSING INTERNSHIP PROGRAM
+      </div>
+
+      <h1>
+        30 Day Clinical Refresher
+      </h1>
+
+      <div class="subtitle">
+        Bachelor Nursing Intern
+        — Knowledge, Skill, Judgment, Safety
+      </div>
+
+      <div class="intro">
+
+        برنامج مراجعة عملي لمدة 30 يوم
+        مصمم لطالب التمريض في فترة الامتياز.
+        الهدف مش مجرد حفظ المعلومات،
+        لكن إنك تفهم، تفتكر، تطبق،
+        وتتصرف بأمان مع المريض.
+
+      </div>
+
+
+      <div class="progress-section">
+
+        <div class="progress-header">
+
+          <div class="progress-title">
+            Your Progress
+          </div>
+
+          <div class="progress-number">
+            0%
+          </div>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div class="progress-fill"></div>
+
+        </div>
+
+
+        <div class="progress-info">
+
+          0 من 30 يوم مكتمل
+
+        </div>
+
+      </div>
+
     </div>
 
+  </header>
 
-    <!-- Day 1 -->
 
-    <a class="day" href="days/day-01.html">
 
-      <div class="number">
-        DAY 01
+  <main>
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-label">
+            CLINICAL ROADMAP
+          </div>
+
+          <h2>
+            خطة الـ 30 يوم
+          </h2>
+
+          <div class="section-description">
+            اختار اليوم اللي عايز تدرسه.
+          </div>
+
+        </div>
+
+
+        <div class="days-grid">
+
+
+          <!-- DAY 01 -->
+
+          <a
+            class="day-card active"
+            href="days/day-01.html"
+          >
+
+            <div class="day-number">
+              DAY 01
+            </div>
+
+            <div class="day-title">
+              Assessment + ABCDE +
+              Vital Signs + Patient Safety
+            </div>
+
+            <div class="day-status">
+              Available
+            </div>
+
+          </a>
+
+
+
+          <!-- DAY 02 -->
+
+          <a
+            class="day-card active"
+            href="days/day-02.html"
+          >
+
+            <div class="day-number">
+              DAY 02
+            </div>
+
+            <div class="day-title">
+              Hygiene, Positioning
+              & Bed Preparation
+            </div>
+
+            <div class="day-status">
+              Available
+            </div>
+
+          </a>
+
+
+
+          <!-- DAYS 03 - 30 -->
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 03
+            </div>
+
+            <div class="day-title">
+              Infection Control
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 04
+            </div>
+
+            <div class="day-title">
+              Mobility, Transfer
+              & Fall Prevention
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 05
+            </div>
+
+            <div class="day-title">
+              Hygiene & Pressure
+              Injury Prevention
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 06
+            </div>
+
+            <div class="day-title">
+              Intake & Output
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 07
+            </div>
+
+            <div class="day-title">
+              Medication Safety
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 08
+            </div>
+
+            <div class="day-title">
+              Medication Administration
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 09
+            </div>
+
+            <div class="day-title">
+              IV Therapy
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 10
+            </div>
+
+            <div class="day-title">
+              Wound Care
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 11
+            </div>
+
+            <div class="day-title">
+              Oxygen Therapy
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 12
+            </div>
+
+            <div class="day-title">
+              Respiratory Assessment
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 13
+            </div>
+
+            <div class="day-title">
+              Cardiovascular Assessment
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 14
+            </div>
+
+            <div class="day-title">
+              Neurological Assessment
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 15
+            </div>
+
+            <div class="day-title">
+              Pain Assessment
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 16
+            </div>
+
+            <div class="day-title">
+              Fluid & Electrolyte Balance
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 17
+            </div>
+
+            <div class="day-title">
+              Medical-Surgical Nursing
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 18
+            </div>
+
+            <div class="day-title">
+              Diabetes & Insulin
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 19
+            </div>
+
+            <div class="day-title">
+              Hypertension & Cardiovascular Care
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 20
+            </div>
+
+            <div class="day-title">
+              Heart Failure & Shock
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 21
+            </div>
+
+            <div class="day-title">
+              COPD & Respiratory Disorders
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 22
+            </div>
+
+            <div class="day-title">
+              Stroke & Neurological Care
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 23
+            </div>
+
+            <div class="day-title">
+              Preoperative Nursing
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 24
+            </div>
+
+            <div class="day-title">
+              Postoperative Nursing
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 25
+            </div>
+
+            <div class="day-title">
+              Emergency Nursing
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 26
+            </div>
+
+            <div class="day-title">
+              Patient Education
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 27
+            </div>
+
+            <div class="day-title">
+              Communication & Handover
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 28
+            </div>
+
+            <div class="day-title">
+              Documentation & Legal Safety
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 29
+            </div>
+
+            <div class="day-title">
+              Clinical Judgment
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+          <div class="day-card locked">
+
+            <div class="day-number">
+              DAY 30
+            </div>
+
+            <div class="day-title">
+              Final Clinical Readiness
+            </div>
+
+            <div class="day-status">
+              Coming Soon
+            </div>
+
+          </div>
+
+
+        </div>
+
       </div>
 
-      <div class="title">
-        Assessment + ABCDE + Vital Signs + Patient Safety
+    </section>
+
+
+
+    <!-- PROGRAM METHOD -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-label">
+            LEARNING METHOD
+          </div>
+
+          <h2>
+            طريقة التعلم
+          </h2>
+
+          <div class="section-description">
+            البرنامج مبني على الانتقال من المعرفة إلى التصرف الآمن.
+          </div>
+
+        </div>
+
+
+        <div class="method-grid">
+
+
+          <div class="method-card">
+
+            <div class="method-number">
+              01
+            </div>
+
+            <div class="method-title">
+              Understand
+            </div>
+
+            <div class="method-text">
+              افهم المعلومة وسبب عملها قبل حفظ الخطوات.
+            </div>
+
+          </div>
+
+
+          <div class="method-card">
+
+            <div class="method-number">
+              02
+            </div>
+
+            <div class="method-title">
+              Remember
+            </div>
+
+            <div class="method-text">
+              ثبت النقاط الأساسية والمصطلحات المهمة.
+            </div>
+
+          </div>
+
+
+          <div class="method-card">
+
+            <div class="method-number">
+              03
+            </div>
+
+            <div class="method-title">
+              Apply
+            </div>
+
+            <div class="method-text">
+              اربط المعرفة بالمهارة والتطبيق العملي.
+            </div>
+
+          </div>
+
+
+          <div class="method-card">
+
+            <div class="method-number">
+              04
+            </div>
+
+            <div class="method-title">
+              Act Safely
+            </div>
+
+            <div class="method-text">
+              اتعلم إمتى تتصرف وإمتى توقف وتطلب المساعدة.
+            </div>
+
+          </div>
+
+
+        </div>
+
       </div>
 
-      <div class="description">
-        اضغط هنا لفتح محتوى اليوم الأول
-      </div>
+    </section>
 
-    </a>
+  </main>
 
 
-    <!-- Day 2 -->
 
-    <a class="day" href="days/day-02.html">
+  <footer>
 
-      <div class="number">
-        DAY 02
-      </div>
+    <div class="container">
 
-      <div class="title">
-        Day 2 — Nursing Internship
-      </div>
+      Nursing Internship — 30 Day Clinical Refresher
 
-      <div class="description">
-        اضغط هنا لفتح محتوى اليوم الثاني
-      </div>
+      <br>
 
-    </a>
+      Built for clinical learning and internship readiness.
 
-  </div>
+    </div>
+
+  </footer>
+
 
 </body>
 
