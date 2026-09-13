@@ -1,27 +1,801 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>نبضة — خطة استرجاع أساسيات التمريض لسنة الامتياز</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A1420;
+  --surface:#101C2C;
+  --surface-2:#16273A;
+  --surface-3:#1C2F45;
+  --line:#223850;
+  --text:#E8F1F5;
+  --text-muted:#8FA6B8;
+  --accent:#35D6C4;
+  --accent-2:#6EE7D8;
+  --accent-soft:rgba(53,214,196,.13);
+  --warn:#F2B84B;
+  --warn-soft:rgba(242,184,75,.13);
+  --danger:#FB6B6B;
+  --danger-soft:rgba(251,107,107,.13);
+  --success:#4ADE9C;
+  --success-soft:rgba(74,222,156,.13);
+  --radius-sm:8px;
+  --radius-md:14px;
+  --font:'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
+  --maxw:700px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  direction:rtl;
+  text-align:right;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+img,svg{display:block;max-width:100%;}
+a{color:var(--accent-2);}
+button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
 
-  <title>Day 1 — Assessment</title>
+/* ---------- layout shells ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{
+  background:linear-gradient(180deg,#0C1826 0%,var(--bg) 100%);
+  border-bottom:1px solid var(--line);
+  padding:22px 0 0;
+}
+.brand-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
+.brand{font-size:26px;font-weight:700;color:var(--text);letter-spacing:.2px;}
+.brand span{color:var(--accent);}
+.brand-sub{color:var(--text-muted);font-size:14.5px;margin-top:4px;max-width:46ch;}
+.wave{width:100%;height:46px;margin-top:14px;overflow:hidden;}
+.wave path{
+  fill:none;stroke:var(--accent);stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:900;stroke-dashoffset:900;
+  animation:draw 1.8s ease-out forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+.disclaimer{
+  margin:14px 0 0;padding:10px 12px;
+  background:var(--warn-soft);border:1px solid rgba(242,184,75,.35);
+  border-radius:var(--radius-sm);color:var(--text);font-size:13.5px;
+}
+.disclaimer b{color:var(--warn);}
+
+nav.tabs{
+  display:flex;gap:6px;margin-top:16px;
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{
+  background:none;border:none;color:var(--text-muted);
+  padding:11px 14px;font-size:14.5px;font-weight:600;cursor:pointer;
+  border-bottom:2.5px solid transparent;white-space:nowrap;
+}
+.tab-btn.active{color:var(--accent-2);border-bottom-color:var(--accent);}
+
+main{padding:20px 0 60px;}
+.view{display:none;}
+.view.active{display:block;animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- dashboard ---------- */
+.hero-stat{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius-md);padding:18px 18px 16px;margin-bottom:18px;
+}
+.hero-stat .row{display:flex;justify-content:space-between;align-items:baseline;}
+.hero-stat .big{font-size:15px;color:var(--text-muted);}
+.hero-stat .big b{color:var(--accent-2);font-size:22px;font-weight:700;}
+.progress-track{height:8px;border-radius:6px;background:var(--surface-3);margin-top:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:3.3%;border-radius:6px;}
+.hero-note{color:var(--text-muted);font-size:13px;margin-top:10px;}
+
+.week-head{
+  display:flex;align-items:center;gap:8px;
+  margin:22px 0 8px;color:var(--text-muted);font-size:13.5px;font-weight:600;
+}
+.week-head .ln{flex:1;height:1px;background:var(--line);}
+
+.day-row{
+  display:flex;align-items:center;gap:12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin-bottom:8px;
+}
+.day-row.active{border-color:var(--accent);background:var(--accent-soft);cursor:pointer;}
+.day-row.locked{opacity:.55;}
+.day-num{
+  min-width:34px;height:34px;border-radius:9px;background:var(--surface-3);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--text-muted);
+  flex-shrink:0;
+}
+.day-row.active .day-num{background:var(--accent);color:#062522;}
+.day-row.done .day-num{background:var(--success);color:#06251a;}
+.day-body{flex:1;min-width:0;}
+.day-title{font-size:14px;color:var(--text);}
+.day-row.locked .day-title{color:var(--text-muted);}
+.day-tag{font-size:12px;color:var(--accent-2);margin-top:2px;}
+.day-row.locked .day-tag{color:var(--text-muted);}
+.day-badge{
+  font-size:11px;padding:3px 8px;border-radius:20px;background:var(--surface-3);
+  color:var(--text-muted);flex-shrink:0;white-space:nowrap;
+}
+.day-badge.review{background:var(--warn-soft);color:var(--warn);}
+.day-badge.mock{background:var(--danger-soft);color:var(--danger);}
+.lock-ic{color:var(--text-muted);flex-shrink:0;}
+.check-ic{color:var(--success);flex-shrink:0;}
+
+/* ---------- day1 lesson ---------- */
+.steps-tracker{
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+  padding:4px 2px 14px;margin-bottom:6px;border-bottom:1px solid var(--line);
+}
+.steps-tracker::-webkit-scrollbar{display:none;}
+.step-dot{
+  min-width:30px;height:30px;border-radius:50%;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;
+  color:var(--text-muted);border:1px solid var(--line);text-decoration:none;flex-shrink:0;
+}
+.step-dot.seen{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent);}
+
+.lesson-sec{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:18px;margin-bottom:14px;scroll-margin-top:14px;
+}
+.lesson-sec.warmup{border-color:rgba(242,184,75,.35);}
+.sec-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.sec-num{
+  min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:#062522;
+  display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;
+}
+.lesson-sec.warmup .sec-num{background:var(--warn);}
+.sec-h{font-size:17px;font-weight:700;}
+.sec-time{color:var(--text-muted);font-size:12.5px;margin-inline-start:auto;}
+.lesson-sec p{margin:0 0 12px;font-size:15px;}
+.lesson-sec p:last-child{margin-bottom:0;}
+
+.glossary{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin:12px 0;}
+.gloss-row{
+  display:flex;align-items:baseline;gap:8px;padding:9px 12px;font-size:14px;
+  border-bottom:1px solid var(--line);background:var(--surface-2);
+}
+.gloss-row:last-child{border-bottom:none;}
+.gloss-row .term{color:var(--accent-2);font-weight:600;direction:ltr;}
+.gloss-row .eq{color:var(--text-muted);}
+.gloss-row .ar{color:var(--text);}
+
+details.reveal{
+  border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;margin:10px 0;background:var(--surface-2);
+}
+details.reveal summary{
+  cursor:pointer;font-size:14.5px;color:var(--accent-2);font-weight:600;list-style:none;
+  display:flex;align-items:center;gap:6px;
+}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--accent);font-weight:700;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:8px;font-size:14.5px;color:var(--text);padding-top:8px;border-top:1px dashed var(--line);}
+
+.skill-card .skf{display:flex;gap:8px;margin-bottom:10px;font-size:14.5px;}
+.skill-card .skf b{color:var(--accent-2);min-width:110px;flex-shrink:0;font-weight:600;}
+.skill-card .steplist{margin:0;padding-inline-start:20px;}
+.skill-card .steplist li{margin-bottom:8px;font-size:14.5px;}
+.skill-card .why{color:var(--text-muted);font-size:13px;display:block;margin-top:2px;}
+.note-flag{
+  margin-top:12px;padding:9px 11px;background:var(--warn-soft);border-radius:var(--radius-sm);
+  font-size:13px;color:var(--text);border:1px solid rgba(242,184,75,.3);
+}
+
+.q-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px;margin-bottom:10px;background:var(--surface-2);}
+.q-card .q-text{font-size:14.5px;margin-bottom:10px;font-weight:600;}
+.q-opts{display:flex;flex-direction:column;gap:7px;}
+.q-opt{
+  text-align:right;background:var(--surface-3);border:1px solid var(--line);color:var(--text);
+  padding:9px 11px;border-radius:var(--radius-sm);font-size:14px;cursor:pointer;font-family:inherit;
+}
+.q-opt.tf-opt{display:inline-block;width:auto;}
+.tf-row{display:flex;gap:8px;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:9px;font-size:13.5px;color:var(--text-muted);padding-top:9px;border-top:1px dashed var(--line);}
+.q-why.show{display:block;}
+.quiz-score{
+  display:flex;justify-content:space-between;align-items:center;margin-top:6px;
+  padding:10px 12px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);
+}
+.quiz-score b{color:var(--accent-2);}
+
+.flash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.flashcard{perspective:1000px;height:120px;cursor:pointer;}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;
+  border:1px solid var(--line);font-size:14px;
+}
+.flashcard-front{background:var(--surface-2);color:var(--accent-2);font-weight:700;direction:ltr;}
+.flashcard-back{background:var(--accent-soft);color:var(--text);transform:rotateY(180deg);}
+
+.summary-list{margin:0;padding-inline-start:20px;}
+.summary-list li{margin-bottom:9px;font-size:14.5px;}
+.complete-btn{
+  width:100%;margin-top:14px;padding:13px;border:none;border-radius:var(--radius-sm);
+  background:var(--accent);color:#062522;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;
+}
+.complete-btn[disabled]{background:var(--success);color:#06251a;cursor:default;}
+.next-hint{color:var(--text-muted);font-size:13px;margin-top:10px;text-align:center;}
+
+/* ---------- resources ---------- */
+.res-note{color:var(--text-muted);font-size:13.5px;margin-bottom:16px;}
+.res-group h3{font-size:14px;color:var(--text-muted);margin:20px 0 8px;font-weight:600;}
+.res-card{
+  display:block;border-inline-start:3px solid var(--accent);background:var(--surface);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:12px 14px;margin-bottom:9px;
+  text-decoration:none;color:var(--text);
+}
+.res-card:hover{background:var(--surface-2);}
+.res-card .rname{font-weight:700;color:var(--accent-2);font-size:15px;direction:ltr;text-align:right;display:block;}
+.res-card .rdesc{font-size:13.5px;color:var(--text-muted);margin-top:3px;}
+.res-card .rnew{display:inline-block;margin-top:5px;font-size:11.5px;color:var(--warn);background:var(--warn-soft);padding:2px 7px;border-radius:20px;}
+
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--text-muted);font-size:12.5px;text-align:center;}
+</style>
 </head>
-
 <body>
 
-  <h1>اليوم الأول 🩺</h1>
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <div>
+        <div class="brand">نب<span>ضـ</span>ة</div>
+        <div class="brand-sub">خطة 30 يوم لاسترجاع أساسيات التمريض — من الفهم للتطبيق الآمن مع المريض، لسنة الامتياز</div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 700 46" preserveAspectRatio="none">
+      <path d="M0,23 L120,23 L145,23 L158,6 L172,40 L186,14 L198,23 L340,23 L365,23 L378,6 L392,40 L406,14 L418,23 L560,23 L585,23 L598,6 L612,40 L626,14 L638,23 L700,23"/>
+    </svg>
+    <div class="disclaimer"><b>ملحوظة مهمة:</b> الأداة دي مرجع مذاكرة لاسترجاع المعلومات، مش بديل عن التدريب العملي تحت إشراف. أي مهارة أو قرار سريري لازم يمشي حسب الـ Hospital Policy المحلي عندك وتحت إشراف الفريق.</div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="dash">لوحة الخطة</button>
+      <button class="tab-btn" data-tab="day1">اليوم 1</button>
+      <button class="tab-btn" data-tab="res">مصادر ومراجع</button>
+    </nav>
+  </div>
+</header>
 
-  <h2>Assessment + ABCDE + Vital Signs + Patient Safety</h2>
+<main class="wrap">
 
-  <p>
-    دي صفحة اليوم الأول في برنامج Nursing Internship.
-  </p>
+  <!-- ===================== DASHBOARD ===================== -->
+  <section id="tab-dash" class="view active">
+    <div class="hero-stat">
+      <div class="row">
+        <div class="big">إنت في <b>اليوم 1</b> من 30</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="hero-note">الأيام من 2 لـ 30 بتتفتح تباعًا — خلّص اليوم الحالي واطلب "يوم 2" في المحادثة عشان تكمل، بالظبط زي ما اتفقنا.</div>
+    </div>
+    <div id="weeksHolder"></div>
+  </section>
 
-  <p>
-    لو أنت شايف الكلام ده، يبقى ربط صفحات الأيام شغال بنجاح.
-  </p>
+  <!-- ===================== DAY 1 ===================== -->
+  <section id="tab-day1" class="view">
 
+    <div class="steps-tracker" id="stepsTracker">
+      <a href="#s1" class="step-dot" data-s="1">1</a>
+      <a href="#s2" class="step-dot" data-s="2">2</a>
+      <a href="#s3" class="step-dot" data-s="3">3</a>
+      <a href="#s4" class="step-dot" data-s="4">4</a>
+      <a href="#s5" class="step-dot" data-s="5">5</a>
+      <a href="#s6" class="step-dot" data-s="6">6</a>
+      <a href="#s7" class="step-dot" data-s="7">7</a>
+      <a href="#s8" class="step-dot" data-s="8">8</a>
+      <a href="#s9" class="step-dot" data-s="9">9</a>
+    </div>
+
+    <!-- 1. Quick recall -->
+    <section class="lesson-sec warmup" id="s1">
+      <div class="sec-eyebrow"><div class="sec-num">1</div><div class="sec-h">تحقق سريع قبل ما نبدأ</div><div class="sec-time">~5 د</div></div>
+      <p>الأسئلة دي مش امتحان — هي بس عشان تلاحظ إنت فاكر قد إيه من الأساسيات. فكّر في السؤال 30 ثانية قبل ما تدوس "اعرض الإجابة".</p>
+
+      <details class="reveal"><summary>أول حرف تبدأ بيه في أي Initial Assessment للمريض؟</summary>
+        <div class="ans">Airway — مجرى الهواء، دايمًا الأول قبل أي حاجة تانية.</div></details>
+
+      <details class="reveal"><summary>لو المريض SpO2 عنده 90%، ده رقم طبيعي ولا لأ؟</summary>
+        <div class="ans">لأ. الطبيعي 95% فأكتر. أي رقم أقل من كده لازم ياخد اهتمامك فورًا.</div></details>
+
+      <details class="reveal"><summary>قبل أي إجراء أو دواء، أول حاجة تتأكد منها إيه؟</summary>
+        <div class="ans">هوية المريض (Patient Identification) باستخدام Two Identifiers — مش رقم الأوضة.</div></details>
+
+      <details class="reveal"><summary>الألم (Pain) بيتحسب من ضمن الـ Vital Signs؟</summary>
+        <div class="ans">أيوة، في كتير من البروتوكولات الحديثة بيتقاس كـ Vital Sign خامس أو سادس.</div></details>
+    </section>
+
+    <!-- 2. New topic -->
+    <section class="lesson-sec" id="s2">
+      <div class="sec-eyebrow"><div class="sec-num">2</div><div class="sec-h">الشرح — Assessment، ABCDE، Vital Signs</div><div class="sec-time">~40 د</div></div>
+
+      <p>يلا نرجع للأساس. مش هتحفظ، هتفتكر إزاي تفكّر كممرض/ة قدام أي مريض من غير ما تتلخبط.</p>
+
+      <p><strong>أولًا — الـ Nursing Process:</strong> كل حاجة بتعملها مع المريض بتتبني على خمس خطوات بتتكرر طول الوقت، مش مرة واحدة وخلاص:</p>
+      <div class="glossary">
+        <div class="gloss-row"><span class="term">Assessment</span><span class="eq">=</span><span class="ar">التقييم — تجمع معلومات عن المريض (تاريخ، فحص، Vital Signs)</span></div>
+        <div class="gloss-row"><span class="term">Nursing Diagnosis</span><span class="eq">=</span><span class="ar">التشخيص التمريضي — تحدد المشكلة من منظور التمريض</span></div>
+        <div class="gloss-row"><span class="term">Planning</span><span class="eq">=</span><span class="ar">التخطيط — تحط هدف وخطة رعاية</span></div>
+        <div class="gloss-row"><span class="term">Implementation</span><span class="eq">=</span><span class="ar">التنفيذ — تنفّذ الخطة فعليًا</span></div>
+        <div class="gloss-row"><span class="term">Evaluation</span><span class="eq">=</span><span class="ar">التقييم النهائي — تشوف الخطة نجحت ولا محتاجة تتعدّل</span></div>
+      </div>
+
+      <p><strong>ثانيًا — ABCDE Assessment:</strong> لما تدخل على مريض جديد، أو حالته اتغيّرت فجأة، فيه ترتيب ثابت لازم تمشي عليه، وده أهم حاجة هتاخدها من اليوم ده:</p>
+      <div class="glossary">
+        <div class="gloss-row"><span class="term">Airway</span><span class="eq">=</span><span class="ar">مجرى الهواء — هل فيه عائق؟ صوت غريب زي Snoring أو Stridor؟</span></div>
+        <div class="gloss-row"><span class="term">Breathing</span><span class="eq">=</span><span class="ar">التنفس — العدد، العمق، ومجهود التنفس</span></div>
+        <div class="gloss-row"><span class="term">Circulation</span><span class="eq">=</span><span class="ar">الدورة الدموية — النبض، الضغط، لون ودرجة حرارة الجلد</span></div>
+        <div class="gloss-row"><span class="term">Disability</span><span class="eq">=</span><span class="ar">الحالة العصبية — مستوى الوعي، حركة الأطراف، الحدقتين</span></div>
+        <div class="gloss-row"><span class="term">Exposure</span><span class="eq">=</span><span class="ar">الكشف الكامل على المريض، مع الحفاظ على الخصوصية والحرارة</span></div>
+      </div>
+      <p>القاعدة الدهبية: متتقلش لـ B قبل ما تتأكد من A. لو لقيت مشكلة في أي خطوة، تتصرف فيها فورًا قبل ما تكمل اللي بعدها.</p>
+
+      <p><strong>ثالثًا — Vital Signs:</strong> أسرع طريقة تعرف بيها حالة المريض الفسيولوجية دلوقتي:</p>
+      <div class="glossary">
+        <div class="gloss-row"><span class="term">Temperature</span><span class="eq">=</span><span class="ar">درجة الحرارة — طبيعي تقريبًا 36.5–37.5°C</span></div>
+        <div class="gloss-row"><span class="term">Pulse / HR</span><span class="eq">=</span><span class="ar">النبض — طبيعي للبالغين 60–100 نبضة/دقيقة</span></div>
+        <div class="gloss-row"><span class="term">Respiratory Rate</span><span class="eq">=</span><span class="ar">معدل التنفس — طبيعي 12–20 نفس/دقيقة</span></div>
+        <div class="gloss-row"><span class="term">Blood Pressure</span><span class="eq">=</span><span class="ar">ضغط الدم — تقريبًا 90/60 لـ 120/80 mmHg حسب المريض</span></div>
+        <div class="gloss-row"><span class="term">SpO₂</span><span class="eq">=</span><span class="ar">تشبع الأكسجين — طبيعي 95% فأكتر</span></div>
+        <div class="gloss-row"><span class="term">Pain</span><span class="eq">=</span><span class="ar">الألم — بيتقاس من 0 لـ 10، وبيتحسب Vital Sign في بروتوكولات كتير</span></div>
+      </div>
+      <p style="color:var(--text-muted);font-size:13.5px">هذه أرقام تقريبية شائعة حسب المصادر العالمية، وممكن تختلف شوية حسب عمر المريض وحالته والـ Hospital Policy المحلي.</p>
+
+      <p><strong>رابعًا — أساسيات السلامة:</strong></p>
+      <div class="glossary">
+        <div class="gloss-row"><span class="term">Patient ID</span><span class="eq">=</span><span class="ar">Two Identifiers مستقلين (زي الاسم الكامل + رقم الملف)، أبدًا مش رقم الأوضة</span></div>
+        <div class="gloss-row"><span class="term">Fall Prevention</span><span class="eq">=</span><span class="ar">تقييم بسيط لخطر السقوط، خصوصًا كبار السن أو اللي أخدوا مهدئ</span></div>
+      </div>
+    </section>
+
+    <!-- 3. Clinical example -->
+    <section class="lesson-sec" id="s3">
+      <div class="sec-eyebrow"><div class="sec-num">3</div><div class="sec-h">مثال من المستشفى</div><div class="sec-time">~10 د</div></div>
+      <p>تخيل معايا: الصبح بدري، إنت داخل الـ Ward، وفيه مريض جديد اتنقل من الطوارئ لسه واصل. أول حاجة هتعملها إيه؟</p>
+      <p>هتعمل Initial Assessment بترتيب ABCDE بالظبط، وفي نفس الوقت هتاخد الـ Vital Signs كاملة، وهتتأكد من هوية المريض قبل أي حاجة. كل ده بيحصل في أول 5 دقايق من وصوله، قبل حتى ما تقرا الملف بالتفصيل.</p>
+    </section>
+
+    <!-- 4. Skill -->
+    <section class="lesson-sec skill-card" id="s4">
+      <div class="sec-eyebrow"><div class="sec-num">4</div><div class="sec-h">مهارة عملية — قياس العلامات الحيوية</div><div class="sec-time">~20 د</div></div>
+
+      <div class="skf"><b>Purpose</b><span>تقييم الحالة الفسيولوجية الأساسية للمريض ومتابعة أي تغيّر بمرور الوقت.</span></div>
+      <div class="skf"><b>Indications</b><span>عند الـ Admission، بداية كل شِفت، قبل/بعد أي إجراء أو دواء مهم، وعند أي تغيّر في حالة المريض.</span></div>
+      <div class="skf"><b>Equipment</b><span>Thermometer، جهاز ضغط بمقاس Cuff مناسب، Stethoscope، Pulse oximeter، ساعة بعقرب ثواني.</span></div>
+      <div class="skf"><b>Preparation</b><span>تعرّف بنفسك، تأكّد من الهوية بـ Two Identifiers، اشرح الإجراء، اغسل ايديك، وادّي المريض 5 دقايق راحة قبل قياس الضغط.</span></div>
+
+      <div class="skf" style="display:block"><b style="display:block;margin-bottom:6px">Steps</b>
+        <ol class="steplist">
+          <li>اقيس الحرارة الأول <span class="why">Why: بتدّيك فكرة سريعة عن وجود Infection أو Hypothermia.</span></li>
+          <li>اقيس النبض — Rate وRhythm وStrength مش بس الرقم <span class="why">Why: نبض سريع منتظم مختلف كليًا عن نبض سريع غير منتظم.</span></li>
+          <li>اقيس التنفس وانت لسه ماسك إيد المريض <span class="why">Why: لو حس إنه بيتراقب ممكن يغيّر نمط تنفسه من غير قصد.</span></li>
+          <li>اقيس الضغط بـ Cuff مناسب المقاس، على دراع من غير IV line أو AV fistula <span class="why">Why: قراءة غلط = قرار طبي غلط.</span></li>
+          <li>اقيس SpO₂ بالـ Pulse oximeter <span class="why">Why: بيدّيك فكرة فورية عن الأكسجين في الدم.</span></li>
+          <li>سجّل القيم فورًا وقارنها بالقيم اللي قبل كده <span class="why">Why: التغيّر بين قراءة وقراءة أهم أحيانًا من الرقم نفسه.</span></li>
+        </ol>
+      </div>
+
+      <div class="skf"><b>Precautions</b><span>مقاس Cuff صح، متقيسش على دراع فيها IV/Fistula، المريض يكون هادي ومرتاح قبل القياس.</span></div>
+      <div class="skf"><b>Common mistakes</b><span>مقاس Cuff غلط، عدّ نبض سريع من غير وقت كافي، عدم مطابقة الهوية قبل القياس، تسجيل القيم من الذاكرة بعد فترة.</span></div>
+      <div class="skf"><b>Documentation</b><span>سجّل القيم بدقة وفورًا، وبلّغ عن أي قيمة غير طبيعية فورًا.</span></div>
+      <div class="skf"><b>Escalate إذا</b><span>SpO₂ أقل من 90%، ضغط منخفض جدًا، نبض سريع أو بطيء جدًا — بلّغ فورًا، متستناش الجولة اللي بعدها.</span></div>
+
+      <div class="note-flag">الخطوات دي إرشادية عامة حسب مصادر عالمية — الترتيب أو التفاصيل ممكن يختلف شوية حسب الـ Hospital Policy المحلي عندك، ولو المهارة جديدة عليك اعملها تحت Supervision.</div>
+    </section>
+
+    <!-- 5. Scenario -->
+    <section class="lesson-sec" id="s5">
+      <div class="sec-eyebrow"><div class="sec-num">5</div><div class="sec-h">سيناريو إكلينيكي</div><div class="sec-time">~10 د</div></div>
+      <p><strong>الحالة:</strong> مريض عمره 65 سنة، داخل الوحدة بشكوى ضيق نفس (Shortness of Breath). وانت بتاخدله الـ Vital Signs، لقيت: SpO₂ = 88%، معدل التنفس = 28/دقيقة، والمريض شكله متعب وعرقان وبيتكلم بجمل قصيرة.</p>
+
+      <details class="reveal"><summary>What do you think is happening?</summary>
+        <div class="ans">المريض في حالة Respiratory Distress واضحة — الـ SpO₂ منخفض والتنفس سريع، وده يستدعي تدخل فوري.</div></details>
+
+      <details class="reveal"><summary>What should the nurse do first?</summary>
+        <div class="ans">تبدأ بـ ABCDE فورًا، تتأكد من الـ Airway، تدّي Oxygen حسب البروتوكول والطلب الطبي، وتبلّغ فورًا (Escalate) — متستناش.</div></details>
+
+      <details class="reveal"><summary>Why؟</summary>
+        <div class="ans">لأن SpO₂ = 88% رقم خطير وبيدل على نقص أكسجين واضح، ولو اتأخرت في التصرف ممكن الحالة تتدهور بسرعة لحد الـ Respiratory Failure.</div></details>
+    </section>
+
+    <!-- 6. MCQ -->
+    <section class="lesson-sec" id="s6">
+      <div class="sec-eyebrow"><div class="sec-num">6</div><div class="sec-h">MCQs — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+      <div id="mcqHolder"></div>
+      <div class="quiz-score">نتيجة الـ MCQ: <b><span id="mcqScoreText">0 / 5</span></b></div>
+    </section>
+
+    <!-- 7. True/False -->
+    <section class="lesson-sec" id="s7">
+      <div class="sec-eyebrow"><div class="sec-num">7</div><div class="sec-h">True / False — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+      <div id="tfHolder"></div>
+      <div class="quiz-score">نتيجة الـ True/False: <b><span id="tfScoreText">0 / 5</span></b></div>
+    </section>
+
+    <!-- 8. Flashcards -->
+    <section class="lesson-sec" id="s8">
+      <div class="sec-eyebrow"><div class="sec-num">8</div><div class="sec-h">Flashcards — 10 كروت</div><div class="sec-time">~10 د</div></div>
+      <p style="color:var(--text-muted);font-size:13px">دوس على أي كارت عشان تقلبه.</p>
+      <div class="flash-grid" id="flashHolder"></div>
+    </section>
+
+    <!-- 9. Summary -->
+    <section class="lesson-sec" id="s9">
+      <div class="sec-eyebrow"><div class="sec-num">9</div><div class="sec-h">Final Summary</div><div class="sec-time"></div></div>
+      <ol class="summary-list">
+        <li>ABCDE هو الأساس لأي Initial Assessment، ولازم يتعمل بالترتيب.</li>
+        <li>الـ Vital Signs الخمسة (+الألم كسادس) هي أول نافذة على حالة المريض.</li>
+        <li>أي Vital Sign خارج المعدل الطبيعي = قرار وتصرف، مش بس تسجيل في الورق.</li>
+        <li>هوية المريض بتتأكد بـ Two Identifiers قبل أي إجراء، مش برقم الأوضة.</li>
+        <li>مقاس الـ Cuff الغلط بيدّي قراءة ضغط غلط تمامًا.</li>
+        <li>الـ Nursing Process (ADPIE) هو العقلية اللي بتفكر بيها في كل حالة من غير استثناء.</li>
+        <li>لو حسّيت إنك نسيت حاجة أساسية، ارجعلها فورًا — مفيش حاجة اسمها "بديهية" في التمريض.</li>
+      </ol>
+      <button class="complete-btn" id="completeBtn">أنهيت اليوم 1 ✓</button>
+      <div class="next-hint">لما تكون جاهز لليوم اللي بعده، قوللي "يوم 2" في المحادثة.</div>
+    </section>
+
+  </section>
+
+  <!-- ===================== RESOURCES ===================== -->
+  <section id="tab-res" class="view">
+    <p class="res-note">المصادر دي بتتحدّث مع الوقت، ودايمًا اتبع الـ Hospital Policy المحلي عندك وقت التطبيق العملي. لو المصادر اختلفت في تفصيلة معينة، الأفضل تسأل الـ Clinical Instructor بتاعك.</p>
+
+    <div class="res-group">
+      <h3>السلامة والجودة</h3>
+      <a class="res-card" href="https://www.who.int/teams/integrated-health-services/patient-safety" target="_blank" rel="noopener">
+        <span class="rname">WHO — Patient Safety</span>
+        <span class="rdesc">صفحة منظمة الصحة العالمية الرئيسية لسلامة المريض، والـ Global Patient Safety Action Plan.</span>
+      </a>
+      <a class="res-card" href="https://www.jointcommission.org/en-us/standards/national-performance-goals" target="_blank" rel="noopener">
+        <span class="rname">Joint Commission — National Performance Goals</span>
+        <span class="rdesc">أهداف سلامة المريض الرسمية للمستشفيات في أمريكا — مرجع ممتاز لثقافة السلامة والإبلاغ عن الأخطاء.</span>
+        <span class="rnew">🆕 الاسم اتغيّر من National Patient Safety Goals لـ National Performance Goals ابتداءً من يناير 2026</span>
+      </a>
+    </div>
+
+    <div class="res-group">
+      <h3>إرشادات إكلينيكية</h3>
+      <a class="res-card" href="https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html" target="_blank" rel="noopener">
+        <span class="rname">CDC — Hand Hygiene &amp; Infection Control</span>
+        <span class="rdesc">إرشادات مكافحة العدوى وغسيل الأيادي للـ Healthcare Workers.</span>
+      </a>
+      <a class="res-card" href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener">
+        <span class="rname">NICE Guidance</span>
+        <span class="rdesc">إرشادات إكلينيكية بريطانية موثوقة لكل التخصصات تقريبًا، بترتيب حسب الحالة المرضية.</span>
+      </a>
+      <a class="res-card" href="https://www.nhs.uk/conditions/" target="_blank" rel="noopener">
+        <span class="rname">NHS — Conditions</span>
+        <span class="rdesc">شرح مبسّط وموثوق لمعظم الحالات المرضية الشائعة، مفيد كنقطة بداية سريعة قبل المصدر الأعمق.</span>
+      </a>
+    </div>
+
+    <div class="res-group">
+      <h3>الطوارئ والإنعاش</h3>
+      <a class="res-card" href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank" rel="noopener">
+        <span class="rname">American Heart Association — CPR &amp; ECC Guidelines</span>
+        <span class="rdesc">الدليل الرسمي لإرشادات الإنعاش القلبي الرئوي (BLS/ACLS) المعتمد عالميًا.</span>
+        <span class="rnew">🆕 نسخة 2025 صدرت أكتوبر 2025 — فيها تحديث لخطوات الاختناق، ودمج الـ Naloxone في خوارزمية الـ BLS</span>
+      </a>
+    </div>
+
+    <div class="res-group">
+      <h3>مراجع طبية شاملة</h3>
+      <a class="res-card" href="https://www.merckmanuals.com/professional" target="_blank" rel="noopener">
+        <span class="rname">Merck Manual — Professional Version</span>
+        <span class="rdesc">مرجع طبي شامل ومختصر لكل الحالات تقريبًا، ومجاني بالكامل أونلاين.</span>
+      </a>
+      <a class="res-card" href="https://medlineplus.gov" target="_blank" rel="noopener">
+        <span class="rname">MedlinePlus (NIH)</span>
+        <span class="rdesc">شرح مبسّط وموثوق للحالات والأدوية، مناسب كمراجعة سريعة.</span>
+      </a>
+    </div>
+
+    <div class="res-group">
+      <h3>أبحاث</h3>
+      <a class="res-card" href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener">
+        <span class="rname">PubMed / NCBI</span>
+        <span class="rdesc">قاعدة بيانات الأبحاث الطبية الأشهر عالميًا، لو احتجت تتأكد من دليل علمي لحاجة معينة.</span>
+      </a>
+    </div>
+
+    <div class="res-group">
+      <h3>مذاكرة وتمارين لطلبة التمريض</h3>
+      <a class="res-card" href="https://nurseslabs.com/category/nursing-notes/fundamentals-of-nursing/" target="_blank" rel="noopener">
+        <span class="rname">Nurseslabs — Fundamentals of Nursing</span>
+        <span class="rdesc">شرح وأسئلة NCLEX-style على أساسيات التمريض، مفيد جدًا للمراجعة الإضافية بعد كل يوم.</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  صُممت كأداة مذاكرة مساعدة لسنة الامتياز — مبتحلّش محل الإشراف الإكلينيكي ولا بروتوكول المستشفى.
+</footer>
+
+<script>
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ---------- dashboard roadmap data ---------- */
+const plan = [
+  {n:1,  t:`التقييم، ABCDE، العلامات الحيوية وسلامة المريض`, tag:`Nursing Fundamentals`},
+  {n:2,  t:`النظافة الشخصية، العناية الفموية، وضع المريض وتجهيز السرير`, tag:`Nursing Fundamentals`},
+  {n:3,  t:`الحركة، النقل، المشي، والوقاية من السقوط وقرح الفراش`, tag:`Nursing Fundamentals`},
+  {n:4,  t:`مكافحة العدوى: غسيل الأيادي، الـ PPE، والتعقيم`, tag:`Infection Control`},
+  {n:5,  t:`توازن السوائل، التغذية، التغذية الأنبوبية، والقسطرة والإخراج`, tag:`Nursing Fundamentals`},
+  {n:6,  t:`العناية التنفسية: الأكسجين، الشفط، وجمع العينات`, tag:`Nursing Fundamentals`},
+  {n:7,  t:`التوثيق والتسليم والتواصل مع المريض`, tag:`Documentation`, review:true},
+  {n:8,  t:`التقييم العام، مستوى الوعي، وGlasgow Coma Scale، وتقييم الجلد`, tag:`Health Assessment`},
+  {n:9,  t:`أسلوب الفحص: Inspection → Palpation → Percussion → Auscultation`, tag:`Health Assessment`},
+  {n:10, t:`تقييم الجهاز التنفسي والقلب والأوعية الدموية`, tag:`Health Assessment`},
+  {n:11, t:`تقييم الأعصاب والبطن والعضلات والمفاصل والجهاز البولي`, tag:`Health Assessment`},
+  {n:12, t:`القلب: ضغط الدم المرتفع، الفشل القلبي، ونقص التروية`, tag:`Medical-Surgical`},
+  {n:13, t:`القلب: اضطراب النظم والصدمة (Shock)`, tag:`Medical-Surgical`},
+  {n:14, t:`الجهاز التنفسي: COPD، الربو، الالتهاب الرئوي، والفشل التنفسي`, tag:`Medical-Surgical`, review:true},
+  {n:15, t:`الأعصاب: السكتة الدماغية، التشنجات، وتغيّر مستوى الوعي`, tag:`Medical-Surgical`},
+  {n:16, t:`الغدد الصماء: السكري، هبوط وارتفاع السكر، وDKA`, tag:`Medical-Surgical`},
+  {n:17, t:`الكلى: الفشل الكلوي الحاد والمزمن، واضطراب السوائل والأملاح`, tag:`Medical-Surgical`},
+  {n:18, t:`الجهاز الهضمي والدم والعظام: النزيف، تليّف الكبد، والكسور`, tag:`Medical-Surgical`},
+  {n:19, t:`أساسيات أمان الدواء: الحقوق الخمسة، الهوية، وحساب الجرعة`, tag:`Medication Safety`},
+  {n:20, t:`طرق إعطاء الدواء: بالفم، بالعضل، تحت الجلد، وبالوريد`, tag:`Medication Safety`},
+  {n:21, t:`أخطاء الدواء، الحساسية، والأدوية عالية الخطورة`, tag:`Medication Safety`, review:true},
+  {n:22, t:`الطوارئ: ABCDE، الإنعاش القلبي الرئوي (BLS/CPR)، توقف القلب`, tag:`Emergency`},
+  {n:23, t:`الطوارئ: الصدمة، الحساسية المفرطة، وطوارئ السكر`, tag:`Emergency`},
+  {n:24, t:`الطوارئ: السكتة، ألم الصدر، ضيق التنفس الحاد، النزيف والحروق`, tag:`Emergency`},
+  {n:25, t:`مكافحة العدوى المتقدمة وإجراءات العزل`, tag:`Infection Control`},
+  {n:26, t:`سلامة المريض المتقدمة وثقافة الإبلاغ عن الأخطاء`, tag:`Patient Safety`},
+  {n:27, t:`التوثيق والتواصل المتقدم والجوانب القانونية`, tag:`Documentation`},
+  {n:28, t:`التفكير السريري المكثف — حالات متكاملة`, tag:`Clinical Judgment`, review:true},
+  {n:29, t:`مراجعة شاملة لقائمة المهارات العملية (Skills Checklist)`, tag:`Practical Skills`},
+  {n:30, t:`التقييم السريري التجريبي الشهري`, tag:`Mock Assessment`, mock:true},
+];
+const weeks = [
+  {label:`الأسبوع 1`, from:1, to:7},
+  {label:`الأسبوع 2`, from:8, to:14},
+  {label:`الأسبوع 3`, from:15, to:21},
+  {label:`الأسبوع 4`, from:22, to:28},
+  {label:`الأسبوع 5`, from:29, to:30},
+];
+
+function lockSvg(){return `<svg class="lock-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`;}
+function checkSvg(){return `<svg class="check-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>`;}
+
+let dayOneDone = false;
+
+function renderDashboard(){
+  const holder = document.getElementById('weeksHolder');
+  holder.innerHTML = '';
+  weeks.forEach(function(w){
+    const head = document.createElement('div');
+    head.className = 'week-head';
+    head.innerHTML = '<span>'+w.label+'</span><span class="ln"></span>';
+    holder.appendChild(head);
+    plan.filter(function(d){return d.n>=w.from && d.n<=w.to;}).forEach(function(d){
+      const row = document.createElement('div');
+      const isActive = d.n===1;
+      row.className = 'day-row ' + (isActive ? 'active' : 'locked') + (isActive && dayOneDone ? ' done' : '');
+      let badge = '';
+      if(d.review) badge = '<span class="day-badge review">مراجعة أسبوعية</span>';
+      if(d.mock) badge = '<span class="day-badge mock">Mock Assessment</span>';
+      row.innerHTML =
+        '<div class="day-num">'+d.n+'</div>'+
+        '<div class="day-body"><div class="day-title">'+d.t+'</div><div class="day-tag">'+d.tag+'</div></div>'+
+        badge +
+        (isActive ? (dayOneDone?checkSvg():'') : lockSvg());
+      if(isActive){
+        row.addEventListener('click', function(){
+          document.querySelector('.tab-btn[data-tab="day1"]').click();
+        });
+      }
+      holder.appendChild(row);
+    });
+  });
+}
+renderDashboard();
+
+/* ---------- step tracker highlight on scroll ---------- */
+const dots = document.querySelectorAll('.step-dot');
+const secs = document.querySelectorAll('.lesson-sec');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const idx = Array.prototype.indexOf.call(secs, e.target) + 1;
+        const dot = document.querySelector('.step-dot[data-s="'+idx+'"]');
+        if(dot) dot.classList.add('seen');
+      }
+    });
+  }, {threshold:0.5});
+  secs.forEach(function(s){io.observe(s);});
+}
+
+/* ---------- MCQ ---------- */
+const mcqData = [
+  {q:`SpO₂ الطبيعي للبالغين الأصحاء بيكون تقريبًا؟`, opts:[`80–85%`,`85–90%`,`95–100%`,`70–75%`], c:2,
+   why:`SpO₂ الطبيعي للبالغين الأصحاء 95% أو أكتر. أقل من 90% غالبًا بيحتاج تدخل فوري.`},
+  {q:`أول خطوة في أي ABCDE Assessment؟`, opts:[`Airway`,`Breathing`,`Circulation`,`Disability`], c:0,
+   why:`لازم تتأكد إن مجرى الهواء مفتوح الأول — من غير Airway مفيش فايدة من تقييم أي حاجة تانية.`},
+  {q:`المعدل الطبيعي لمعدل التنفس عند البالغين؟`, opts:[`8–10 /دقيقة`,`12–20 /دقيقة`,`25–30 /دقيقة`,`30–40 /دقيقة`], c:1,
+   why:`الطبيعي 12–20 نفس/دقيقة. أعلى من كده بوضوح أو أقل من 12 لازم ياخد اهتمامك.`},
+  {q:`قبل قياس ضغط الدم، أهم حاجة تتأكد منها؟`, opts:[`مقاس الـ Cuff مناسب`,`المريض واقف`,`الذراع فيها IV line`,`تتجاهل هدوء المريض`], c:0,
+   why:`الـ Cuff الغلط (كبير أو صغير) بيدّي قراءة غير دقيقة تمامًا — أشهر سبب لقراءة ضغط غلط.`},
+  {q:`أي اختيار صح للتأكد من هوية المريض؟`, opts:[`رقم الأوضة بس`,`الاسم الكامل + رقم الملف/تاريخ الميلاد`,`شكل المريض`,`تسأل زميلك`], c:1,
+   why:`لازم Two Identifiers مستقلين عن مكان المريض — رقم الأوضة بيتغيّر والمريض بينتقل.`},
+];
+let mcqScore = 0;
+function renderMCQ(){
+  const holder = document.getElementById('mcqHolder');
+  mcqData.forEach(function(item, qi){
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    let optsHtml = '<div class="q-opts">';
+    item.opts.forEach(function(opt, oi){
+      optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>';
+    });
+    optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+    card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+    holder.appendChild(card);
+    card.querySelectorAll('.q-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(card.dataset.locked) return;
+        card.dataset.locked = '1';
+        const oi = parseInt(btn.dataset.oi,10);
+        card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+        if(oi === item.c){
+          btn.classList.add('correct');
+          mcqScore++;
+        } else {
+          btn.classList.add('incorrect');
+          card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct');
+        }
+        card.querySelector('.q-why').classList.add('show');
+        document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+      });
+    });
+  });
+}
+renderMCQ();
+
+/* ---------- True/False ---------- */
+const tfData = [
+  {s:`رقم الأوضة (Room Number) كفاية كـ Identifier للتأكد من هوية المريض.`, a:false,
+   why:`رقم الأوضة مش Identifier موثوق لأنه بيتغيّر — لازم معرّفين تانيين زي الاسم ورقم الملف.`},
+  {s:`الألم (Pain) بيتحسب من ضمن الـ Vital Signs في كتير من البروتوكولات الحديثة.`, a:true,
+   why:`في بروتوكولات كتير، الألم بيتقاس Vital Sign خامس أو سادس جنب الحرارة والنبض والتنفس والضغط والأكسجين.`},
+  {s:`SpO₂ بمقدار 90% يُعتبر رقم طبيعي ومطمئن.`, a:false,
+   why:`الطبيعي 95% فأكتر. 90% لازم ياخد اهتمام فوري مش يتسجل وخلاص.`},
+  {s:`أول حرف في ABCDE بيرمز لـ Airway.`, a:true,
+   why:`Airway – Breathing – Circulation – Disability – Exposure، بالترتيب ده بالظبط.`},
+  {s:`من الطبيعي إنك تسيب المريض يمشي لوحده على طول بعد أي إجراء من غير تقييم خطر السقوط.`, a:false,
+   why:`لازم تقييم بسيط لخطر السقوط الأول، خصوصًا لو المريض كبير في السن أو أخد دواء مهدئ.`},
+];
+let tfScore = 0;
+function renderTF(){
+  const holder = document.getElementById('tfHolder');
+  tfData.forEach(function(item, qi){
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML =
+      '<div class="q-text">'+(qi+1)+'. '+item.s+'</div>'+
+      '<div class="q-opts tf-row">'+
+        '<button class="q-opt tf-opt" data-v="true">صح</button>'+
+        '<button class="q-opt tf-opt" data-v="false">غلط</button>'+
+      '</div><div class="q-why">'+item.why+'</div>';
+    holder.appendChild(card);
+    card.querySelectorAll('.q-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(card.dataset.locked) return;
+        card.dataset.locked = '1';
+        const v = btn.dataset.v === 'true';
+        card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+        if(v === item.a){
+          btn.classList.add('correct');
+          tfScore++;
+        } else {
+          btn.classList.add('incorrect');
+          card.querySelector('[data-v="'+item.a+'"]').classList.add('correct');
+        }
+        card.querySelector('.q-why').classList.add('show');
+        document.getElementById('tfScoreText').textContent = tfScore+' / '+tfData.length;
+      });
+    });
+  });
+}
+renderTF();
+
+/* ---------- Flashcards ---------- */
+const flashData = [
+  {f:`Vital Signs`, b:`العلامات الحيوية`},
+  {f:`Airway`, b:`مجرى الهواء`},
+  {f:`Breathing`, b:`التنفس`},
+  {f:`Circulation`, b:`الدورة الدموية`},
+  {f:`SpO₂`, b:`تشبع الأكسجين بالدم`},
+  {f:`Bradycardia`, b:`بطء ضربات القلب (أقل من 60/د)`},
+  {f:`Tachycardia`, b:`تسارع ضربات القلب (أكتر من 100/د)`},
+  {f:`Hypotension`, b:`انخفاض ضغط الدم`},
+  {f:`Patient Identification`, b:`التحقق من هوية المريض بمعرّفين مستقلين`},
+  {f:`Nursing Process (ADPIE)`, b:`تقييم ← تشخيص تمريضي ← تخطيط ← تنفيذ ← تقييم نهائي`},
+];
+function renderFlash(){
+  const holder = document.getElementById('flashHolder');
+  flashData.forEach(function(item){
+    const card = document.createElement('div');
+    card.className = 'flashcard';
+    card.innerHTML =
+      '<div class="flashcard-inner">'+
+        '<div class="flashcard-front">'+item.f+'</div>'+
+        '<div class="flashcard-back">'+item.b+'</div>'+
+      '</div>';
+    card.addEventListener('click', function(){card.classList.toggle('flipped');});
+    holder.appendChild(card);
+  });
+}
+renderFlash();
+
+/* ---------- progress persistence ---------- */
+async function loadProgress(){
+  try{
+    const res = await window.storage.get('nursing30_progress', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      if(data.day1 && data.day1.completed){
+        dayOneDone = true;
+        document.getElementById('progressFill').style.width = '3.3%';
+        renderDashboard();
+        const btn = document.getElementById('completeBtn');
+        btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+data.day1.mcq+'/5 — T/F '+data.day1.tf+'/5)';
+        btn.setAttribute('disabled','');
+      }
+    }
+  }catch(e){ /* no saved progress yet */ }
+}
+loadProgress();
+
+document.getElementById('completeBtn').addEventListener('click', async function(){
+  const btn = this;
+  const data = {day1:{completed:true, mcq:mcqScore, tf:tfScore, ts:Date.now()}};
+  btn.textContent = 'جاري الحفظ...';
+  try{
+    await window.storage.set('nursing30_progress', JSON.stringify(data), false);
+  }catch(e){ /* storage unavailable, continue anyway */ }
+  dayOneDone = true;
+  btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+mcqScore+'/5 — T/F '+tfScore+'/5)';
+  btn.setAttribute('disabled','');
+  renderDashboard();
+});
+</script>
 </body>
-
 </html>
