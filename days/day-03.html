@@ -1,1 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>نبضة — اليوم 3: الحركة، النقل، والوقاية من السقوط</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A1420; --surface:#101C2C; --surface-2:#16273A; --surface-3:#1C2F45; --line:#223850;
+  --text:#E8F1F5; --text-muted:#8FA6B8;
+  --accent:#35D6C4; --accent-2:#6EE7D8; --accent-soft:rgba(53,214,196,.13);
+  --warn:#F2B84B; --warn-soft:rgba(242,184,75,.13);
+  --danger:#FB6B6B; --danger-soft:rgba(251,107,107,.13);
+  --success:#4ADE9C; --success-soft:rgba(74,222,156,.13);
+  --radius-sm:8px; --radius-md:14px;
+  --font:'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif; --maxw:700px;
+}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);direction:rtl;text-align:right;line-height:1.8;-webkit-font-smoothing:antialiased;font-size:16px;}
+a{color:var(--accent-2);} button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{background:linear-gradient(180deg,#0C1826 0%,var(--bg) 100%);border-bottom:1px solid var(--line);padding:22px 0 20px;}
+.eyebrow{color:var(--accent-2);font-size:13px;font-weight:600;margin-bottom:4px;}
+.brand{font-size:23px;font-weight:700;color:var(--text);}
+.brand-sub{color:var(--text-muted);font-size:14px;margin-top:4px;}
+.wave{width:100%;height:40px;margin-top:14px;overflow:hidden;}
+.wave path{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.8s ease-out forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.disclaimer{margin:14px 0 0;padding:10px 12px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.35);border-radius:var(--radius-sm);color:var(--text);font-size:13.5px;}
+.disclaimer b{color:var(--warn);}
+.video-card{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;background:var(--accent-soft);border:1px solid rgba(53,214,196,.35);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);}
+.video-card .vic{font-size:22px;flex-shrink:0;}
+.video-card .vt{font-size:13px;color:var(--text-muted);}
+.video-card .vn{font-weight:700;color:var(--accent-2);font-size:14.5px;}
+main{padding:20px 0 50px;}
+.steps-tracker{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 14px;margin-bottom:6px;border-bottom:1px solid var(--line);}
+.steps-tracker::-webkit-scrollbar{display:none;}
+.step-dot{min-width:30px;height:30px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:var(--text-muted);border:1px solid var(--line);text-decoration:none;flex-shrink:0;}
+.step-dot.seen{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent);}
+.lesson-sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px;margin-bottom:14px;scroll-margin-top:14px;}
+.lesson-sec.warmup{border-color:rgba(242,184,75,.35);}
+.sec-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.sec-num{min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:#062522;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;}
+.lesson-sec.warmup .sec-num{background:var(--warn);}
+.sec-h{font-size:17px;font-weight:700;}
+.sec-time{color:var(--text-muted);font-size:12.5px;margin-inline-start:auto;}
+.lesson-sec p{margin:0 0 12px;font-size:15px;} .lesson-sec p:last-child{margin-bottom:0;}
+.glossary{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin:12px 0;}
+.gloss-row{display:flex;align-items:baseline;gap:8px;padding:9px 12px;font-size:14px;border-bottom:1px solid var(--line);background:var(--surface-2);}
+.gloss-row:last-child{border-bottom:none;}
+.gloss-row .term{color:var(--accent-2);font-weight:600;direction:ltr;}
+.gloss-row .eq{color:var(--text-muted);} .gloss-row .ar{color:var(--text);}
+details.reveal{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;margin:10px 0;background:var(--surface-2);}
+details.reveal summary{cursor:pointer;font-size:14.5px;color:var(--accent-2);font-weight:600;list-style:none;display:flex;align-items:center;gap:6px;}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--accent);font-weight:700;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:8px;font-size:14.5px;color:var(--text);padding-top:8px;border-top:1px dashed var(--line);}
+.skill-card .skf{display:flex;gap:8px;margin-bottom:10px;font-size:14.5px;}
+.skill-card .skf b{color:var(--accent-2);min-width:110px;flex-shrink:0;font-weight:600;}
+.skill-card .steplist{margin:0;padding-inline-start:20px;}
+.skill-card .steplist li{margin-bottom:8px;font-size:14.5px;}
+.skill-card .why{color:var(--text-muted);font-size:13px;display:block;margin-top:2px;}
+.note-flag{margin-top:12px;padding:9px 11px;background:var(--warn-soft);border-radius:var(--radius-sm);font-size:13px;color:var(--text);border:1px solid rgba(242,184,75,.3);}
+.q-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px;margin-bottom:10px;background:var(--surface-2);}
+.q-card .q-text{font-size:14.5px;margin-bottom:10px;font-weight:600;}
+.q-opts{display:flex;flex-direction:column;gap:7px;}
+.q-opt{text-align:right;background:var(--surface-3);border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:var(--radius-sm);font-size:14px;cursor:pointer;font-family:inherit;}
+.tf-row{display:flex;gap:8px;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:9px;font-size:13.5px;color:var(--text-muted);padding-top:9px;border-top:1px dashed var(--line);}
+.q-why.show{display:block;}
+.quiz-score{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:10px 12px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);}
+.quiz-score b{color:var(--accent-2);}
+.flash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.flashcard{perspective:1000px;height:120px;cursor:pointer;}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;border:1px solid var(--line);font-size:14px;}
+.flashcard-front{background:var(--surface-2);color:var(--accent-2);font-weight:700;direction:ltr;}
+.flashcard-back{background:var(--accent-soft);color:var(--text);transform:rotateY(180deg);}
+.summary-list{margin:0;padding-inline-start:20px;} .summary-list li{margin-bottom:9px;font-size:14.5px;}
+.complete-btn{width:100%;margin-top:14px;padding:13px;border:none;border-radius:var(--radius-sm);background:var(--accent);color:#062522;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;}
+.complete-btn[disabled]{background:var(--success);color:#06251a;cursor:default;}
+.next-hint{color:var(--text-muted);font-size:13px;margin-top:10px;text-align:center;}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--text-muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">اليوم 3 من 30 · Nursing Fundamentals</div>
+    <div class="brand">الحركة، النقل، المشي، والوقاية من السقوط وقرح الفراش</div>
+    <div class="brand-sub">الجزء الثالث من سلسلة استرجاع أساسيات التمريض لسنة الامتياز</div>
+    <svg class="wave" viewBox="0 0 700 40" preserveAspectRatio="none">
+      <path d="M0,20 L120,20 L145,20 L158,4 L172,36 L186,12 L198,20 L340,20 L365,20 L378,4 L392,36 L406,12 L418,20 L560,20 L585,20 L598,4 L612,36 L626,12 L638,20 L700,20"/>
+    </svg>
+    <div class="disclaimer"><b>ملحوظة:</b> مرجع مذاكرة، مش بديل عن التدريب تحت إشراف. أي مهارة أو قرار سريري يمشي حسب الـ Hospital Policy المحلي عندك.</div>
+    <a class="video-card" href="https://www.youtube.com/playlist?list=PLZWxnerlkaRo5oxe4pleGgw1mR2RuXGmp" target="_blank" rel="noopener">
+      <span class="vic">🎥</span>
+      <span><span class="vn">بلايليست: مهارات التمريض بالتفصيل</span><br><span class="vt">فيديوهات عربية عملية لمساعدة المريض على المشي والنقل — دور فيها على مهارة النهاردة</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="steps-tracker" id="stepsTracker">
+    <a href="#s1" class="step-dot" data-s="1">1</a><a href="#s2" class="step-dot" data-s="2">2</a><a href="#s3" class="step-dot" data-s="3">3</a>
+    <a href="#s4" class="step-dot" data-s="4">4</a><a href="#s5" class="step-dot" data-s="5">5</a><a href="#s6" class="step-dot" data-s="6">6</a>
+    <a href="#s7" class="step-dot" data-s="7">7</a><a href="#s8" class="step-dot" data-s="8">8</a><a href="#s9" class="step-dot" data-s="9">9</a>
+  </div>
+
+  <section class="lesson-sec warmup" id="s1">
+    <div class="sec-eyebrow"><div class="sec-num">1</div><div class="sec-h">تحقق سريع</div><div class="sec-time">~5 د</div></div>
+    <details class="reveal"><summary>امبارح اتكلمنا على إيه وضعية بتساعد التنفس؟</summary><div class="ans">Fowler's Position (نص جلوس).</div></details>
+    <details class="reveal"><summary>أول علامة لقرحة الفراش؟</summary><div class="ans">احمرار ثابت مايختفيش بالضغط.</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s2">
+    <div class="sec-eyebrow"><div class="sec-num">2</div><div class="sec-h">الشرح — الحركة، النقل، والوقاية من السقوط</div><div class="sec-time">~35 د</div></div>
+    <p><strong>الحركة والنقل (Mobility & Transfer):</strong> المريض اللي بيفضل في السرير كتير معرّض لمضاعفات خطيرة — عضلات ضعيفة، جلطات، قرح فراش. الحركة المبكرة (Early Mobilization) من أهم حاجات بتحمي المريض.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Ambulation</span><span class="eq">=</span><span class="ar">مساعدة المريض على المشي</span></div>
+      <div class="gloss-row"><span class="term">Transfer</span><span class="eq">=</span><span class="ar">نقل المريض من مكان لمكان (سرير لكرسي مثلًا)</span></div>
+      <div class="gloss-row"><span class="term">Range of Motion</span><span class="eq">=</span><span class="ar">تمارين لحركة المفاصل لمنع التيبس</span></div>
+      <div class="gloss-row"><span class="term">DVT</span><span class="eq">=</span><span class="ar">جلطة في أوردة الرجل العميقة، بتزيد مع قلة الحركة</span></div>
+    </div>
+    <p><strong>الوقاية من السقوط (Fall Prevention):</strong> السقوط من أكتر الحوادث شيوعًا في المستشفى، وخطره بيزيد مع كبار السن والمرضى اللي أخدوا مهدئات.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Fall Risk Assessment</span><span class="eq">=</span><span class="ar">تقييم بسيط لخطر سقوط المريض عند الدخول وبشكل دوري</span></div>
+      <div class="gloss-row"><span class="term">Bed Alarm</span><span class="eq">=</span><span class="ar">جهاز إنذار لو المريض حاول ينزل من السرير لوحده</span></div>
+    </div>
+  </section>
+
+  <section class="lesson-sec" id="s3">
+    <div class="sec-eyebrow"><div class="sec-num">3</div><div class="sec-h">مثال من المستشفى</div><div class="sec-time">~10 د</div></div>
+    <p>مريض كبير في السن، أخد جرعة مهدئ قبل النوم بساعة، وطلب يروح الحمام لوحده. المفروض تساعده وتتأكد إن الأرض مش زلقة والسرير في أوطى مستوى، مش تسيبه يحاول لوحده.</p>
+  </section>
+
+  <section class="lesson-sec skill-card" id="s4">
+    <div class="sec-eyebrow"><div class="sec-num">4</div><div class="sec-h">مهارة عملية — مساعدة المريض على المشي لأول مرة بعد عملية</div><div class="sec-time">~20 د</div></div>
+    <div class="skf"><b>Purpose</b><span>استعادة الحركة تدريجيًا ومنع مضاعفات الرقود الطويل زي الجلطات وضعف العضلات.</span></div>
+    <div class="skf" style="display:block"><b style="display:block;margin-bottom:6px">Steps</b>
+      <ol class="steplist">
+        <li>قيّم الدوخة بخلي المريض يقعد على طرف السرير الأول (Dangling) <span class="why">Why: النزول المفاجئ ممكن يسبب Orthostatic Hypotension ودوخة.</span></li>
+        <li>اتأكد من الحذاء المناسب والأرض غير زلقة <span class="why">Why: أشهر سبب سقوط هو حذاء غلط أو أرضية مبللة.</span></li>
+        <li>امشي جنب المريض من الجانب الضعيف وامسكه من حزام أو ذراعه <span class="why">Why: بتقدر تسنده بسرعة لو حس بدوخة.</span></li>
+        <li>راقب علامات التعب أو الدوخة طول الوقت وارجع بيه لو حصلت <span class="why">Why: الأمان أهم من إكمال المسافة المخطط لها.</span></li>
+      </ol>
+    </div>
+    <div class="skf"><b>Precautions</b><span>اتأكد من عدم وجود أنابيب أو خطوط وريدية ممكن تتشد.</span></div>
+    <div class="skf"><b>Common mistakes</b><span>تسيب المريض يقف لوحده من غير Dangling، أو تكمل المشي رغم شكوى المريض من دوخة.</span></div>
+    <div class="skf"><b>Escalate إذا</b><span>المريض قال هيغمى عليه أو لونه اتغير — اقعده فورًا وبلّغ.</span></div>
+  </section>
+
+  <section class="lesson-sec" id="s5">
+    <div class="sec-eyebrow"><div class="sec-num">5</div><div class="sec-h">سيناريو إكلينيكي</div><div class="sec-time">~10 د</div></div>
+    <p><strong>الحالة:</strong> مريضة عمرها 78 سنة، طلبت تروح الحمام بليل، ولقيتيها واقفة جنب السرير بتترنح شوية.</p>
+    <details class="reveal"><summary>What should the nurse do first?</summary><div class="ans">تسنديها فورًا وتقعديها، ماتسيبيهاش تكمل لوحدها.</div></details>
+    <details class="reveal"><summary>Why؟</summary><div class="ans">خطر السقوط عالي جدًا في السن ده خصوصًا بليل، والإصابة ممكن تكون خطيرة (كسر في الحوض مثلًا).</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s6">
+    <div class="sec-eyebrow"><div class="sec-num">6</div><div class="sec-h">MCQs — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="mcqHolder"></div>
+    <div class="quiz-score">نتيجة الـ MCQ: <b><span id="mcqScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s7">
+    <div class="sec-eyebrow"><div class="sec-num">7</div><div class="sec-h">True / False — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="tfHolder"></div>
+    <div class="quiz-score">نتيجة الـ True/False: <b><span id="tfScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s8">
+    <div class="sec-eyebrow"><div class="sec-num">8</div><div class="sec-h">Flashcards — 8 كروت</div><div class="sec-time">~8 د</div></div>
+    <p style="color:var(--text-muted);font-size:13px">دوس على أي كارت عشان تقلبه.</p>
+    <div class="flash-grid" id="flashHolder"></div>
+  </section>
+
+  <section class="lesson-sec" id="s9">
+    <div class="sec-eyebrow"><div class="sec-num">9</div><div class="sec-h">Final Summary</div><div class="sec-time"></div></div>
+    <ol class="summary-list">
+      <li>الحركة المبكرة بتمنع مضاعفات خطيرة.</li>
+      <li>دايمًا اعمل Dangling قبل ما تقيم المريض يمشي.</li>
+      <li>كبار السن + مهدئات = أعلى خطر سقوط.</li>
+      <li>الحذاء والأرضية سبب شائع للسقوط، افحصهم دايمًا.</li>
+      <li>الأمان أهم من إكمال أي خطة حركة.</li>
+    </ol>
+    <button class="complete-btn" id="completeBtn">أنهيت اليوم 3 ✓</button>
+    <div class="next-hint">لما تكون جاهز لليوم اللي بعده، قوللي "يوم 4" في المحادثة.</div>
+  </section>
+</main>
+
+<footer>جزء من سلسلة الـ30 يوم لاسترجاع أساسيات التمريض — مرجع مذاكرة، مش بديل عن الإشراف الإكلينيكي.</footer>
+
+<script>
+const mcqData = [
+ {q:"أهم سبب لتشجيع الحركة المبكرة بعد العملية؟", opts:["الشكل بس","منع الجلطات وضعف العضلات","إرضاء الطبيب","توفير وقت"], c:1, why:"الحركة المبكرة بتقلل خطر DVT وضعف العضلات بشكل كبير."},
+ {q:"قبل ما تقيم المريض يمشي لأول مرة، تعمل إيه؟", opts:["تخليه يقف على طول","Dangling على طرف السرير الأول","تسيبه لوحده يجرب","تدّيله مهدئ"], c:1, why:"Dangling بيقيم الدوخة قبل الوقوف الكامل."},
+ {q:"مين أكتر عرضة لخطر السقوط؟", opts:["الشاب السليم","كبير السن اللي أخد مهدئ","المريض الواعي تمامًا","الممرض"], c:1, why:"كبار السن + المهدئات = أعلى خطر سقوط."},
+ {q:"DVT اختصار لإيه؟", opts:["Deep Vein Thrombosis","Direct Vein Test","Daily Vital Test","Delayed Venous Trauma"], c:0, why:"جلطة في الأوردة العميقة."},
+ {q:"لو المريض حس بدوخة وانتوا بتمشوا، تعمل إيه؟", opts:["تكمل المشي","توقف وتسنده فورًا","تسيبه يكمل لوحده","تتجاهل"], c:1, why:"الأمان أهم من إكمال الخطة."}
+];
+let mcqScore = 0;
+const mcqHolder = document.getElementById('mcqHolder');
+mcqData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  let optsHtml = '<div class="q-opts">';
+  item.opts.forEach(function(opt, oi){ optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>'; });
+  optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+  mcqHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const oi = parseInt(btn.dataset.oi,10);
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(oi === item.c){ btn.classList.add('correct'); mcqScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+    });
+  });
+});
+
+const tfData = [
+ {s:"الرقود الطويل في السرير من غير حركة آمن تمامًا للمريض.", a:false, why:"بيزود خطر الجلطات وضعف العضلات وقرح الفراش."},
+ {s:"الـ Dangling يعني قعود المريض على طرف السرير قبل الوقوف.", a:true, why:"صح، ده بيقيم الدوخة الأول."},
+ {s:"كبار السن اللي أخدوا مهدئ أقل عرضة للسقوط.", a:false, why:"العكس، هما أكتر عرضة للسقوط."},
+ {s:"الحذاء الغلط أو الأرضية المبللة من أشهر أسباب السقوط.", a:true, why:"صح تمامًا، من أشهر الأسباب."},
+ {s:"لو المريض حس بدوخة أثناء المشي، كمّل عادي لحد ما توصلوا الهدف.", a:false, why:"لأ، لازم توقف فورًا وتسنده."}
+];
+let tfScore = 0;
+const tfHolder = document.getElementById('tfHolder');
+tfData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.s+'</div>'+
+    '<div class="q-opts tf-row"><button class="q-opt" data-v="true">صح</button><button class="q-opt" data-v="false">غلط</button></div>'+
+    '<div class="q-why">'+item.why+'</div>';
+  tfHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const v = btn.dataset.v === 'true';
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(v === item.a){ btn.classList.add('correct'); tfScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-v="'+item.a+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('tfScoreText').textContent = tfScore+' / '+tfData.length;
+    });
+  });
+});
+
+const flashData = [
+ {f:"Ambulation", b:"مساعدة المريض على المشي"}, {f:"Transfer", b:"نقل المريض من مكان لمكان"},
+ {f:"Range of Motion", b:"تمارين حركة المفاصل"}, {f:"DVT", b:"جلطة الأوردة العميقة"},
+ {f:"Dangling", b:"قعود على طرف السرير قبل الوقوف"}, {f:"Fall Risk Assessment", b:"تقييم خطر السقوط"},
+ {f:"Bed Alarm", b:"جهاز إنذار لمنع نزول المريض بمفرده"}, {f:"Orthostatic Hypotension", b:"هبوط ضغط مفاجئ عند الوقوف"}
+];
+const flashHolder = document.getElementById('flashHolder');
+flashData.forEach(function(item){
+  const card = document.createElement('div'); card.className = 'flashcard';
+  card.innerHTML = '<div class="flashcard-inner"><div class="flashcard-front">'+item.f+'</div><div class="flashcard-back">'+item.b+'</div></div>';
+  card.addEventListener('click', function(){card.classList.toggle('flipped');});
+  flashHolder.appendChild(card);
+});
+
+const dots = document.querySelectorAll('.step-dot');
+const secs = document.querySelectorAll('.lesson-sec');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const idx = Array.prototype.indexOf.call(secs, e.target) + 1;
+        const dot = document.querySelector('.step-dot[data-s="'+idx+'"]');
+        if(dot) dot.classList.add('seen');
+      }
+    });
+  }, {threshold:0.5});
+  secs.forEach(function(s){io.observe(s);});
+}
+
+async function loadProgress(){
+  try{
+    const res = await window.storage.get('nursing30_day3_progress', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      if(data.completed){
+        const btn = document.getElementById('completeBtn');
+        btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+data.mcq+'/5 — T/F '+data.tf+'/5)';
+        btn.setAttribute('disabled','');
+      }
+    }
+  }catch(e){}
+}
+loadProgress();
+document.getElementById('completeBtn').addEventListener('click', async function(){
+  const btn = this;
+  const data = {completed:true, mcq:mcqScore, tf:tfScore, ts:Date.now()};
+  btn.textContent = 'جاري الحفظ...';
+  try{ await window.storage.set('nursing30_day3_progress', JSON.stringify(data), false); }catch(e){}
+  btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+mcqScore+'/5 — T/F '+tfScore+'/5)';
+  btn.setAttribute('disabled','');
+});
+</script>
+</body>
+</html>
 
