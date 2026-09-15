@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>نبضة — اليوم 4: مكافحة العدوى، غسيل الأيادي، وPPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A1420; --surface:#101C2C; --surface-2:#16273A; --surface-3:#1C2F45; --line:#223850;
+  --text:#E8F1F5; --text-muted:#8FA6B8;
+  --accent:#35D6C4; --accent-2:#6EE7D8; --accent-soft:rgba(53,214,196,.13);
+  --warn:#F2B84B; --warn-soft:rgba(242,184,75,.13);
+  --danger:#FB6B6B; --danger-soft:rgba(251,107,107,.13);
+  --success:#4ADE9C; --success-soft:rgba(74,222,156,.13);
+  --radius-sm:8px; --radius-md:14px;
+  --font:'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif; --maxw:700px;
+}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);direction:rtl;text-align:right;line-height:1.8;-webkit-font-smoothing:antialiased;font-size:16px;}
+a{color:var(--accent-2);} button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{background:linear-gradient(180deg,#0C1826 0%,var(--bg) 100%);border-bottom:1px solid var(--line);padding:22px 0 20px;}
+.eyebrow{color:var(--accent-2);font-size:13px;font-weight:600;margin-bottom:4px;}
+.brand{font-size:23px;font-weight:700;color:var(--text);}
+.brand-sub{color:var(--text-muted);font-size:14px;margin-top:4px;}
+.wave{width:100%;height:40px;margin-top:14px;overflow:hidden;}
+.wave path{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.8s ease-out forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.disclaimer{margin:14px 0 0;padding:10px 12px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.35);border-radius:var(--radius-sm);color:var(--text);font-size:13.5px;}
+.disclaimer b{color:var(--warn);}
+.video-card{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;background:var(--accent-soft);border:1px solid rgba(53,214,196,.35);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);}
+.video-card .vic{font-size:22px;flex-shrink:0;}
+.video-card .vt{font-size:13px;color:var(--text-muted);}
+.video-card .vn{font-weight:700;color:var(--accent-2);font-size:14.5px;}
+main{padding:20px 0 50px;}
+.steps-tracker{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 14px;margin-bottom:6px;border-bottom:1px solid var(--line);}
+.steps-tracker::-webkit-scrollbar{display:none;}
+.step-dot{min-width:30px;height:30px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:var(--text-muted);border:1px solid var(--line);text-decoration:none;flex-shrink:0;}
+.step-dot.seen{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent);}
+.lesson-sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px;margin-bottom:14px;scroll-margin-top:14px;}
+.lesson-sec.warmup{border-color:rgba(242,184,75,.35);}
+.sec-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.sec-num{min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:#062522;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;}
+.lesson-sec.warmup .sec-num{background:var(--warn);}
+.sec-h{font-size:17px;font-weight:700;}
+.sec-time{color:var(--text-muted);font-size:12.5px;margin-inline-start:auto;}
+.lesson-sec p{margin:0 0 12px;font-size:15px;} .lesson-sec p:last-child{margin-bottom:0;}
+.glossary{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin:12px 0;}
+.gloss-row{display:flex;align-items:baseline;gap:8px;padding:9px 12px;font-size:14px;border-bottom:1px solid var(--line);background:var(--surface-2);}
+.gloss-row:last-child{border-bottom:none;}
+.gloss-row .term{color:var(--accent-2);font-weight:600;direction:ltr;}
+.gloss-row .eq{color:var(--text-muted);} .gloss-row .ar{color:var(--text);}
+details.reveal{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;margin:10px 0;background:var(--surface-2);}
+details.reveal summary{cursor:pointer;font-size:14.5px;color:var(--accent-2);font-weight:600;list-style:none;display:flex;align-items:center;gap:6px;}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--accent);font-weight:700;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:8px;font-size:14.5px;color:var(--text);padding-top:8px;border-top:1px dashed var(--line);}
+.skill-card .skf{display:flex;gap:8px;margin-bottom:10px;font-size:14.5px;}
+.skill-card .skf b{color:var(--accent-2);min-width:110px;flex-shrink:0;font-weight:600;}
+.skill-card .steplist{margin:0;padding-inline-start:20px;}
+.skill-card .steplist li{margin-bottom:8px;font-size:14.5px;}
+.skill-card .why{color:var(--text-muted);font-size:13px;display:block;margin-top:2px;}
+.note-flag{margin-top:12px;padding:9px 11px;background:var(--warn-soft);border-radius:var(--radius-sm);font-size:13px;color:var(--text);border:1px solid rgba(242,184,75,.3);}
+.q-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px;margin-bottom:10px;background:var(--surface-2);}
+.q-card .q-text{font-size:14.5px;margin-bottom:10px;font-weight:600;}
+.q-opts{display:flex;flex-direction:column;gap:7px;}
+.q-opt{text-align:right;background:var(--surface-3);border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:var(--radius-sm);font-size:14px;cursor:pointer;font-family:inherit;}
+.tf-row{display:flex;gap:8px;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:9px;font-size:13.5px;color:var(--text-muted);padding-top:9px;border-top:1px dashed var(--line);}
+.q-why.show{display:block;}
+.quiz-score{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:10px 12px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);}
+.quiz-score b{color:var(--accent-2);}
+.flash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.flashcard{perspective:1000px;height:120px;cursor:pointer;}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;border:1px solid var(--line);font-size:14px;}
+.flashcard-front{background:var(--surface-2);color:var(--accent-2);font-weight:700;direction:ltr;}
+.flashcard-back{background:var(--accent-soft);color:var(--text);transform:rotateY(180deg);}
+.summary-list{margin:0;padding-inline-start:20px;} .summary-list li{margin-bottom:9px;font-size:14.5px;}
+.complete-btn{width:100%;margin-top:14px;padding:13px;border:none;border-radius:var(--radius-sm);background:var(--accent);color:#062522;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;}
+.complete-btn[disabled]{background:var(--success);color:#06251a;cursor:default;}
+.next-hint{color:var(--text-muted);font-size:13px;margin-top:10px;text-align:center;}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--text-muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">اليوم 4 من 30 · Infection Control</div>
+    <div class="brand">مكافحة العدوى: غسيل الأيادي، الـ PPE، والتعقيم</div>
+    <div class="brand-sub">الجزء الرابع من سلسلة استرجاع أساسيات التمريض لسنة الامتياز</div>
+    <svg class="wave" viewBox="0 0 700 40" preserveAspectRatio="none">
+      <path d="M0,20 L120,20 L145,20 L158,4 L172,36 L186,12 L198,20 L340,20 L365,20 L378,4 L392,36 L406,12 L418,20 L560,20 L585,20 L598,4 L612,36 L626,12 L638,20 L700,20"/>
+    </svg>
+    <div class="disclaimer"><b>ملحوظة:</b> مرجع مذاكرة، مش بديل عن التدريب تحت إشراف. أي مهارة أو قرار سريري يمشي حسب الـ Hospital Policy المحلي عندك.</div>
+    <a class="video-card" href="https://www.youtube.com/watch?v=vYtkgkIkpqM" target="_blank" rel="noopener">
+      <span class="vic">🎥</span>
+      <span><span class="vn">شرح بروسيجر غسيل الأيدين — نظري وعملي (أولى تمريض)</span><br><span class="vt">فيديو عربي كامل لخطوات الغسيل الصحيح، نظري وعملي</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="steps-tracker" id="stepsTracker">
+    <a href="#s1" class="step-dot" data-s="1">1</a><a href="#s2" class="step-dot" data-s="2">2</a><a href="#s3" class="step-dot" data-s="3">3</a>
+    <a href="#s4" class="step-dot" data-s="4">4</a><a href="#s5" class="step-dot" data-s="5">5</a><a href="#s6" class="step-dot" data-s="6">6</a>
+    <a href="#s7" class="step-dot" data-s="7">7</a><a href="#s8" class="step-dot" data-s="8">8</a><a href="#s9" class="step-dot" data-s="9">9</a>
+  </div>
+
+  <section class="lesson-sec warmup" id="s1">
+    <div class="sec-eyebrow"><div class="sec-num">1</div><div class="sec-h">تحقق سريع</div><div class="sec-time">~5 د</div></div>
+    <details class="reveal"><summary>امبارح اتكلمنا على إيه بيمنع قرح الفراش؟</summary><div class="ans">الحركة المبكرة وتغيير الوضعية بانتظام.</div></details>
+    <details class="reveal"><summary>أشهر سبب للسقوط في المستشفى؟</summary><div class="ans">الحذاء الغلط أو الأرضية المبللة، وقلة الإشراف مع كبار السن.</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s2">
+    <div class="sec-eyebrow"><div class="sec-num">2</div><div class="sec-h">الشرح — غسيل الأيادي، الـ PPE، والتعقيم</div><div class="sec-time">~35 د</div></div>
+    <p><strong>غسيل الأيادي (Hand Hygiene):</strong> أبسط وأقوى إجراء لمنع العدوى في المستشفى كله. الـ WHO بتقول فيه 5 لحظات لازم تغسل ايديك فيها.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Hand Hygiene</span><span class="eq">=</span><span class="ar">غسيل أو تطهير الأيادي</span></div>
+      <div class="gloss-row"><span class="term">5 Moments</span><span class="eq">=</span><span class="ar">اللحظات الخمس اللي لازم تغسل ايديك فيها حسب WHO</span></div>
+      <div class="gloss-row"><span class="term">Alcohol-based Handrub</span><span class="eq">=</span><span class="ar">معقم كحولي، أسرع من الغسيل في أغلب الحالات</span></div>
+    </div>
+    <p><strong>معدات الوقاية الشخصية (PPE):</strong> بتحميك إنت والمريض من انتقال العدوى، ومفيش ترتيب عشوائي للبسها وخلعها.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">PPE</span><span class="eq">=</span><span class="ar">قفازات، مريلة، كمامة، نضارة</span></div>
+      <div class="gloss-row"><span class="term">Don</span><span class="eq">=</span><span class="ar">لبس معدات الوقاية</span></div>
+      <div class="gloss-row"><span class="term">Doff</span><span class="eq">=</span><span class="ar">خلع معدات الوقاية بترتيب معين عشان متلوثش نفسك</span></div>
+    </div>
+    <p><strong>التعقيم والعزل:</strong> الفرق بين النضافة العادية والتعقيم الكامل بيفرق مع الإجراءات الغازية.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Medical Asepsis</span><span class="eq">=</span><span class="ar">نضافة عامة (Clean Technique)</span></div>
+      <div class="gloss-row"><span class="term">Surgical Asepsis</span><span class="eq">=</span><span class="ar">تعقيم كامل، خالي من الميكروبات (Sterile Technique)</span></div>
+      <div class="gloss-row"><span class="term">Standard Precautions</span><span class="eq">=</span><span class="ar">احتياطات أساسية مع كل مريض بدون استثناء</span></div>
+      <div class="gloss-row"><span class="term">Isolation Precautions</span><span class="eq">=</span><span class="ar">احتياطات إضافية حسب نوع العدوى (Contact, Droplet, Airborne)</span></div>
+    </div>
+  </section>
+
+  <section class="lesson-sec" id="s3">
+    <div class="sec-eyebrow"><div class="sec-num">3</div><div class="sec-h">مثال من المستشفى</div><div class="sec-time">~10 د</div></div>
+    <p>قبل ما تدخل على مريض معزول بعدوى معدية، لازم تلبس PPE بترتيب صح، وبعد ما تخرج تخلعها بترتيب معاكس عشان مايتلوثش جلدك أو هدومك.</p>
+  </section>
+
+  <section class="lesson-sec skill-card" id="s4">
+    <div class="sec-eyebrow"><div class="sec-num">4</div><div class="sec-h">مهارة عملية — غسيل الأيادي الصحيح</div><div class="sec-time">~15 د</div></div>
+    <div class="skf"><b>Purpose</b><span>أهم إجراء واحد لمنع انتقال العدوى بين المرضى والعاملين.</span></div>
+    <div class="skf" style="display:block"><b style="display:block;margin-bottom:6px">Steps</b>
+      <ol class="steplist">
+        <li>اغسل بالمية والصابون لو الأيادي متسخة بشكل واضح <span class="why">Why: المعقم الكحولي مش فعال مع الأوساخ الظاهرة.</span></li>
+        <li>استخدم المعقم الكحولي في باقي الحالات <span class="why">Why: أسرع وفعال ضد معظم الميكروبات.</span></li>
+        <li>افرك كل أجزاء اليد لمدة كافية (20-30 ثانية) <span class="why">Why: الأماكن اللي بتتنسى أكتر عرضة للتلوث.</span></li>
+        <li>اغسل قبل وبعد كل تلامس مع المريض <span class="why">Why: كل تلامس فرصة جديدة لنقل ميكروب.</span></li>
+      </ol>
+    </div>
+    <div class="skf"><b>Precautions</b><span>القفاز مش بديل عن غسيل الأيادي — الغسيل لسه مطلوب قبل وبعد.</span></div>
+    <div class="skf"><b>Common mistakes</b><span>الاعتماد على القفازات بدل غسيل الأيادي.</span></div>
+    <div class="skf"><b>Escalate إذا</b><span>لاحظت زميل بيتجاهل غسيل الأيادي بشكل متكرر — ده موضوع سلامة لازم يتناقش.</span></div>
+  </section>
+
+  <section class="lesson-sec" id="s5">
+    <div class="sec-eyebrow"><div class="sec-num">5</div><div class="sec-h">سيناريو إكلينيكي</div><div class="sec-time">~10 د</div></div>
+    <p><strong>الحالة:</strong> إنت طالع من غرفة مريض معزول بعدوى معوية (Contact Precautions)، وعندك مريض تاني لازم تروحله فورًا.</p>
+    <details class="reveal"><summary>What should you do first?</summary><div class="ans">تخلع الـ PPE بالترتيب الصحيح وتغسل ايديك كويس قبل ما تروح للمريض التاني.</div></details>
+    <details class="reveal"><summary>Why؟</summary><div class="ans">لو ماخلعتش صح أو ماغسلتش ايديك، ممكن تنقل العدوى من المريض الأول للتاني بنفسك.</div></details>
+  </section>
+
+  <section class="lesson-sec" id="s6">
+    <div class="sec-eyebrow"><div class="sec-num">6</div><div class="sec-h">MCQs — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="mcqHolder"></div>
+    <div class="quiz-score">نتيجة الـ MCQ: <b><span id="mcqScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s7">
+    <div class="sec-eyebrow"><div class="sec-num">7</div><div class="sec-h">True / False — 5 أسئلة</div><div class="sec-time">~5 د</div></div>
+    <div id="tfHolder"></div>
+    <div class="quiz-score">نتيجة الـ True/False: <b><span id="tfScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="lesson-sec" id="s8">
+    <div class="sec-eyebrow"><div class="sec-num">8</div><div class="sec-h">Flashcards — 8 كروت</div><div class="sec-time">~8 د</div></div>
+    <p style="color:var(--text-muted);font-size:13px">دوس على أي كارت عشان تقلبه.</p>
+    <div class="flash-grid" id="flashHolder"></div>
+  </section>
+
+  <section class="lesson-sec" id="s9">
+    <div class="sec-eyebrow"><div class="sec-num">9</div><div class="sec-h">Final Summary</div><div class="sec-time"></div></div>
+    <ol class="summary-list">
+      <li>غسيل الأيادي أقوى إجراء واحد لمنع العدوى.</li>
+      <li>المعقم الكحولي أسرع، إلا لو الأيادي متسخة بشكل واضح.</li>
+      <li>القفاز مش بديل عن غسيل الأيادي.</li>
+      <li>ترتيب لبس وخلع الـ PPE مهم زي بعضه.</li>
+      <li>Standard Precautions مع كل مريض من غير استثناء.</li>
+    </ol>
+    <button class="complete-btn" id="completeBtn">أنهيت اليوم 4 ✓</button>
+    <div class="next-hint">لما تكون جاهز لليوم اللي بعده، قوللي "يوم 5" في المحادثة.</div>
+  </section>
+</main>
+
+<footer>جزء من سلسلة الـ30 يوم لاسترجاع أساسيات التمريض — مرجع مذاكرة، مش بديل عن الإشراف الإكلينيكي.</footer>
+
+<script>
+const mcqData = [
+ {q:"أسرع وأفضل طريقة لتطهير الأيادي لو مش متسخة بشكل واضح؟", opts:["مية وصابون بس","معقم كحولي","مسح بمنديل","تجاهل الموضوع"], c:1, why:"المعقم الكحولي أسرع وفعال في أغلب الحالات، إلا لو الأيادي متسخة بشكل واضح."},
+ {q:"القفازات بديل عن غسيل الأيادي؟", opts:["أيوة دايمًا","لأ، الغسيل لسه مطلوب قبل وبعد","بس لو القفاز جديد","بس في العزل"], c:1, why:"القفاز مش بديل عن الغسيل."},
+ {q:"Surgical Asepsis معناها؟", opts:["نضافة عادية","تعقيم كامل خالي من الميكروبات","غسيل أيادي بس","لبس قفازات بس"], c:1, why:"Surgical Asepsis = Sterile Technique، تعقيم كامل."},
+ {q:"لو خرجت من غرفة عزل، أول حاجة تعملها؟", opts:["تروح للمريض التاني على طول","تخلع الـ PPE بالترتيب الصح وتغسل ايديك","تاخد استراحة","تلبس PPE تاني فورًا"], c:1, why:"لازم تخلع بالترتيب الصح وتغسل ايديك عشان منقلش عدوى."},
+ {q:"الـ 5 Moments لغسيل الأيادي فكرة من مين؟", opts:["CDC","WHO","الوزارة المحلية بس","لا يوجد معيار موحد"], c:1, why:"منظمة الصحة العالمية (WHO) هي اللي حددت الـ 5 Moments."}
+];
+let mcqScore = 0;
+const mcqHolder = document.getElementById('mcqHolder');
+mcqData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  let optsHtml = '<div class="q-opts">';
+  item.opts.forEach(function(opt, oi){ optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>'; });
+  optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+  mcqHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const oi = parseInt(btn.dataset.oi,10);
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(oi === item.c){ btn.classList.add('correct'); mcqScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+    });
+  });
+});
+
+const tfData = [
+ {s:"المعقم الكحولي فعال حتى لو الأيادي متسخة بأوساخ ظاهرة.", a:false, why:"في الحالة دي لازم مية وصابون."},
+ {s:"لازم تغسل ايديك قبل وبعد كل تلامس مع المريض.", a:true, why:"صح، مش مرة واحدة في الشيفت."},
+ {s:"الـ Medical Asepsis نفسه الـ Surgical Asepsis.", a:false, why:"Medical = نضافة عامة، Surgical = تعقيم كامل."},
+ {s:"ترتيب خلع الـ PPE مهم بنفس درجة أهمية ترتيب لبسها.", a:true, why:"الخلع الغلط ممكن يلوثك."},
+ {s:"لو لابس قفازات مش لازم تغسل ايديك قبلهم أو بعدهم.", a:false, why:"الغسيل لسه مطلوب."}
+];
+let tfScore = 0;
+const tfHolder = document.getElementById('tfHolder');
+tfData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.s+'</div>'+
+    '<div class="q-opts tf-row"><button class="q-opt" data-v="true">صح</button><button class="q-opt" data-v="false">غلط</button></div>'+
+    '<div class="q-why">'+item.why+'</div>';
+  tfHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const v = btn.dataset.v === 'true';
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(v === item.a){ btn.classList.add('correct'); tfScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-v="'+item.a+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('tfScoreText').textContent = tfScore+' / '+tfData.length;
+    });
+  });
+});
+
+const flashData = [
+ {f:"Hand Hygiene", b:"غسيل/تطهير الأيادي"}, {f:"PPE", b:"معدات الوقاية الشخصية"},
+ {f:"Don", b:"لبس معدات الوقاية"}, {f:"Doff", b:"خلع معدات الوقاية بترتيب معين"},
+ {f:"Medical Asepsis", b:"نضافة عامة (Clean Technique)"}, {f:"Surgical Asepsis", b:"تعقيم كامل (Sterile Technique)"},
+ {f:"Standard Precautions", b:"احتياطات أساسية مع كل مريض"}, {f:"Isolation Precautions", b:"احتياطات إضافية حسب نوع العدوى"}
+];
+const flashHolder = document.getElementById('flashHolder');
+flashData.forEach(function(item){
+  const card = document.createElement('div'); card.className = 'flashcard';
+  card.innerHTML = '<div class="flashcard-inner"><div class="flashcard-front">'+item.f+'</div><div class="flashcard-back">'+item.b+'</div></div>';
+  card.addEventListener('click', function(){card.classList.toggle('flipped');});
+  flashHolder.appendChild(card);
+});
+
+const dots = document.querySelectorAll('.step-dot');
+const secs = document.querySelectorAll('.lesson-sec');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const idx = Array.prototype.indexOf.call(secs, e.target) + 1;
+        const dot = document.querySelector('.step-dot[data-s="'+idx+'"]');
+        if(dot) dot.classList.add('seen');
+      }
+    });
+  }, {threshold:0.5});
+  secs.forEach(function(s){io.observe(s);});
+}
+
+async function loadProgress(){
+  try{
+    const res = await window.storage.get('nursing30_day4_progress', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      if(data.completed){
+        const btn = document.getElementById('completeBtn');
+        btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+data.mcq+'/5 — T/F '+data.tf+'/5)';
+        btn.setAttribute('disabled','');
+      }
+    }
+  }catch(e){}
+}
+loadProgress();
+document.getElementById('completeBtn').addEventListener('click', async function(){
+  const btn = this;
+  const data = {completed:true, mcq:mcqScore, tf:tfScore, ts:Date.now()};
+  btn.textContent = 'جاري الحفظ...';
+  try{ await window.storage.set('nursing30_day4_progress', JSON.stringify(data), false); }catch(e){}
+  btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+mcqScore+'/5 — T/F '+tfScore+'/5)';
+  btn.setAttribute('disabled','');
+});
+</script>
+</body>
+</html>
