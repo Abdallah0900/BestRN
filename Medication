@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Medication Handbook | Batch 01 — Nursing Internship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #07121f; --bg-soft: #0b1827; --surface: #0f2030; --surface-2: #13283a; --surface-3: #172f43;
+  --teal: #22c7b8; --teal-dark: #159c91; --blue: #4f8cff;
+  --text: #f3f7fa; --text-soft: #c6d2dc; --muted: #8495a5;
+  --border: rgba(255,255,255,0.08); --border-strong: rgba(34,199,184,0.28);
+  --success: #35d09a; --warn:#f2b84b; --warn-soft:rgba(242,184,75,.12);
+  --danger:#fb6b6b; --danger-soft:rgba(251,107,107,.12); --success-soft:rgba(53,208,154,.12);
+  --radius: 18px; --radius-sm: 12px; --maxw:820px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 80% 0%, rgba(34,199,184,0.09), transparent 28%),
+             radial-gradient(circle at 10% 20%, rgba(79,140,255,0.06), transparent 24%), var(--bg);
+  color:var(--text); font-family:"Cairo","Noto Sans Arabic",Arial,sans-serif;
+  direction:rtl; text-align:right; line-height:1.8;
+}
+a{color:inherit;text-decoration:none;} button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{position:sticky;top:0;z-index:100;background:rgba(7,18,31,0.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.header-inner{min-height:64px;display:flex;align-items:center;gap:12px;padding:10px 0;flex-wrap:wrap;}
+.brand-mark{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:10px;background:linear-gradient(135deg,rgba(34,199,184,0.18),rgba(79,140,255,0.08));color:var(--teal);font-size:14px;font-weight:800;}
+.brand-title{font-size:13px;font-weight:800;}
+.brand-subtitle{color:var(--muted);font-size:10.5px;font-weight:500;}
+.badge{margin-inline-start:auto;font-size:11px;font-weight:800;color:var(--teal);background:rgba(34,199,184,0.09);border:1px solid var(--border-strong);padding:6px 12px;border-radius:999px;white-space:nowrap;}
+
+.hero-strip{padding:24px 0 4px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;}
+.eyebrow-line{width:24px;height:2px;background:var(--teal);border-radius:10px;}
+h1.title{font-size:clamp(21px,4vw,28px);line-height:1.35;font-weight:800;}
+.subtitle{margin-top:8px;color:var(--text-soft);font-size:14px;font-weight:600;}
+.disclaimer{margin:16px 0 0;padding:12px 14px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.3);border-radius:var(--radius-sm);color:var(--text-soft);font-size:13px;}
+.disclaimer b{color:var(--warn);}
+
+.progress-box{margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
+.progress-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);}
+.progress-row b{color:var(--teal);font-size:16px;}
+.progress-track{height:8px;border-radius:6px;background:var(--surface-3);margin-top:10px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal-dark),var(--teal));width:5%;border-radius:6px;}
+.progress-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.chip{font-size:11px;padding:4px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-soft);}
+
+main{padding:22px 0 56px;}
+
+/* drug entries */
+.drug{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;}
+.drug[open] > summary{border-bottom:1px solid var(--border);}
+.drug > summary{cursor:pointer;list-style:none;padding:18px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.drug > summary::-webkit-details-marker{display:none;}
+.drug-idx{min-width:30px;height:30px;border-radius:9px;background:var(--teal);color:#062522;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;}
+.drug-name{font-size:17px;font-weight:800;}
+.drug-generic{color:var(--muted);font-size:11.5px;}
+.drug-tags{display:flex;gap:6px;margin-inline-start:auto;flex-wrap:wrap;}
+.tag{font-size:10.5px;padding:4px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-soft);}
+.tag.alert{background:var(--danger-soft);border-color:rgba(251,107,107,.4);color:var(--danger);font-weight:800;}
+.chev{color:var(--muted);font-size:12px;}
+
+.drug-body{padding:6px 20px 22px;}
+.sec{margin-top:18px;}
+.sec-h{font-size:13px;font-weight:800;color:var(--teal);margin-bottom:9px;display:flex;align-items:center;gap:6px;}
+.sec p{font-size:14px;color:var(--text-soft);margin-bottom:8px;}
+.sec ul{margin:0;padding-inline-start:19px;}
+.sec li{font-size:13.5px;color:var(--text-soft);margin-bottom:7px;}
+.sec li b{color:var(--text);}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:560px){.two-col{grid-template-columns:1fr;}}
+.mini-h{font-size:12px;font-weight:700;color:var(--text-soft);margin-bottom:6px;}
+
+.dose-box{padding:12px 14px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.3);border-radius:var(--radius-sm);font-size:13.5px;color:var(--text-soft);}
+.dose-box b{color:var(--warn);}
+
+table.mtable{width:100%;border-collapse:collapse;font-size:12.5px;}
+table.mtable th{text-align:right;color:var(--teal);font-weight:700;padding:8px 9px;border-bottom:1px solid var(--border-strong);font-size:11.5px;}
+table.mtable td{padding:9px;border-bottom:1px solid var(--border);color:var(--text-soft);vertical-align:top;}
+table.mtable tr:last-child td{border-bottom:none;}
+
+.se-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+.se-box{padding:11px 13px;border-radius:var(--radius-sm);border:1px solid var(--border);}
+.se-box.common{background:var(--surface-2);}
+.se-box.important{background:var(--warn-soft);border-color:rgba(242,184,75,.3);}
+.se-box.dangerous{background:var(--danger-soft);border-color:rgba(251,107,107,.35);}
+.se-label{font-size:11px;font-weight:800;margin-bottom:5px;}
+.se-box.common .se-label{color:var(--text-soft);}
+.se-box.important .se-label{color:var(--warn);}
+.se-box.dangerous .se-label{color:var(--danger);}
+.se-box p{margin:0;font-size:13px;color:var(--text-soft);}
+
+.int-row{padding:10px 0;border-bottom:1px dashed var(--border);font-size:13px;}
+.int-row:last-child{border-bottom:none;}
+.int-row .pair{color:var(--blue);font-weight:700;direction:ltr;display:block;text-align:right;font-size:13px;}
+.int-row .arrow{color:var(--text-soft);}
+.int-row .watch{color:var(--muted);font-size:12px;margin-top:3px;}
+
+.education-box{padding:13px 15px;background:var(--surface-2);border-radius:var(--radius-sm);border-inline-start:3px solid var(--teal);font-size:13.5px;color:var(--text-soft);}
+
+.safety-box{padding:13px 15px;background:var(--danger-soft);border:1px solid rgba(251,107,107,.32);border-radius:var(--radius-sm);font-size:13.5px;color:var(--text-soft);}
+.safety-box b{color:var(--danger);}
+
+.alert-banner{margin-top:18px;padding:16px;background:linear-gradient(145deg,rgba(251,107,107,.14),rgba(251,107,107,.05));border:1.5px solid rgba(251,107,107,.5);border-radius:var(--radius-sm);}
+.alert-banner .al-title{color:var(--danger);font-weight:800;font-size:14px;margin-bottom:8px;}
+.alert-banner p{font-size:13px;color:var(--text-soft);margin-bottom:6px;}
+
+details.reveal{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;margin:9px 0;background:var(--surface-2);}
+details.reveal summary{cursor:pointer;font-size:13.5px;color:var(--teal);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px;}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--teal);font-weight:800;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:8px;font-size:13.5px;color:var(--text-soft);padding-top:8px;border-top:1px dashed var(--border);}
+
+.remember-box{padding:14px 16px;background:rgba(34,199,184,0.08);border:1px solid var(--border-strong);border-radius:var(--radius-sm);}
+.remember-box .rb-h{color:var(--teal);font-weight:800;font-size:13px;margin-bottom:8px;}
+.remember-box ul{margin:0;padding-inline-start:19px;}
+.remember-box li{font-size:13.5px;color:var(--text-soft);margin-bottom:5px;}
+
+.rule-line{margin-top:14px;padding:14px 16px;background:var(--surface-3);border-radius:var(--radius-sm);font-size:14px;font-weight:700;color:var(--text);text-align:center;border-inline-start:3px solid var(--blue);}
+
+/* quiz */
+.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:20px;}
+.quiz-section h2{font-size:18px;font-weight:800;margin-bottom:4px;}
+.quiz-section .qs-sub{color:var(--muted);font-size:12.5px;margin-bottom:16px;}
+.q-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:11px;background:var(--surface-2);}
+.q-text{font-size:14px;margin-bottom:11px;font-weight:700;color:var(--text);}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:right;background:var(--surface-3);border:1px solid var(--border);color:var(--text-soft);padding:10px 12px;border-radius:var(--radius-sm);font-size:13.5px;cursor:pointer;font-family:inherit;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:10px;font-size:13px;color:var(--muted);padding-top:10px;border-top:1px dashed var(--border);}
+.q-why.show{display:block;}
+.quiz-score{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:11px 13px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:13.5px;color:var(--muted);}
+.quiz-score b{color:var(--teal);}
+
+.next-strip{margin-top:20px;padding:16px;text-align:center;background:var(--surface);border:1px dashed var(--border-strong);border-radius:var(--radius);color:var(--muted);font-size:13px;}
+footer{border-top:1px solid var(--border);padding:22px 0 44px;color:var(--muted);font-size:12px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap header-inner">
+    <div class="brand-mark" aria-hidden="true">NR</div>
+    <div>
+      <div class="brand-title">Nursing Internship</div>
+      <div class="brand-subtitle">Hospital Medication Handbook</div>
+    </div>
+    <span class="badge">BATCH 01</span>
+  </div>
+</header>
+
+<div class="wrap hero-strip">
+  <div class="eyebrow"><span class="eyebrow-line"></span>Medication Safety Handbook</div>
+  <h1 class="title">Hospital Medication Handbook — الدفعة الأولى (5 أدوية)</h1>
+  <div class="subtitle">من الفهم للأمان — الأدوية اللي هتقابلها فعليًا في مستشفيات مصر</div>
+  <div class="disclaimer">
+    <b>ملحوظة مهمة:</b> المحتوى ده مرجع تعليمي بس، مش بديل عن الـ Prescription أو الـ Product Information أو بروتوكول مستشفاك — وهما دايمًا المرجع النهائي لأي جرعة أو معدل حقيقي. الجرعات هنا Educational Only ومحتاجة تتأكد منها دايمًا حسب حالة المريض.
+    <br><br><b>ملحوظة على الدفعة:</b> بدل ما أعمل 10 أدوية دفعة واحدة، عملت 5 بس المرة دي عشان كل دواء فيه تفاصيل كتير (19 قسم) ومحتاج دقة عالية — لو حابب أكمل بنفس السرعة (10) في الدفعات الجاية قولّي.
+  </div>
+
+  <div class="progress-box">
+    <div class="progress-row"><span>Progress</span><b>5 / 100 Medications</b></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-meta">
+      <span class="chip">✓ Analgesics &amp; Antipyretics</span>
+      <span class="chip">✓ IV Fluids</span>
+      <span class="chip">✓ Antibiotics</span>
+      <span class="chip">✓ Cardiovascular / Diuretics</span>
+      <span class="chip">✓ Diabetes &amp; Insulin</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ================= DRUG 1: PARACETAMOL ================= -->
+<details class="drug" open>
+  <summary>
+    <div class="drug-idx">1</div>
+    <div><div class="drug-name">Paracetamol (Acetaminophen)</div><div class="drug-generic">Panadol · Abimol · Adol · Cetal — Egypt</div></div>
+    <div class="drug-tags"><span class="tag">Analgesic / Antipyretic</span></div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="drug-body">
+
+    <div class="sec">
+      <div class="sec-h">💊 إيه هو الدواء ده؟</div>
+      <p>من أكتر الأدوية استخدامًا في أي مستشفى — بيخفف الألم البسيط لمتوسط وبينزل الحرارة. الاسم العلمي Paracetamol (أو Acetaminophen). آلية عمله بالظبط لسه مش مفهومة 100%، لكنه بيأثر على مركز تنظيم الحرارة في المخ (Hypothalamus) ويقلل إحساس الألم — على عكس NSAIDs، مالوش تأثير مضاد للالتهاب حقيقي.</p>
+      <p><b>بيتدّي ليه:</b> خافض حرارة، مسكن ألم بسيط-متوسط، وبديل آمن نسبيًا لما الـ NSAIDs تكون ممنوعة (زي مرضى القرحة أو الكلى).</p>
+    </div>
+
+    <div class="sec two-col">
+      <div>
+        <div class="mini-h">قبل ما تديه — Assessment</div>
+        <ul><li>الحرارة ومستوى الألم</li><li>وزن المريض (خصوصًا الأطفال)</li><li>تاريخ مرض كبدي</li></ul>
+      </div>
+      <div>
+        <div class="mini-h">Labs</div>
+        <ul><li>وظائف الكبد — لو استخدام طويل المدى أو مرض كبدي معروف (مش لازم لكل جرعة عادية)</li></ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">💉 الإعطاء</div>
+      <ul><li>Oral (أقراص/شراب)</li><li>IV (Perfalgan) — Infusion على مدى 15 دقيقة، مش IV Push</li><li>Rectal (تحاميل) أحيانًا</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚖️ الجرعة — Educational Only</div>
+      <div class="dose-box"><b>البالغين:</b> 500–1000mg كل 4–6 ساعات، بحد أقصى 4g/يوم (بعض البروتوكولات بتحط حد أقصى أقل مثل 3g لمرضى الكبد/كبار السن/شرب كحول منتظم). الجرعة والتركيبة الدقيقة حسب الطلب الطبي دايمًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">📊 المتابعة بعد الإعطاء</div>
+      <table class="mtable">
+        <tr><th>What to monitor</th><th>Why</th><th>Warning sign</th></tr>
+        <tr><td>الحرارة</td><td>تأكيد فعالية الدواء</td><td>استمرار حرارة عالية رغم الجرعة</td></tr>
+        <tr><td>علامات تسمم الكبد</td><td>الجرعة الزايدة بتأثر على الكبد</td><td>غثيان، ألم أعلى يمين البطن، اصفرار</td></tr>
+        <tr><td>الجرعة الكلية اليومية من كل المصادر</td><td>أدوية كتير (زي أدوية البرد) فيها Paracetamol مخفي</td><td>تجاوز 4g/يوم</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚠️ الأعراض الجانبية</div>
+      <div class="se-grid">
+        <div class="se-box common"><div class="se-label">Common</div><p>غثيان خفيف، طفح جلدي بسيط</p></div>
+        <div class="se-box important"><div class="se-label">Important</div><p>تفاعل حساسية (نادر)</p></div>
+        <div class="se-box dangerous"><div class="se-label">Dangerous</div><p>تسمم كبدي حاد (Hepatotoxicity) مع الجرعة الزايدة أو الاستخدام المزمن، خصوصًا مع الكحول</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🛑 امتى توقف / تتأكد من الطلب</div>
+      <ul><li>لو المريض أخد جرعة تانية من دواء فيه Paracetamol في نفس الفترة</li><li>لو عنده مرض كبدي والجرعة أعلى من المعتاد</li><li>لو الحرارة مش بتستجيب بعد جرعات متكررة — محتاج مراجعة السبب مش زيادة الجرعة</li></ul>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">Contraindications</div><ul><li>حساسية معروفة من الدواء</li><li>فشل كبدي حاد شديد</li></ul></div>
+      <div><div class="mini-h">Precautions</div><ul><li>أمراض الكبد، سوء التغذية</li><li>الجفاف الشديد</li><li>استخدام كحول مزمن</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🔀 التداخلات الدوائية</div>
+      <div class="int-row"><span class="pair">Paracetamol + Warfarin</span><span class="arrow">→ ممكن يزود تأثير Warfarin مع الاستخدام المنتظم</span><div class="watch">راقب INR</div></div>
+      <div class="int-row"><span class="pair">Paracetamol + كحول مزمن</span><span class="arrow">→ يزود خطر تسمم الكبد</span><div class="watch">احذر مع مرضى إدمان الكحول</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">👨‍⚕️ Nursing Considerations</div>
+      <ul><li>راجع كل الأدوية التانية اللي المريض بياخدها — كتير منها فيه Paracetamol مخفي</li><li>ماتفترضش إنه "آمن تمامًا" لمجرد إنه بيتباع من غير روشتة</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🗣️ تثقيف المريض</div>
+      <div class="education-box">الدواء ده آمن لو اتاخد بالجرعة الصح، بس ميتاخدش مع أدوية تانية فيها نفس المادة (زي أدوية البرد) من غير ما تسأل. لو حسيت بغثيان شديد أو اصفرار في العين، روح المستشفى فورًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🚨 Medication Safety</div>
+      <div class="safety-box">أشهر خطأ هو <b>ازدواج الجرعة</b> — المريض بياخد Paracetamol منفصل + دواء برد فيه Paracetamol كمان من غير ما ينتبه. تأكد دايمًا من مراجعة كل الأدوية قبل الإعطاء.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🩺 سيناريو إكلينيكي</div>
+      <p>مريضة حرارتها 38.5، مكتوب لها Paracetamol 1g IV. وانتي بتراجعي الملف لقيتي إنها أخدت جرعة تانية من الصيدلية بره المستشفى قبل الدخول بساعتين.</p>
+      <details class="reveal"><summary>What should the nurse check before giving the dose?</summary><div class="ans">لازم تتأكدي من الوقت والجرعة اللي اتاخدت قبل كده، وتحسبي الجرعة الكلية في آخر 24 ساعة، وتبلّغي لو في خطر تجاوز الحد الأقصى.</div></details>
+    </div>
+
+    <div class="remember-box">
+      <div class="rb-h">🧠 Remember This</div>
+      <ul>
+        <li>افحص كل الأدوية التانية اللي فيها Paracetamol مخفي</li>
+        <li>الحد الأقصى 4g/يوم (أو أقل حسب البروتوكول)</li>
+        <li>راقب علامات تسمم الكبد مش بس الحرارة</li>
+        <li>الـ IV بيتدّي Infusion مش Push</li>
+      </ul>
+    </div>
+    <div class="rule-line">"قبل ما تدّي Paracetamol، افتكر: هل المريض أخد جرعة تانية من مصدر تاني النهاردة؟"</div>
+
+  </div>
+</details>
+
+<!-- ================= DRUG 2: NORMAL SALINE ================= -->
+<details class="drug">
+  <summary>
+    <div class="drug-idx">2</div>
+    <div><div class="drug-name">Normal Saline 0.9% (Sodium Chloride)</div><div class="drug-generic">IV Fluid — Isotonic Crystalloid</div></div>
+    <div class="drug-tags"><span class="tag">IV Fluids</span></div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="drug-body">
+
+    <div class="sec">
+      <div class="sec-h">💊 إيه هو الدواء ده؟</div>
+      <p>محلول ملح بتركيز 0.9%، تركيزه قريب من تركيز بلازما الدم — عشان كده اسمه Isotonic. بيوزع في الفراغ خارج الخلية بشكل متساوي تقريبًا، مش بيدخل جوه الخلايا زي المية النقية.</p>
+      <p><b>بيتدّي ليه:</b> تعويض سوائل، تعويض فقدان دم بسيط، مذيب لأدوية IV تانية، والحفاظ على IV Line مفتوح.</p>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">قبل ما تديه — Assessment</div><ul><li>حالة السوائل (جفاف/زيادة)</li><li>الوظائف القلبية (خطر Overload)</li><li>الوظائف الكلوية</li></ul></div>
+      <div><div class="mini-h">Labs</div><ul><li>الصوديوم والكلوريد — لو كميات كبيرة أو فترة طويلة</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">💉 الإعطاء</div>
+      <p>IV فقط (Peripheral أو Central). السرعة حسب الطلب الطبي وحالة المريض — ممكن Bolus سريع في الطوارئ أو Maintenance بطيء.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚖️ الجرعة — Educational Only</div>
+      <div class="dose-box">الكمية والسرعة بتختلف تمامًا حسب سبب الإعطاء وحالة المريض (تعويض بسيط مختلف عن Resuscitation في الصدمة). دايمًا حسب الطلب الطبي وبروتوكول المستشفى — مفيش رقم ثابت لكل الحالات.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">📊 المتابعة بعد الإعطاء</div>
+      <table class="mtable">
+        <tr><th>What to monitor</th><th>Why</th><th>Warning sign</th></tr>
+        <tr><td>علامات Fluid Overload</td><td>كمية كبيرة/سريعة بتثقل على القلب</td><td>ضيق نفس، تورم، صوت في الرئة</td></tr>
+        <tr><td>I&amp;O</td><td>متابعة توازن السوائل</td><td>فرق كبير بين الداخل والخارج</td></tr>
+        <tr><td>الصوديوم في الدم</td><td>كميات كبيرة من الملح بتأثر عليه</td><td>صوديوم غير طبيعي بالتحاليل</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚠️ الأعراض الجانبية</div>
+      <div class="se-grid">
+        <div class="se-box common"><div class="se-label">Common</div><p>تورم بسيط في مكان الحقن</p></div>
+        <div class="se-box important"><div class="se-label">Important</div><p>Fluid Overload في مرضى القلب/الكلى</p></div>
+        <div class="se-box dangerous"><div class="se-label">Dangerous</div><p>Pulmonary Edema — لو إعطاء سريع جدًا أو كمية أعلى من طاقة القلب</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🛑 امتى توقف / تتأكد من الطلب</div>
+      <ul><li>لو المريض عنده علامات Fluid Overload واضحة</li><li>لو السرعة المكتوبة عالية بشكل غريب لحالة مريض قلب/كلى</li></ul>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">Contraindications</div><ul><li>Fluid Overload موجود بالفعل</li><li>بعض حالات فشل القلب الحاد</li></ul></div>
+      <div><div class="mini-h">Precautions</div><ul><li>مرضى القلب والكلى</li><li>كبار السن</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🔀 التداخلات الدوائية</div>
+      <div class="int-row"><span class="pair">Compatibility مع أدوية IV تانية</span><span class="arrow">→ مش كل الأدوية متوافقة مع كل المحاليل</span><div class="watch">افحص الـ Compatibility لكل دواء لوحده قبل الخلط</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">👨‍⚕️ Nursing Considerations</div>
+      <ul><li>راقب معدل التنقيط بانتظام، خصوصًا مع مرضى القلب أو الكلى</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🗣️ تثقيف المريض</div>
+      <div class="education-box">المحلول ده بيعوض السوائل في جسمك، وهنراقب كمية السوائل اللي بتاخدها وبتطلعها.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🚨 Medication Safety</div>
+      <div class="safety-box">أشهر خطأ هو <b>سرعة تنقيط غلط</b>، أو الخلط بينه وبين محاليل ملحية أعلى تركيز (Hypertonic Saline) اللي دي خطيرة ومختلفة تمامًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🩺 سيناريو إكلينيكي</div>
+      <p>مريض قلب عنده Heart Failure، مكتوب له Normal Saline IV 100 مل/ساعة، ولاحظتي بداية ضيق نفس وخشخشة في الرئة.</p>
+      <details class="reveal"><summary>What should the nurse do?</summary><div class="ans">قللي السرعة أو وقفي التنقيط مؤقتًا حسب البروتوكول، وبلّغي فورًا — العلامات دي ممكن تكون Fluid Overload.</div></details>
+    </div>
+
+    <div class="remember-box">
+      <div class="rb-h">🧠 Remember This</div>
+      <ul><li>راقب علامات Fluid Overload خصوصًا مع مرضى القلب/الكلى</li><li>السرعة مش رقم ثابت — حسب الطلب وحالة المريض</li><li>متلخبطش بين 0.9% العادي والمحاليل المركزة</li><li>I&amp;O دايمًا مع أي IV Fluid</li></ul>
+    </div>
+    <div class="rule-line">"قبل ما تزود سرعة أي IV Fluid، افتكر: هل قلب المريض ده يتحمل الكمية دي؟"</div>
+
+  </div>
+</details>
+
+<!-- ================= DRUG 3: CEFTRIAXONE ================= -->
+<details class="drug">
+  <summary>
+    <div class="drug-idx">3</div>
+    <div><div class="drug-name">Ceftriaxone</div><div class="drug-generic">Rocephin — 3rd Gen Cephalosporin</div></div>
+    <div class="drug-tags"><span class="tag">Antibiotics</span></div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="drug-body">
+
+    <div class="sec">
+      <div class="sec-h">💊 إيه هو الدواء ده؟</div>
+      <p>مضاد حيوي واسع الطيف من عائلة الـ Cephalosporins (الجيل الثالث)، بيمنع بناء جدار الخلية البكتيرية فبيقتلها.</p>
+      <p><b>بيتدّي ليه:</b> عدوى بكتيرية متوسطة-شديدة (تنفسية، بولية، جلدية، التيفويد الشائع في مصر)، والوقاية قبل بعض العمليات.</p>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">قبل ما تديه — Assessment</div><ul><li>تاريخ حساسية Penicillin/Cephalosporins (تصالب محتمل)</li><li>الحمى وعلامات العدوى الحالية</li></ul></div>
+      <div><div class="mini-h">Labs</div><ul><li>مش إلزامي لكل جرعة، لكن وظائف الكبد/الكلى لو استخدام طويل أو جرعات عالية</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">💉 الإعطاء</div>
+      <ul>
+        <li>IM: بيتحل بمحلول فيه Lidocaine 1% لتقليل الألم (ممنوع يتحقن IV)</li>
+        <li>IV: Infusion على مدى ~30 دقيقة، مش Push سريع</li>
+        <li><b>⚠️ ممنوع تمامًا</b> يتحل أو يتخلط مع محاليل فيها كالسيوم (Ringer's Lactate، TPN) — خطر ترسيب، وخطير جدًا مع حديثي الولادة</li>
+      </ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚖️ الجرعة — Educational Only</div>
+      <div class="dose-box">البالغين: عادة 1–2g مرة أو مرتين يوميًا حسب شدة العدوى (حالات زي التهاب السحايا بتاخد جرعة أعلى). الجرعة بتختلف حسب نوع ومكان العدوى وبتتحدد بالطلب الطبي دايمًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">📊 المتابعة بعد الإعطاء</div>
+      <table class="mtable">
+        <tr><th>What to monitor</th><th>Why</th><th>Warning sign</th></tr>
+        <tr><td>علامات تحسن العدوى</td><td>تأكيد فعالية العلاج</td><td>استمرار الحمى بعد أيام</td></tr>
+        <tr><td>علامات حساسية</td><td>احتمال تفاعل، خصوصًا مع تاريخ بنسلين</td><td>طفح، صعوبة تنفس</td></tr>
+        <tr><td>الإسهال</td><td>خطر C. difficile مع أي مضاد واسع الطيف</td><td>إسهال شديد أو مستمر</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚠️ الأعراض الجانبية</div>
+      <div class="se-grid">
+        <div class="se-box common"><div class="se-label">Common</div><p>ألم بسيط في مكان الحقن، غثيان خفيف</p></div>
+        <div class="se-box important"><div class="se-label">Important</div><p>إسهال، طفح جلدي بسيط</p></div>
+        <div class="se-box dangerous"><div class="se-label">Dangerous</div><p>Anaphylaxis، إسهال شديد مرتبط بـ C. difficile</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🛑 امتى توقف / تتأكد من الطلب</div>
+      <ul><li>تاريخ حساسية موثق من Cephalosporins أو حساسية بنسلين شديدة</li><li>لو الطلب مكتوب يتحل بمحلول فيه كالسيوم</li></ul>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">Contraindications</div><ul><li>حساسية معروفة من Cephalosporins</li><li>حديثي الولادة على محاليل كالسيوم وريدية</li></ul></div>
+      <div><div class="mini-h">Precautions</div><ul><li>تاريخ حساسية بنسلين</li><li>أمراض كبد/كلى شديدة</li><li>صفراء المرارة</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🔀 التداخلات الدوائية</div>
+      <div class="int-row"><span class="pair">Ceftriaxone + محاليل كالسيوم (Ringer's, TPN)</span><span class="arrow">→ ترسيب خطير، خطر قاتل عند حديثي الولادة</span><div class="watch">متخلطهمش بنفس الخط، اغسل الخط كويس بينهم</div></div>
+      <div class="int-row"><span class="pair">Ceftriaxone + Warfarin</span><span class="arrow">→ احتمال زيادة تأثير سيولة الدم</span><div class="watch">راقب علامات النزيف</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">👨‍⚕️ Nursing Considerations</div>
+      <ul><li>افحص تاريخ الحساسية بدقة قبل أول جرعة</li><li>راقب مكان حقن الـ IM لو اتحقن بلدوكايين</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🗣️ تثقيف المريض</div>
+      <div class="education-box">لازم تكمل كورس المضاد الحيوي كامل حتى لو حسيت بتحسن، عشان البكتيريا متقاومش. لو حسيت بطفح جلدي أو صعوبة تنفس، قول فورًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🚨 Medication Safety</div>
+      <div class="safety-box">أخطر خطأ هو <b>الخلط مع محاليل الكالسيوم</b> — ده سبب حالات وفاة موثقة عند حديثي الولادة. تأكد دايمًا من نوع محلول التخفيف.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🩺 سيناريو إكلينيكي</div>
+      <p>مريض مكتوب له Ceftriaxone IV، وهو نفسه على IV Fluids من نوع Ringer's Lactate على نفس الخط.</p>
+      <details class="reveal"><summary>What should the nurse do?</summary><div class="ans">وقفي محلول الـ Ringer's مؤقتًا واغسلي الخط بـ Normal Saline قبل وبعد إعطاء الـ Ceftriaxone، عشان تتجنبي الترسيب الخطير بين الدوائين.</div></details>
+    </div>
+
+    <div class="remember-box">
+      <div class="rb-h">🧠 Remember This</div>
+      <ul><li>ممنوع يتخلط مع محاليل فيها كالسيوم</li><li>افحص تاريخ حساسية البنسلين/السيفالوسبورين دايمًا</li><li>لدوكايين للـ IM بس، ممنوع IV</li><li>راقب الإسهال — ممكن C. difficile</li></ul>
+    </div>
+    <div class="rule-line">"قبل ما تدّي Ceftriaxone، افتكر: هل في كالسيوم في أي محلول تاني بيدخل نفس الخط؟"</div>
+
+  </div>
+</details>
+
+<!-- ================= DRUG 4: FUROSEMIDE ================= -->
+<details class="drug">
+  <summary>
+    <div class="drug-idx">4</div>
+    <div><div class="drug-name">Furosemide</div><div class="drug-generic">Lasix — Loop Diuretic</div></div>
+    <div class="drug-tags"><span class="tag">Cardiovascular</span></div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="drug-body">
+
+    <div class="sec">
+      <div class="sec-h">💊 إيه هو الدواء ده؟</div>
+      <p>مدر بول قوي من عائلة الـ Loop Diuretics. بيمنع امتصاص الصوديوم والكلوريد في جزء من الكلية (Loop of Henle)، فبيطلع صوديوم وميه أكتر في البول.</p>
+      <p><b>بيتدّي ليه:</b> احتباس سوائل (Edema)، فشل القلب، ضغط دم مرتفع مصاحب لاحتباس سوائل، بعض حالات الفشل الكلوي.</p>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">قبل ما تديه — Assessment</div><ul><li>الضغط والنبض</li><li>حالة السوائل (تورم، وزن، صوت الرئة)</li><li>علامات الجفاف</li></ul></div>
+      <div><div class="mini-h">Labs</div><ul><li>البوتاسيوم والصوديوم (بيفقدهم الجسم)</li><li>وظائف الكلى</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">💉 الإعطاء</div>
+      <p>PO أو IV/IM. الـ IV ينفع Push بطيء (حسب البروتوكول والجرعة) أو Infusion. <b>الإعطاء السريع جدًا للجرعات العالية مرتبط بخطر تلف السمع (Ototoxicity).</b></p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚖️ الجرعة — Educational Only</div>
+      <div class="dose-box">البالغين: عادة يبدأ من 20–40mg PO أو IV، وبتتعدل حسب استجابة المريض. الجرعة الدقيقة ومعدل الزيادة حسب الحالة (فشل قلب، فشل كلوي) وبتتحدد بالطلب الطبي.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">📊 المتابعة بعد الإعطاء</div>
+      <table class="mtable">
+        <tr><th>What to monitor</th><th>Why</th><th>Warning sign</th></tr>
+        <tr><td>البوتاسيوم</td><td>الدواء بيسبب Hypokalemia</td><td>بوتاسيوم منخفض، ضعف عضلات، عدم انتظام نبض</td></tr>
+        <tr><td>الضغط والنبض</td><td>خطر هبوط الضغط مع فقدان السوائل</td><td>هبوط واضح أو دوخة عند الوقوف</td></tr>
+        <tr><td>I&amp;O والوزن اليومي</td><td>متابعة الفعالية وتوازن السوائل</td><td>إخراج غير متوقع أو قلة استجابة</td></tr>
+        <tr><td>السمع</td><td>خطر Ototoxicity مع جرعات عالية/IV سريع</td><td>طنين أو ضعف سمع مفاجئ</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚠️ الأعراض الجانبية</div>
+      <div class="se-grid">
+        <div class="se-box common"><div class="se-label">Common</div><p>زيادة التبول، دوخة خفيفة</p></div>
+        <div class="se-box important"><div class="se-label">Important</div><p>هبوط ضغط، اختلال الكهارل</p></div>
+        <div class="se-box dangerous"><div class="se-label">Dangerous</div><p>اضطراب نظم قلب خطير بسبب هبوط بوتاسيوم شديد، فقدان سمع (نادر)</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🛑 امتى توقف / تتأكد من الطلب</div>
+      <ul><li>البوتاسيوم منخفض جدًا في آخر تحليل</li><li>الضغط منخفض بشكل واضح</li><li>علامات جفاف واضحة قبل الجرعة</li></ul>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">Contraindications</div><ul><li>Anuria (انقطاع البول الكامل)</li><li>غيبوبة كبدية</li></ul></div>
+      <div><div class="mini-h">Precautions</div><ul><li>مرضى السكري</li><li>حساسية السلفا</li><li>كبار السن (خطر سقوط)</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🔀 التداخلات الدوائية</div>
+      <div class="int-row"><span class="pair">Furosemide + Digoxin</span><span class="arrow">→ هبوط البوتاسيوم بيزود خطر تسمم الديجوكسين</span><div class="watch">راقب غثيان، اضطراب رؤية، عدم انتظام نبض</div></div>
+      <div class="int-row"><span class="pair">Furosemide + NSAIDs</span><span class="arrow">→ بتقلل فعالية المدر</span><div class="watch">راقب الاستجابة</div></div>
+      <div class="int-row"><span class="pair">Furosemide + Aminoglycosides</span><span class="arrow">→ بتزود خطر تلف السمع</span><div class="watch">تجنب الإعطاء المتزامن لو ممكن</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">👨‍⚕️ Nursing Considerations</div>
+      <ul><li>زن المريض يوميًا في نفس التوقيت تقريبًا</li><li>راقب البوتاسيوم بانتظام مع الاستخدام المستمر</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🗣️ تثقيف المريض</div>
+      <div class="education-box">هتحتاج تروح الحمام أكتر من المعتاد. لو حسيت بدوخة شديدة أو تنميل أو خفقان قلب غريب، قول فورًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🚨 Medication Safety</div>
+      <div class="safety-box">أشهر خطأ هو <b>الإعطاء الوريدي السريع جدًا</b> (خطر تلف سمع)، أو عدم متابعة البوتاسيوم بانتظام.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🩺 سيناريو إكلينيكي</div>
+      <p>مريض فشل قلب على Furosemide، وآخر تحليل بوتاسيوم جه 3.0 (منخفض)، وهو كمان على Digoxin.</p>
+      <details class="reveal"><summary>What should the nurse do before giving the next dose?</summary><div class="ans">بلّغي عن مستوى البوتاسيوم المنخفض قبل إعطاء الجرعة الجاية — الهبوط ده بيزود خطر تسمم الديجوكسين بشكل كبير، والقرار (تأجيل/تعويض بوتاسيوم أولًا) يرجع للطبيب.</div></details>
+    </div>
+
+    <div class="remember-box">
+      <div class="rb-h">🧠 Remember This</div>
+      <ul><li>راقب البوتاسيوم بانتظام — نقصه خطر حقيقي</li><li>الإعطاء الوريدي السريع جدًا = خطر تلف سمع</li><li>وزن المريض يوميًا لمتابعة الاستجابة</li><li>خطر خاص مع مرضى الديجوكسين</li></ul>
+    </div>
+    <div class="rule-line">"قبل ما تدّي Furosemide، افتكر: البوتاسيوم عامل إيه في آخر تحليل؟"</div>
+
+  </div>
+</details>
+
+<!-- ================= DRUG 5: INSULIN REGULAR ================= -->
+<details class="drug">
+  <summary>
+    <div class="drug-idx">5</div>
+    <div><div class="drug-name">Insulin — Regular (Short-Acting)</div><div class="drug-generic">Actrapid · Humulin R</div></div>
+    <div class="drug-tags"><span class="tag alert">🔴 HIGH-ALERT</span><span class="tag">Diabetes</span></div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="drug-body">
+
+    <div class="sec">
+      <div class="sec-h">💊 إيه هو الدواء ده؟</div>
+      <p>هرمون طبيعي بيفرزه البنكرياس، وبيدخل هنا كدواء لتنظيم سكر الدم. النوع ده (Regular/Short-Acting) بيشتغل بسرعة نسبيًا، وبيساعد الجلوكوز يدخل من الدم لجوه الخلايا (عضلات، دهون) عشان يتستخدم كطاقة، وبيقلل إنتاج الجلوكوز من الكبد.</p>
+      <p><b>بيتدّي ليه:</b> السكري النوع الأول (أساسي)، السكري النوع الثاني لما الأدوية التانية مش كفاية، ارتفاع سكر حاد، الحماض الكيتوني السكري (DKA).</p>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">قبل ما تديه — Assessment</div><ul><li>قياس سكر الدم فورًا قبل كل جرعة (إلزامي)</li><li>علامات هبوط السكر الحالية (رعشة، عرق، تشوش)</li></ul></div>
+      <div><div class="mini-h">Labs</div><ul><li>سكر الدم (Point of Care)</li><li>البوتاسيوم مع بروتوكولات DKA — الإنسولين بيدخله جوه الخلايا وبينزل مستواه بالدم</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">💉 الإعطاء</div>
+      <p>SC (الطريقة اليومية المعتادة) أو IV — <b>النوع ده بس من كل أنواع الإنسولين ممكن يتدّي IV</b>، وبيستخدم كـ Infusion مستمر في الطوارئ (زي DKA). ممنوع IV Push سريع من غير بروتوكول واضح.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚖️ الجرعة — Educational Only</div>
+      <div class="dose-box">الجرعة مش رقم ثابت — بتتحدد حسب مستوى السكر الحالي، نوع البروتوكول (Sliding Scale أو جرعة ثابتة)، والوزن في بعض البروتوكولات. دايمًا حسب الطلب الطبي والبروتوكول المحلي، <b>ومحتاجة Double-check من ممرض تاني قبل الإعطاء</b>.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">📊 المتابعة بعد الإعطاء</div>
+      <table class="mtable">
+        <tr><th>What to monitor</th><th>Why</th><th>Warning sign</th></tr>
+        <tr><td>سكر الدم</td><td>تأكيد الاستجابة ومنع الهبوط الزايد</td><td>أقل من 70 mg/dL أو علامات هبوط سكر</td></tr>
+        <tr><td>البوتاسيوم (بروتوكولات DKA)</td><td>الإنسولين بيدخله جوه الخلايا</td><td>بوتاسيوم منخفض بشكل واضح</td></tr>
+        <tr><td>علامات هبوط السكر</td><td>أهم خطر فوري مرتبط بالدواء</td><td>رعشة، عرق، تشوش، جوع مفاجئ</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">⚠️ الأعراض الجانبية</div>
+      <div class="se-grid">
+        <div class="se-box common"><div class="se-label">Common</div><p>ألم بسيط في مكان الحقن</p></div>
+        <div class="se-box important"><div class="se-label">Important</div><p>زيادة وزن مع الاستخدام طويل المدى</p></div>
+        <div class="se-box dangerous"><div class="se-label">Dangerous</div><p>هبوط سكر شديد (Severe Hypoglycemia) — ممكن يوصل لفقدان وعي أو تشنجات</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🛑 امتى توقف / تتأكد من الطلب</div>
+      <ul><li>سكر الدم قبل الجرعة أقل من الحد المسموح بالبروتوكول (غالبًا أقل من 70-80)</li><li>في الحالة دي: وقفي الجرعة، تصرفي مع هبوط السكر الأول، وبلّغي</li></ul>
+    </div>
+
+    <div class="sec two-col">
+      <div><div class="mini-h">Contraindications</div><ul><li>هبوط سكر حالي غير معالج</li></ul></div>
+      <div><div class="mini-h">Precautions</div><ul><li>الفشل الكلوي (بيطول تأثير الإنسولين)</li><li>مرضى مش قادرين يعبروا عن أعراض هبوط السكر</li></ul></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🔀 التداخلات الدوائية</div>
+      <div class="int-row"><span class="pair">Insulin + Beta-blockers</span><span class="arrow">→ ممكن تخفي أعراض هبوط السكر (رعشة، خفقان)</span><div class="watch">راقبي علامات تانية زي التعرق والتشوش</div></div>
+      <div class="int-row"><span class="pair">Insulin + الكحول</span><span class="arrow">→ بيزود خطر هبوط السكر</span><div class="watch">احذري مع المرضى اللي بيشربوا</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">👨‍⚕️ Nursing Considerations</div>
+      <ul><li>اقرا نوع الإنسولين بعناية شديدة (أسماء متشابهة — LASA)</li><li>لو بتخلطي Regular مع NPH: اسحبي Regular الأول دايمًا (Clear before Cloudy)</li></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🗣️ تثقيف المريض</div>
+      <div class="education-box">لازم تاكل بعد الحقنة في الوقت المحدد، ومتفوتيش وجبة بعد ما تاخدي الجرعة. لو حسيتي برعشة أو عرق بارد أو تشوش، كلي أو اشربي حاجة سكر فورًا.</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🚨 Medication Safety</div>
+      <div class="safety-box">من أخطر الأدوية للخطأ فيها. أشهر أخطاء: <b>الخلط بين نوع وتاني من الإنسولين</b>، جرعة غلط بسبب قراءة الوحدات غلط (Units مش mL)، والإعطاء من غير قياس سكر حديث.</div>
+    </div>
+
+    <div class="alert-banner">
+      <div class="al-title">🔴 HIGH-ALERT MEDICATION</div>
+      <p>الإنسولين من أقدم وأثبت الأدوية على قايمة الـ High-Alert الرسمية (ISMP) — على القايمة من أول ما اتعملت.</p>
+      <p><b>ليه؟</b> الخطأ فيه (جرعة زيادة، نوع غلط، توقيت غلط) ممكن يسبب هبوط سكر خطير أو قاتل خلال دقايق.</p>
+      <p><b>إجراءات الأمان:</b> Double-check من ممرض تاني قبل كل جرعة IV أو جرعات معقدة، التأكد من نوع الإنسولين ووحدة القياس (Units)، وقياس سكر حديث قبل كل جرعة.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">🩺 سيناريو إكلينيكي</div>
+      <p>مريض سكري مكتوب له Regular Insulin SC قبل الفطار، وانتي قايسة السكر لقيتيه 65 mg/dL.</p>
+      <details class="reveal"><summary>What should the nurse do?</summary><div class="ans">وقفي عن إعطاء الجرعة فورًا، اتصرفي مع هبوط السكر حسب البروتوكول (زي جلوكوز سريع)، وبلّغي — متديش الإنسولين على سكر منخفض.</div></details>
+    </div>
+
+    <div class="remember-box">
+      <div class="rb-h">🧠 Remember This</div>
+      <ul><li>قيسي السكر قبل كل جرعة، من غير استثناء</li><li>الإنسولين IV هو النوع Regular بس</li><li>Double-check إلزامي (High-Alert)</li><li>راقبي البوتاسيوم في بروتوكولات DKA</li></ul>
+    </div>
+    <div class="rule-line">"قبل ما تدّي أي جرعة إنسولين، افتكري: السكر دلوقتي كام، والوجبة جاهزة إمتى؟"</div>
+
+  </div>
+</details>
+
+<!-- ================= CLINICAL SAFETY CHECK ================= -->
+<div class="quiz-section">
+  <h2>✅ Clinical Safety Check</h2>
+  <div class="qs-sub">5 أسئلة تغطي الخمس أدوية اللي فاتت — تأكد إنك فاهم قبل ما تكمل</div>
+  <div id="mcqHolder"></div>
+  <div class="quiz-score">النتيجة: <b><span id="mcqScoreText">0 / 5</span></b></div>
+</div>
+
+<div class="next-strip">لما تكون جاهز للدفعة الجاية (5 أدوية تانية)، قوللي "التالي" أو "Next" في المحادثة.</div>
+
+</main>
+
+<footer>Nursing Internship — Hospital Medication Handbook · مرجع تعليمي، المرجع النهائي دايمًا: Prescriber Order + Product Information + Hospital Protocol.</footer>
+
+<script>
+const mcqData = [
+ {q:"مريض أخد Paracetamol من بره المستشفى، ومكتوب له جرعة تانية IV. أول حاجة تتأكدي منها؟", opts:["لون الدواء","إجمالي الجرعة في آخر 24 ساعة","رأي المريض بس","سرعة الإعطاء"], c:1, why:"أشهر خطأ مع Paracetamol هو ازدواج الجرعة من مصادر مختلفة."},
+ {q:"مريض قلب على Normal Saline IV، وبدأ يظهر ضيق نفس وخشخشة في الرئة. السبب المحتمل؟", opts:["حساسية من الملح","Fluid Overload","نقص سكر","عدوى"], c:1, why:"كمية أو سرعة سوائل أعلى من طاقة القلب بتسبب Fluid Overload."},
+ {q:"إيه الممنوع تخلطه مع Ceftriaxone في نفس الخط؟", opts:["Normal Saline","محاليل فيها كالسيوم (Ringer's, TPN)","الماء المقطر","D5W"], c:1, why:"خطر ترسيب خطير، وقاتل عند حديثي الولادة."},
+ {q:"مريض على Furosemide وDigoxin، وبوتاسيومه منخفض. الخطر الأساسي؟", opts:["زيادة الوزن","تسمم الديجوكسين", "حساسية جلد","إمساك"], c:1, why:"هبوط البوتاسيوم بيزود خطر تسمم الديجوكسين بشكل كبير."},
+ {q:"سكر مريض قبل جرعة Insulin كان 65 mg/dL. تعملي إيه؟", opts:["تدّي الجرعة كاملة","توقفي الجرعة وتتصرفي مع هبوط السكر","تنصّي الجرعة","تسجلي وتكملي"], c:1, why:"متدّيش إنسولين على سكر منخفض — لازم تعالجي الهبوط الأول."}
+];
+let mcqScore = 0;
+const mcqHolder = document.getElementById('mcqHolder');
+mcqData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  let optsHtml = '<div class="q-opts">';
+  item.opts.forEach(function(opt, oi){ optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>'; });
+  optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+  mcqHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const oi = parseInt(btn.dataset.oi,10);
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(oi === item.c){ btn.classList.add('correct'); mcqScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+    });
+  });
+});
+</script>
+</body>
+</html>
