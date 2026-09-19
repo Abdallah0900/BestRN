@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Day 08 | Medication Administration — Nursing Internship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #07121f; --bg-soft: #0b1827; --surface: #0f2030; --surface-2: #13283a; --surface-3: #172f43;
+  --teal: #22c7b8; --teal-dark: #159c91; --blue: #4f8cff;
+  --text: #f3f7fa; --text-soft: #c6d2dc; --muted: #8495a5;
+  --border: rgba(255,255,255,0.08); --border-strong: rgba(34,199,184,0.28);
+  --success: #35d09a; --warn:#f2b84b; --warn-soft:rgba(242,184,75,.13);
+  --danger:#fb6b6b; --danger-soft:rgba(251,107,107,.13); --success-soft:rgba(53,208,154,.13);
+  --radius: 18px; --radius-sm: 12px; --maxw:760px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(34,199,184,0.09), transparent 28%),
+    radial-gradient(circle at 10% 20%, rgba(79,140,255,0.06), transparent 24%),
+    var(--bg);
+  color:var(--text); font-family:"Cairo","Noto Sans Arabic",Arial,sans-serif;
+  direction:rtl; text-align:right; line-height:1.8;
+}
+a{color:inherit;text-decoration:none;} button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+header.top{position:sticky;top:0;z-index:100;background:rgba(7,18,31,0.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.header-inner{min-height:64px;display:flex;align-items:center;gap:12px;padding:10px 0;}
+.brand-mark{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:10px;background:linear-gradient(135deg,rgba(34,199,184,0.18),rgba(79,140,255,0.08));color:var(--teal);font-size:14px;font-weight:800;}
+.brand-title{font-size:13px;font-weight:800;}
+.brand-subtitle{color:var(--muted);font-size:10.5px;font-weight:500;}
+.day-badge{margin-inline-start:auto;font-size:11px;font-weight:800;color:var(--teal);background:rgba(34,199,184,0.09);border:1px solid var(--border-strong);padding:6px 12px;border-radius:999px;white-space:nowrap;}
+
+.hero-strip{padding:26px 0 4px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;}
+.eyebrow-line{width:24px;height:2px;background:var(--teal);border-radius:10px;}
+h1.title{font-size:clamp(22px,4vw,30px);line-height:1.3;font-weight:800;}
+.subtitle{margin-top:8px;color:var(--text-soft);font-size:14px;font-weight:600;}
+.disclaimer{margin:16px 0 0;padding:11px 13px;background:var(--warn-soft);border:1px solid rgba(242,184,75,.32);border-radius:var(--radius-sm);color:var(--text);font-size:13px;}
+.disclaimer b{color:var(--warn);}
+.video-card{display:flex;align-items:center;gap:10px;margin-top:12px;padding:13px 15px;background:rgba(34,199,184,0.08);border:1px solid var(--border-strong);border-radius:var(--radius-sm);}
+.video-card .vic{font-size:20px;flex-shrink:0;}
+.video-card .vn{font-weight:800;color:var(--teal);font-size:14px;}
+.video-card .vt{font-size:12.5px;color:var(--muted);}
+
+main{padding:22px 0 56px;}
+.steps-tracker{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 16px;margin-bottom:4px;border-bottom:1px solid var(--border);}
+.steps-tracker::-webkit-scrollbar{display:none;}
+.step-dot{min-width:30px;height:30px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);border:1px solid var(--border);flex-shrink:0;}
+.step-dot.seen{background:rgba(34,199,184,0.12);color:var(--teal);border-color:var(--border-strong);}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;scroll-margin-top:16px;}
+.card.warmup{border-color:rgba(242,184,75,.32);}
+.card-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.card-num{min-width:28px;height:28px;border-radius:9px;background:var(--teal);color:#062522;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;flex-shrink:0;}
+.card.warmup .card-num{background:var(--warn);color:#251a02;}
+.card-h{font-size:17px;font-weight:800;}
+.card-time{color:var(--muted);font-size:12px;margin-inline-start:auto;}
+.card p{margin:0 0 13px;font-size:15px;color:var(--text-soft);} .card p:last-child{margin-bottom:0;}
+.card p strong{color:var(--text);}
+
+.glossary{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin:13px 0;}
+.gloss-row{display:flex;align-items:baseline;gap:8px;padding:10px 13px;font-size:13.5px;border-bottom:1px solid var(--border);background:var(--surface-2);}
+.gloss-row:last-child{border-bottom:none;}
+.gloss-row .term{color:var(--teal);font-weight:700;direction:ltr;}
+.gloss-row .eq{color:var(--muted);} .gloss-row .ar{color:var(--text-soft);}
+
+details.reveal{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;margin:11px 0;background:var(--surface-2);}
+details.reveal summary{cursor:pointer;font-size:14px;color:var(--teal);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px;}
+details.reveal summary::-webkit-details-marker{display:none;}
+details.reveal summary::before{content:"+";color:var(--teal);font-weight:800;}
+details.reveal[open] summary::before{content:"–";}
+details.reveal .ans{margin-top:9px;font-size:14px;color:var(--text-soft);padding-top:9px;border-top:1px dashed var(--border);}
+
+.skf{display:flex;gap:8px;margin-bottom:11px;font-size:14px;color:var(--text-soft);}
+.skf b{color:var(--teal);min-width:110px;flex-shrink:0;font-weight:700;}
+.steplist{margin:0;padding-inline-start:20px;}
+.steplist li{margin-bottom:9px;font-size:14px;color:var(--text-soft);}
+.why{color:var(--muted);font-size:12.5px;display:block;margin-top:2px;}
+.note-flag{margin-top:13px;padding:10px 12px;background:var(--warn-soft);border-radius:var(--radius-sm);font-size:12.5px;color:var(--text-soft);border:1px solid rgba(242,184,75,.28);}
+
+.q-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:11px;background:var(--surface-2);}
+.q-text{font-size:14px;margin-bottom:11px;font-weight:700;color:var(--text);}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:right;background:var(--surface-3);border:1px solid var(--border);color:var(--text-soft);padding:10px 12px;border-radius:var(--radius-sm);font-size:13.5px;cursor:pointer;font-family:inherit;}
+.tf-row{display:flex;gap:8px;}
+.q-opt.correct{background:var(--success-soft);border-color:var(--success);color:var(--success);}
+.q-opt.incorrect{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);}
+.q-opt[disabled]{cursor:default;}
+.q-why{display:none;margin-top:10px;font-size:13px;color:var(--muted);padding-top:10px;border-top:1px dashed var(--border);}
+.q-why.show{display:block;}
+.quiz-score{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:11px 13px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:13.5px;color:var(--muted);}
+.quiz-score b{color:var(--teal);}
+
+.flash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.flashcard{perspective:1000px;height:120px;cursor:pointer;}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;border:1px solid var(--border);font-size:13.5px;}
+.flashcard-front{background:var(--surface-2);color:var(--teal);font-weight:800;direction:ltr;}
+.flashcard-back{background:rgba(34,199,184,0.1);color:var(--text-soft);transform:rotateY(180deg);}
+
+.summary-list{margin:0;padding-inline-start:20px;} .summary-list li{margin-bottom:10px;font-size:14px;color:var(--text-soft);}
+.complete-btn{width:100%;margin-top:15px;padding:14px;border:none;border-radius:var(--radius-sm);background:var(--teal);color:#062522;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;box-shadow:0 10px 28px rgba(34,199,184,.18);}
+.complete-btn[disabled]{background:var(--success);color:#06251a;cursor:default;box-shadow:none;}
+.next-hint{color:var(--muted);font-size:12.5px;margin-top:11px;text-align:center;}
+footer{border-top:1px solid var(--border);padding:22px 0 44px;color:var(--muted);font-size:12px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap header-inner">
+    <div class="brand-mark" aria-hidden="true">NR</div>
+    <div>
+      <div class="brand-title">Nursing Internship</div>
+      <div class="brand-subtitle">30 Day Clinical Refresher</div>
+    </div>
+    <span class="day-badge">DAY 08 / 30</span>
+  </div>
+</header>
+
+<div class="wrap hero-strip">
+  <div class="eyebrow"><span class="eyebrow-line"></span>Clinical Assessment &amp; Skills · Phase 02</div>
+  <h1 class="title">Medication Administration — الحقوق الأساسية لإعطاء الدواء</h1>
+  <div class="subtitle">اليوم الثامن من سلسلة الـ30 يوم — أساسيات أمان الدواء قبل أي جرعة</div>
+  <div class="disclaimer"><b>ملحوظة:</b> مرجع مذاكرة، مش بديل عن التدريب تحت إشراف. جرعات وبروتوكولات الأدوية تتبع دايمًا سياسة مستشفاك والطلب الطبي الموثق.</div>
+  <div class="video-card">
+    <span class="vic">🎥</span>
+    <a href="https://www.youtube.com/watch?v=Qmns8I1Hg0c" target="_blank" rel="noopener">
+      <span class="vn">شاهد وتعلم: إعطاء حقنة العضل (IM)</span><br><span class="vt">تطبيق عملي بالعربي على شخص حقيقي</span>
+    </a>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="steps-tracker" id="stepsTracker">
+    <a href="#s1" class="step-dot" data-s="1">1</a><a href="#s2" class="step-dot" data-s="2">2</a><a href="#s3" class="step-dot" data-s="3">3</a>
+    <a href="#s4" class="step-dot" data-s="4">4</a><a href="#s5" class="step-dot" data-s="5">5</a><a href="#s6" class="step-dot" data-s="6">6</a>
+    <a href="#s7" class="step-dot" data-s="7">7</a><a href="#s8" class="step-dot" data-s="8">8</a><a href="#s9" class="step-dot" data-s="9">9</a>
+  </div>
+
+  <section class="card warmup" id="s1">
+    <div class="card-eyebrow"><div class="card-num">1</div><div class="card-h">تحقق سريع</div><div class="card-time">~5 د</div></div>
+    <details class="reveal"><summary>SBAR اختصار لإيه؟</summary><div class="ans">Situation, Background, Assessment, Recommendation.</div></details>
+    <details class="reveal"><summary>لو ماكتبتش إجراء، قانونيًا يعتبر إيه؟</summary><div class="ans">كإنه ماحصلش — التوثيق حماية قانونية أساسية.</div></details>
+  </section>
+
+  <section class="card" id="s2">
+    <div class="card-eyebrow"><div class="card-num">2</div><div class="card-h">الشرح — حقوق الدواء وطرق الإعطاء</div><div class="card-time">~35 د</div></div>
+    <p><strong>الحقوق الأساسية لإعطاء الدواء (Medication Rights):</strong> قبل ما تدّي أي دواء لأي مريض، فيه حقوق أساسية لازم تتأكد منها كلها، مش بعضها.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Right Patient</span><span class="eq">=</span><span class="ar">المريض الصح — تتأكد بـ Two Identifiers</span></div>
+      <div class="gloss-row"><span class="term">Right Drug</span><span class="eq">=</span><span class="ar">الدواء الصح</span></div>
+      <div class="gloss-row"><span class="term">Right Dose</span><span class="eq">=</span><span class="ar">الجرعة الصح</span></div>
+      <div class="gloss-row"><span class="term">Right Route</span><span class="eq">=</span><span class="ar">الطريق الصح (فم، حقن، وريد...)</span></div>
+      <div class="gloss-row"><span class="term">Right Time</span><span class="eq">=</span><span class="ar">الوقت الصح</span></div>
+      <div class="gloss-row"><span class="term">Right Documentation</span><span class="eq">=</span><span class="ar">التوثيق الصح فورًا بعد الإعطاء</span></div>
+    </div>
+    <p><strong>قبل ما تدّي أي دواء:</strong> التأكد الأول مش خطوة اختيارية، هي اللي بتمنع أغلب أخطاء الدواء.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Medication Order</span><span class="eq">=</span><span class="ar">الطلب الطبي للدواء — لازم يكون واضح ومكتوب</span></div>
+      <div class="gloss-row"><span class="term">Allergy Check</span><span class="eq">=</span><span class="ar">التأكد من عدم وجود حساسية للمريض من الدواء</span></div>
+    </div>
+    <p><strong>طرق إعطاء الدواء الأساسية:</strong> كل طريق ليه استخدام وتقنية مختلفة (طرق IV هناخدها بالتفصيل في يوم لوحده).</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Oral</span><span class="eq">=</span><span class="ar">عن طريق الفم</span></div>
+      <div class="gloss-row"><span class="term">IM</span><span class="eq">=</span><span class="ar">حقن في العضل (Intramuscular)</span></div>
+      <div class="gloss-row"><span class="term">SC</span><span class="eq">=</span><span class="ar">حقن تحت الجلد (Subcutaneous)</span></div>
+    </div>
+    <p><strong>التفكير الصح مع أي دواء:</strong> متدّيش أي دواء وانت مش فاهم ليه — ده مش تفصيلة إضافية.</p>
+    <div class="glossary">
+      <div class="gloss-row"><span class="term">Indication</span><span class="eq">=</span><span class="ar">سبب إعطاء الدواء</span></div>
+      <div class="gloss-row"><span class="term">Monitoring</span><span class="eq">=</span><span class="ar">المتابعة بعد إعطاء الدواء</span></div>
+    </div>
+  </section>
+
+  <section class="card" id="s3">
+    <div class="card-eyebrow"><div class="card-num">3</div><div class="card-h">مثال من المستشفى</div><div class="card-time">~10 د</div></div>
+    <p>مريض مكتوب له دواء IM. قبل ما تديله، لازم تسأل نفسك: ليه بيدّيله؟ هل عنده حساسية؟ هل الجرعة والطريق مناسبين لحالته؟ وبعد ما تديله، هتراقب إيه؟</p>
+  </section>
+
+  <section class="card" id="s4">
+    <div class="card-eyebrow"><div class="card-num">4</div><div class="card-h">مهارة عملية — إعطاء حقنة عضل (IM Injection)</div><div class="card-time">~20 د</div></div>
+    <div class="skf"><b>Purpose</b><span>إيصال الدواء للعضل عشان امتصاص أسرع من تحت الجلد.</span></div>
+    <div class="skf" style="display:block"><b style="display:block;margin-bottom:6px">Steps</b>
+      <ol class="steplist">
+        <li>تأكد من هوية المريض والحقوق الستة قبل التحضير <span class="why">Why: أغلب أخطاء الدواء بتحصل قبل الحقنة نفسها.</span></li>
+        <li>اختار مكان الحقن المناسب وابعد عن الأعصاب والأوعية الكبيرة <span class="why">Why: تقليل خطر إصابة عصب أو وعاء دموي.</span></li>
+        <li>نضف المكان بالكحول وسيبه يجف <span class="why">Why: الكحول المبلل بيوجع ويقلل فعاليته.</span></li>
+        <li>احقن بزاوية 90 درجة تقريبًا حسب حجم العضلة والإبرة <span class="why">Why: الزاوية الصح بتضمن وصول الدواء للعضل مش تحت الجلد.</span></li>
+        <li>احقن الدواء ببطء، واسحب الإبرة بسرعة وثابتة <span class="why">Why: الحقن البطيء بيقلل الألم والضرر للنسيج.</span></li>
+      </ol>
+    </div>
+    <div class="skf"><b>Precautions</b><span>غيّر مكان الحقن (Rotation) لو المريض محتاج حقن متكرر.</span></div>
+    <div class="skf"><b>Common mistakes</b><span>الحقن في نفس المكان بشكل متكرر، أو عدم التأكد من الحقوق الستة قبل التحضير.</span></div>
+    <div class="skf"><b>Escalate إذا</b><span>المريض اتعمله حساسية بعد الحقنة (طفح، ضيق تنفس) — بلّغ فورًا وابدأ بروتوكول الطوارئ.</span></div>
+    <div class="note-flag">تفاصيل زي حجم الإبرة والموقع الدقيق بتختلف حسب البروتوكول المحلي ونوع الدواء — اتبع بروتوكول مستشفاك.</div>
+  </section>
+
+  <section class="card" id="s5">
+    <div class="card-eyebrow"><div class="card-num">5</div><div class="card-h">سيناريو إكلينيكي</div><div class="card-time">~10 د</div></div>
+    <p><strong>الحالة:</strong> مريض مكتوب له دواء، ولما راجعتي الملف لقيتي اسم المريض في الورقة مختلف شوية عن اسم المريض قدامك.</p>
+    <details class="reveal"><summary>What should the nurse do first?</summary><div class="ans">توقفي فورًا ومتديش الدواء لحد ما تتأكدي من الهوية بمعرّفين مستقلين.</div></details>
+    <details class="reveal"><summary>Why؟</summary><div class="ans">إعطاء دواء لمريض غلط من أخطر أخطاء التمريض، وممكن يكون قاتل.</div></details>
+  </section>
+
+  <section class="card" id="s6">
+    <div class="card-eyebrow"><div class="card-num">6</div><div class="card-h">MCQs — 5 أسئلة</div><div class="card-time">~5 د</div></div>
+    <div id="mcqHolder"></div>
+    <div class="quiz-score">نتيجة الـ MCQ: <b><span id="mcqScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="card" id="s7">
+    <div class="card-eyebrow"><div class="card-num">7</div><div class="card-h">True / False — 5 أسئلة</div><div class="card-time">~5 د</div></div>
+    <div id="tfHolder"></div>
+    <div class="quiz-score">نتيجة الـ True/False: <b><span id="tfScoreText">0 / 5</span></b></div>
+  </section>
+
+  <section class="card" id="s8">
+    <div class="card-eyebrow"><div class="card-num">8</div><div class="card-h">Flashcards — 8 كروت</div><div class="card-time">~8 د</div></div>
+    <p style="color:var(--muted);font-size:12.5px">دوس على أي كارت عشان تقلبه.</p>
+    <div class="flash-grid" id="flashHolder"></div>
+  </section>
+
+  <section class="card" id="s9">
+    <div class="card-eyebrow"><div class="card-num">9</div><div class="card-h">Final Summary</div><div class="card-time"></div></div>
+    <ol class="summary-list">
+      <li>الحقوق الستة لازم تتفحص مع كل جرعة، مش مرة واحدة.</li>
+      <li>التأكد من هوية المريض قبل الدواء غير قابل للتفاوض.</li>
+      <li>افهم ليه بتدّي الدواء ده قبل ما تديه.</li>
+      <li>التوثيق فورًا بعد الإعطاء يمنع تكرار الجرعة غلط.</li>
+      <li>غيّر مكان حقن الـ IM/SC لو المريض بياخد حقن متكررة.</li>
+    </ol>
+    <button class="complete-btn" id="completeBtn">أنهيت اليوم 8 ✓</button>
+    <div class="next-hint">لما تكون جاهز لليوم اللي بعده، قوللي "يوم 9" في المحادثة.</div>
+  </section>
+</main>
+
+<footer>Nursing Internship — 30 Day Clinical Refresher · مرجع مذاكرة، مش بديل عن الإشراف الإكلينيكي.</footer>
+
+<script>
+const mcqData = [
+ {q:"كام حق أساسي معروف تقليديًا في Medication Rights؟", opts:["3","6","10","لا يوجد عدد محدد"], c:1, why:"الحقوق الستة التقليدية: Patient, Drug, Dose, Route, Time, Documentation."},
+ {q:"قبل إعطاء أي دواء، أهم حاجة تتأكد منها؟", opts:["هوية المريض والحقوق الستة","لون الدواء بس","رأي المريض بس","سرعة الإعطاء"], c:0, why:"ده اللي بيمنع أغلب الأخطاء."},
+ {q:"لو مش متأكد من هوية المريض قبل الدواء؟", opts:["تدّي الدواء وتسأل بعدين","توقف وتتأكد الأول","تسأل زميل بسرعة وتكمل","تفترض إنه صح"], c:1, why:"التأكد قبل مش بعد."},
+ {q:"التوثيق بعد إعطاء الدواء لازم يكون؟", opts:["في آخر الشيفت","فورًا بعد الإعطاء","اختياري","بعد يوم"], c:1, why:"فورًا عشان مايتنسيش وميحصلش تكرار جرعة غلط."},
+ {q:"الزاوية القياسية لحقنة الـ IM تقريبًا؟", opts:["15 درجة","45 درجة","90 درجة","180 درجة"], c:2, why:"90 درجة تقريبًا حسب حجم العضلة والإبرة."}
+];
+let mcqScore = 0;
+const mcqHolder = document.getElementById('mcqHolder');
+mcqData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  let optsHtml = '<div class="q-opts">';
+  item.opts.forEach(function(opt, oi){ optsHtml += '<button class="q-opt" data-oi="'+oi+'">'+opt+'</button>'; });
+  optsHtml += '</div><div class="q-why">'+item.why+'</div>';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.q+'</div>'+optsHtml;
+  mcqHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const oi = parseInt(btn.dataset.oi,10);
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(oi === item.c){ btn.classList.add('correct'); mcqScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-oi="'+item.c+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('mcqScoreText').textContent = mcqScore+' / '+mcqData.length;
+    });
+  });
+});
+
+const tfData = [
+ {s:"الحقوق الستة للدواء بتتفحص مرة واحدة بس في أول الشيفت.", a:false, why:"لازم تتفحص مع كل جرعة دواء."},
+ {s:"لازم تفهم سبب إعطاء الدواء (Indication) قبل ما تديه.", a:true, why:"صح، مش مجرد تنفيذ أوامر."},
+ {s:"تغيير مكان الحقن (Rotation) مش مهم لو المريض بياخد حقن متكرر.", a:false, why:"مهم جدًا لمنع تلف الأنسجة."},
+ {s:"أخطاء الدواء غالبًا بتحصل بسبب عدم التأكد من الحقوق الستة.", a:true, why:"صح تمامًا."},
+ {s:"الطلب الطبي غير الواضح ينفع تنفذه على أساس تخمينك.", a:false, why:"لازم توضيح الطلب الغامض قبل التنفيذ، مش تخمين."}
+];
+let tfScore = 0;
+const tfHolder = document.getElementById('tfHolder');
+tfData.forEach(function(item, qi){
+  const card = document.createElement('div'); card.className = 'q-card';
+  card.innerHTML = '<div class="q-text">'+(qi+1)+'. '+item.s+'</div>'+
+    '<div class="q-opts tf-row"><button class="q-opt" data-v="true">صح</button><button class="q-opt" data-v="false">غلط</button></div>'+
+    '<div class="q-why">'+item.why+'</div>';
+  tfHolder.appendChild(card);
+  card.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(card.dataset.locked) return; card.dataset.locked = '1';
+      const v = btn.dataset.v === 'true';
+      card.querySelectorAll('.q-opt').forEach(function(b){b.setAttribute('disabled','');});
+      if(v === item.a){ btn.classList.add('correct'); tfScore++; }
+      else { btn.classList.add('incorrect'); card.querySelector('[data-v="'+item.a+'"]').classList.add('correct'); }
+      card.querySelector('.q-why').classList.add('show');
+      document.getElementById('tfScoreText').textContent = tfScore+' / '+tfData.length;
+    });
+  });
+});
+
+const flashData = [
+ {f:"Right Patient", b:"المريض الصح"}, {f:"Right Drug", b:"الدواء الصح"},
+ {f:"Right Dose", b:"الجرعة الصح"}, {f:"Right Route", b:"الطريق الصح"},
+ {f:"Right Time", b:"الوقت الصح"}, {f:"Right Documentation", b:"التوثيق الصح"},
+ {f:"IM", b:"حقن في العضل"}, {f:"SC", b:"حقن تحت الجلد"}
+];
+const flashHolder = document.getElementById('flashHolder');
+flashData.forEach(function(item){
+  const card = document.createElement('div'); card.className = 'flashcard';
+  card.innerHTML = '<div class="flashcard-inner"><div class="flashcard-front">'+item.f+'</div><div class="flashcard-back">'+item.b+'</div></div>';
+  card.addEventListener('click', function(){card.classList.toggle('flipped');});
+  flashHolder.appendChild(card);
+});
+
+const dots = document.querySelectorAll('.step-dot');
+const secs = document.querySelectorAll('.card');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const idx = Array.prototype.indexOf.call(secs, e.target) + 1;
+        const dot = document.querySelector('.step-dot[data-s="'+idx+'"]');
+        if(dot) dot.classList.add('seen');
+      }
+    });
+  }, {threshold:0.5});
+  secs.forEach(function(s){io.observe(s);});
+}
+
+async function loadProgress(){
+  try{
+    const res = await window.storage.get('nursing30_day8_progress', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      if(data.completed){
+        const btn = document.getElementById('completeBtn');
+        btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+data.mcq+'/5 — T/F '+data.tf+'/5)';
+        btn.setAttribute('disabled','');
+      }
+    }
+  }catch(e){}
+}
+loadProgress();
+document.getElementById('completeBtn').addEventListener('click', async function(){
+  const btn = this;
+  const data = {completed:true, mcq:mcqScore, tf:tfScore, ts:Date.now()};
+  btn.textContent = 'جاري الحفظ...';
+  try{ await window.storage.set('nursing30_day8_progress', JSON.stringify(data), false); }catch(e){}
+  btn.textContent = 'تم إنهاء اليوم ✓ (MCQ '+mcqScore+'/5 — T/F '+tfScore+'/5)';
+  btn.setAttribute('disabled','');
+});
+</script>
+</body>
+</html>
